@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "XXX",
+      "XXX",
+      "XXX"
+    ],
+    "key": {
+      "X": {
+        "item": "morethings:yellow_slime_ball"
+      }
+    },
+    "result": {
+      "item": "morethings:yellow_slime_block"
+    }
+  }
