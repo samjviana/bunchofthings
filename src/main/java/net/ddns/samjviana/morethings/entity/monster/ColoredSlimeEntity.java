@@ -2,6 +2,8 @@ package net.ddns.samjviana.morethings.entity.monster;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -24,13 +26,18 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.BasicParticleType;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.ISeedReader;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biomes;
 
 public class ColoredSlimeEntity extends SlimeEntity {
     private static final DataParameter<Byte> DYE_COLOR = EntityDataManager.createKey(
@@ -119,8 +126,30 @@ public class ColoredSlimeEntity extends SlimeEntity {
         return attributes.func_233813_a_();
     }
 
-    public static boolean _canSpawn(EntityType<ColoredSlimeEntity> p_223366_0_, IWorld p_223366_1_, SpawnReason reason, BlockPos p_223366_3_, Random randomIn) {
-        return true;
+    public static boolean _canSpawn(EntityType<ColoredSlimeEntity> entityType, IWorld worldIn, SpawnReason reason, BlockPos pos, Random randomIn) {
+        if (worldIn.getDifficulty() != Difficulty.PEACEFUL) {
+            if (Objects.equals(worldIn.func_242406_i(pos), Optional.of(Biomes.SWAMP)) && pos.getY() > 50 && pos.getY() < 70 && randomIn.nextFloat() < 0.5F && randomIn.nextFloat() < worldIn.func_242413_ae() && worldIn.getLight(pos) <= randomIn.nextInt(8)) {
+               return canSpawnOn(entityType, worldIn, reason, pos, randomIn);
+            }
+   
+            if (!(worldIn instanceof ISeedReader)) {
+               return false;
+            }
+   
+            ChunkPos chunkpos = new ChunkPos(pos);
+            boolean flag = SharedSeedRandom.seedSlimeChunk(chunkpos.x, chunkpos.z, ((ISeedReader)worldIn).getSeed(), 987234911L).nextInt(10) == 0;
+            if (randomIn.nextInt(10) == 0 && flag && pos.getY() < 40) {
+               return canSpawnOn(entityType, worldIn, reason, pos, randomIn);
+            }
+         }
+   
+         return false;
+    }
+
+    @Override
+    public boolean canSpawn(IWorld worldIn, SpawnReason spawnReasonIn) {
+        // TODO Auto-generated method stub
+        return super.canSpawn(worldIn, spawnReasonIn);
     }
     
     @Override
