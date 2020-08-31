@@ -25,9 +25,9 @@ apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '0.2'
-group = 'net.ddns.samjviana.morethings' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'morethings'
+version = '0.3'
+group = 'net.ddns.samjviana.bunchofthings' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = 'bunchofthings'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
@@ -56,7 +56,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                morethings {
+                bunchofthings {
                     source sourceSets.main
                 }
             }
@@ -72,7 +72,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                morethings {
+                bunchofthings {
                     source sourceSets.main
                 }
             }
@@ -87,10 +87,10 @@ minecraft {
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 
-            args '--mod', 'morethings', '--all', '--output', file('src/generated/resources/')
+            args '--mod', 'bunchofthings', '--all', '--output', file('src/generated/resources/')
 
             mods {
-                morethings {
+                bunchofthings {
                     source sourceSets.main
                 }
             }
@@ -129,12 +129,12 @@ dependencies {
 jar {
     manifest {
         attributes([
-            "Specification-Title": "morethings",
-            "Specification-Vendor": "morethingssareus",
+            "Specification-Title": "bunchofthings",
+            "Specification-Vendor": "bunchofthingssareus",
             "Specification-Version": "1", // We are version 1 of ourselves
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"morethingssareus",
+            "Implementation-Vendor" :"bunchofthingssareus",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }

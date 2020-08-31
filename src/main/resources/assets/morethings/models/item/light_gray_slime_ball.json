@@ -1,6 +1,0 @@
-{
-	"parent": "item/generated",
-	"textures": {
-		"layer0": "morethings:item/light_gray_slime_ball"
-	}
-}

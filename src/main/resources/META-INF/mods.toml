@@ -15,27 +15,27 @@ issueTrackerURL="https://github.com/Brandcraf06/AdabraniumMod/issues" #optional
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]] #mandatory
 # The modid of the mod
-modId="morethings" #mandatory
+modId="bunchofthings" #mandatory
 # The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
 version="${file.jarVersion}" #mandatory
  # A display name for the mod
-displayName="More Things" #mandatory
+displayName="Bunch Of Things" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification <here>
 #updateJSONURL="http://myurl.me/" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
 # displayURL="" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
-#logoFile="morethings.png" #optional
+#logoFile="bunchofthings.png" #optional
 # A text field displayed in the mod UI
 #credits="Thanks for this example mod goes to Java" #optional
 # A text field displayed in the mod UI
 authors="samjviana" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-A mod that adds more things.
+A mod that adds a bunch of things.
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-[[dependencies.morethings]] #optional
+[[dependencies.bunchofthings]] #optional
     # the modid of the dependency
     modId="forge" #mandatory
     # Does this dependency have to exist - if not, ordering below must be specified
@@ -47,7 +47,7 @@ A mod that adds more things.
     # Side this dependency is applied on - BOTH, CLIENT or SERVER
     side="BOTH"
 # Here's another dependency
-[[dependencies.morethings]]
+[[dependencies.bunchofthings]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.16.2]"

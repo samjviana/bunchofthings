@@ -1,0 +1,29 @@
+package net.ddns.samjviana.bunchofthings;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import net.ddns.samjviana.bunchofthings.block.ModBlocks;
+import net.ddns.samjviana.bunchofthings.entity.ModEntityType;
+import net.ddns.samjviana.bunchofthings.item.ModItems;
+import net.ddns.samjviana.bunchofthings.particles.ModParticleTypes;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+
+@Mod(BunchOfThings.MODID)
+public class BunchOfThings {
+    private static final Logger LOGGER = LogManager.getLogger();
+    public static final String MODID = "bunchofthings";
+
+    public BunchOfThings() {
+        final ModLoadingContext modLoadingContext = ModLoadingContext.get();
+        final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ModBlocks.BLOCKS.register(modEventBus);
+        ModEntityType.ENTITIES.register(modEventBus);
+        ModItems.ITEMS.register(modEventBus);
+        ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
+    }
+}
