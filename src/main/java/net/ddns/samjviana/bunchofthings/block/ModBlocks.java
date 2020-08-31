@@ -14,7 +14,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, BunchOfThings.MODID);
 
-    public static final RegistryObject<Block> WHITE_SLIME_BLOCK = BLOCKS.register("white_slime_block", () -> new SlimeBlock(AbstractBlock.Properties.create(Material.CLAY, MaterialColor.BLACK).slipperiness(0.8f).sound(SoundType.SLIME).notSolid()));
+    public static final RegistryObject<Block> WHITE_SLIME_BLOCK = BLOCKS.register("white_slime_block", () -> new SlimeBlock(AbstractBlock.Properties.create(Material.CLAY, MaterialColor.WHITE_TERRACOTTA).slipperiness(0.8f).sound(SoundType.SLIME).notSolid()));
     public static final RegistryObject<Block> ORANGE_SLIME_BLOCK = BLOCKS.register("orange_slime_block", () -> new SlimeBlock(AbstractBlock.Properties.create(Material.CLAY, MaterialColor.ORANGE_TERRACOTTA).slipperiness(0.8f).sound(SoundType.SLIME).notSolid()));
     public static final RegistryObject<Block> MAGENTA_SLIME_BLOCK = BLOCKS.register("magenta_slime_block", () -> new SlimeBlock(AbstractBlock.Properties.create(Material.CLAY, MaterialColor.MAGENTA).slipperiness(0.8f).sound(SoundType.SLIME).notSolid()));
     public static final RegistryObject<Block> LIGHT_BLUE_SLIME_BLOCK = BLOCKS.register("light_blue_slime_block", () -> new SlimeBlock(AbstractBlock.Properties.create(Material.CLAY, MaterialColor.LIGHT_BLUE).slipperiness(0.8f).sound(SoundType.SLIME).notSolid()));

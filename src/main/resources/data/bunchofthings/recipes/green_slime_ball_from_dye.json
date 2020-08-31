@@ -1,0 +1,14 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+      {
+        "item": "minecraft:green_dye"
+      },
+      {
+        "item": "bunchofthings:white_slime_ball"
+      }
+    ],
+    "result": {
+      "item": "bunchofthings:green_slime_ball"
+    }
+}

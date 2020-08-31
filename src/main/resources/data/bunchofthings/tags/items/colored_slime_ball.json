@@ -1,0 +1,21 @@
+{
+    "replace": false,
+    "values": [
+        "bunchofthings:white_slime_ball",
+        "bunchofthings:orange_slime_ball",
+        "bunchofthings:magenta_slime_ball",
+        "bunchofthings:light_blue_slime_ball",
+        "bunchofthings:yellow_slime_ball",
+        "bunchofthings:lime_slime_ball",
+        "bunchofthings:pink_slime_ball",
+        "bunchofthings:gray_slime_ball",
+        "bunchofthings:light_gray_slime_ball",
+        "bunchofthings:cyan_slime_ball",
+        "bunchofthings:purple_slime_ball",
+        "bunchofthings:blue_slime_ball",
+        "bunchofthings:brown_slime_ball",
+        "bunchofthings:green_slime_ball",
+        "bunchofthings:red_slime_ball",
+        "bunchofthings:black_slime_ball"
+    ]
+}

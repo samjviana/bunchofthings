@@ -31,6 +31,7 @@
     "item.bunchofthings.red_slime_ball": "Red Slime Ball",
     "item.bunchofthings.white_slime_ball": "White Slime Ball",
     "item.bunchofthings.yellow_slime_ball": "Yellow Slime Ball",
+    "entity.bunchofthings.colored_slime": "Colored Slime",
 	"itemGroup.blocks": "BunchOfThings Blocks",
 	"itemGroup.items": "BunchOfThings Items"
 }
