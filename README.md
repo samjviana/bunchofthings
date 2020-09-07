@@ -1,6 +1,11 @@
 # Bunch of Things
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg?)](https://www.gnu.org/licenses/gpl-3.0) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/Maarsupial/bunchofthings) ![GitHub All Releases](https://img.shields.io/github/downloads/Maarsupial/bunchofthings/total) ![Avaiable](https://cf.way2muchnoise.eu/versions/405703.svg) [![Downloads](https://cf.way2muchnoise.eu/full_405703_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/bunch-of-things)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg?)](https://www.gnu.org/licenses/gpl-3.0)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/Maarsupial/bunchofthings)
+![GitHub All Releases](https://img.shields.io/github/downloads/Maarsupial/bunchofthings/total)
+[![Avaiable](https://cf.way2muchnoise.eu/versions/405703.svg)](https://www.curseforge.com/minecraft/mc-mods/bunch-of-things)
+![Avaiable](https://cf.way2muchnoise.eu/versions/405703.svg)
+[![Downloads](https://cf.way2muchnoise.eu/full_405703_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/bunch-of-things)
 
 A Mod that just adds a bunch of things to minecraft.
 I started this mod only for myself, but why not post it here..
