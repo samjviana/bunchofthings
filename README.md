@@ -14,15 +14,18 @@ For now the mod is under heavy development so i'll constantly add content to it.
 > ![Colored Slime Ball and Block](https://i.ibb.co/dQxL6fr/coloredslime.png)
 > ### Colored Sticky Pistons
 > ![Colored Sticky Pistons](https://i.ibb.co/sgSWJQk/coloredpistons.png)
+
 ## Recipes
 > You can do a Slime Block with it's correspondent Ball Color.
 > ![Slime Block Recipe](https://i.ibb.co/47WmvgJ/blockrecipe.png)
-> With a White Slime Block you can get any other Slime Block by using Dyes.![WithDye](https://i.ibb.co/S3bGL3X/blockdyerecipe.png)
-> With a White Slime Ball you can get any other Slime Ball by using Dyes.![Slime Ball Dye Recipe](https://i.ibb.co/Yh1dJ7W/balldyerecipe.png)
+> With a White Slime Block you can get any other Slime Block by using Dyes.
+> ![WithDye](https://i.ibb.co/S3bGL3X/blockdyerecipe.png)
+> With a White Slime Ball you can get any other Slime Ball by using Dyes.
+> ![Slime Ball Dye Recipe](https://i.ibb.co/Yh1dJ7W/balldyerecipe.png)
 > The Colored Sticky Piston can be made with it's corresponded Colored Slime Ball
-![Sticky Piston Recipe](https://i.ibb.co/0y9fMH1/coloredpistonsrecipe.png)
+>![Sticky Piston Recipe](https://i.ibb.co/0y9fMH1/coloredpistonsrecipe.png)
 > Vanilla Magma Cream and Lead can be made with any Colored Slime Ball.  
-![Magma Cream](https://i.ibb.co/6XJcFG4/lead.png)
+>![Magma Cream](https://i.ibb.co/6XJcFG4/lead.png)
 
 ## Changelog
 > #### Minecraft: 1.16.2 - Mod: 0.4 - Date: 07/09/2020  
