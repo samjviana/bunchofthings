@@ -1,4 +1,4 @@
-mismatchbuildscript {
+buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
         jcenter()
