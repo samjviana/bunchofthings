@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "XXX",
+        "XXX",
+        "XXX"
+    ],
+    "key": {
+        "S": {
+            "item": "bunchofthings:black_slime_ball"
+        }
+    },
+    "result": {
+        "item": "bunchofthings:black_sticky_piston"
+    }
+}

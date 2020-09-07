@@ -1,31 +1,27 @@
 {
     "variants": {
-        "extended=false,facing=down,color=black": {
-            "model": "bunchofthings:block/black_sticky_piston",
+        "extended=false,facing=down,color=blue": {
+            "model": "bunchofthings:block/blue_sticky_piston",
             "x": 90
         },
-        "extended=false,facing=east,color=black": {
-            "model": "bunchofthings:block/black_sticky_piston",
+        "extended=false,facing=east,color=blue": {
+            "model": "bunchofthings:block/blue_sticky_piston",
             "y": 90
         },
-        "extended=false,facing=north,color=black": {
-            "model": "bunchofthings:block/black_sticky_piston"
+        "extended=false,facing=north,color=blue": {
+            "model": "bunchofthings:block/blue_sticky_piston"
         },
-        "extended=false,facing=south,color=black": {
-            "model": "bunchofthings:block/black_sticky_piston",
+        "extended=false,facing=south,color=blue": {
+            "model": "bunchofthings:block/blue_sticky_piston",
             "y": 180
         },
-        "extended=false,facing=up,color=black": {
-            "model": "bunchofthings:block/black_sticky_piston",
+        "extended=false,facing=up,color=blue": {
+            "model": "bunchofthings:block/blue_sticky_piston",
             "x": 270
         },
-        "extended=false,facing=west,color=black": {
-            "model": "bunchofthings:block/black_sticky_piston",
+        "extended=false,facing=west,color=blue": {
+            "model": "bunchofthings:block/blue_sticky_piston",
             "y": 270
-        },
-        "extended=false,facing=down,color=white": {
-            "model": "bunchofthings:block/white_sticky_piston",
-            "x": 90
         },
         "extended=true,facing=down": {
             "model": "minecraft:block/piston_base",

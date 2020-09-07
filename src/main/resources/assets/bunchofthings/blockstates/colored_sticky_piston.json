@@ -1,0 +1,395 @@
+{
+    "variants": {
+        "extended=false,facing=down,color=black": {
+            "model": "bunchofthings:block/black_sticky_piston",
+            "x": 90
+        },
+        "extended=false,facing=east,color=black": {
+            "model": "bunchofthings:block/black_sticky_piston",
+            "y": 90
+        },
+        "extended=false,facing=north,color=black": {
+            "model": "bunchofthings:block/black_sticky_piston"
+        },
+        "extended=false,facing=south,color=black": {
+            "model": "bunchofthings:block/black_sticky_piston",
+            "y": 180
+        },
+        "extended=false,facing=up,color=black": {
+            "model": "bunchofthings:block/black_sticky_piston",
+            "x": 270
+        },
+        "extended=false,facing=west,color=black": {
+            "model": "bunchofthings:block/black_sticky_piston",
+            "y": 270
+        },
+        "extended=false,facing=down,color=white": {
+            "model": "bunchofthings:block/white_sticky_piston",
+            "x": 90
+        },
+        "extended=false,facing=east,color=white": {
+            "model": "bunchofthings:block/white_sticky_piston",
+            "y": 90
+        },
+        "extended=false,facing=north,color=white": {
+            "model": "bunchofthings:block/white_sticky_piston"
+        },
+        "extended=false,facing=south,color=white": {
+            "model": "bunchofthings:block/white_sticky_piston",
+            "y": 180
+        },
+        "extended=false,facing=up,color=white": {
+            "model": "bunchofthings:block/white_sticky_piston",
+            "x": 270
+        },
+        "extended=false,facing=west,color=white": {
+            "model": "bunchofthings:block/white_sticky_piston",
+            "y": 270
+        },
+        "extended=false,facing=down,color=orange": {
+            "model": "bunchofthings:block/orange_sticky_piston",
+            "x": 90
+        },
+        "extended=false,facing=east,color=orange": {
+            "model": "bunchofthings:block/orange_sticky_piston",
+            "y": 90
+        },
+        "extended=false,facing=north,color=orange": {
+            "model": "bunchofthings:block/orange_sticky_piston"
+        },
+        "extended=false,facing=south,color=orange": {
+            "model": "bunchofthings:block/orange_sticky_piston",
+            "y": 180
+        },
+        "extended=false,facing=up,color=orange": {
+            "model": "bunchofthings:block/orange_sticky_piston",
+            "x": 270
+        },
+        "extended=false,facing=west,color=orange": {
+            "model": "bunchofthings:block/orange_sticky_piston",
+            "y": 270
+        },
+        "extended=false,facing=down,color=magenta": {
+            "model": "bunchofthings:block/magenta_sticky_piston",
+            "x": 90
+        },
+        "extended=false,facing=east,color=magenta": {
+            "model": "bunchofthings:block/magenta_sticky_piston",
+            "y": 90
+        },
+        "extended=false,facing=north,color=magenta": {
+            "model": "bunchofthings:block/magenta_sticky_piston"
+        },
+        "extended=false,facing=south,color=magenta": {
+            "model": "bunchofthings:block/magenta_sticky_piston",
+            "y": 180
+        },
+        "extended=false,facing=up,color=magenta": {
+            "model": "bunchofthings:block/magenta_sticky_piston",
+            "x": 270
+        },
+        "extended=false,facing=west,color=magenta": {
+            "model": "bunchofthings:block/magenta_sticky_piston",
+            "y": 270
+        },
+        "extended=false,facing=down,color=light_blue": {
+            "model": "bunchofthings:block/light_blue_sticky_piston",
+            "x": 90
+        },
+        "extended=false,facing=east,color=light_blue": {
+            "model": "bunchofthings:block/light_blue_sticky_piston",
+            "y": 90
+        },
+        "extended=false,facing=north,color=light_blue": {
+            "model": "bunchofthings:block/light_blue_sticky_piston"
+        },
+        "extended=false,facing=south,color=light_blue": {
+            "model": "bunchofthings:block/light_blue_sticky_piston",
+            "y": 180
+        },
+        "extended=false,facing=up,color=light_blue": {
+            "model": "bunchofthings:block/light_blue_sticky_piston",
+            "x": 270
+        },
+        "extended=false,facing=west,color=light_blue": {
+            "model": "bunchofthings:block/light_blue_sticky_piston",
+            "y": 270
+        },
+        "extended=false,facing=down,color=yellow": {
+            "model": "bunchofthings:block/yellow_sticky_piston",
+            "x": 90
+        },
+        "extended=false,facing=east,color=yellow": {
+            "model": "bunchofthings:block/yellow_sticky_piston",
+            "y": 90
+        },
+        "extended=false,facing=north,color=yellow": {
+            "model": "bunchofthings:block/yellow_sticky_piston"
+        },
+        "extended=false,facing=south,color=yellow": {
+            "model": "bunchofthings:block/yellow_sticky_piston",
+            "y": 180
+        },
+        "extended=false,facing=up,color=yellow": {
+            "model": "bunchofthings:block/yellow_sticky_piston",
+            "x": 270
+        },
+        "extended=false,facing=west,color=yellow": {
+            "model": "bunchofthings:block/yellow_sticky_piston",
+            "y": 270
+        },
+        "extended=false,facing=down,color=lime": {
+            "model": "bunchofthings:block/lime_sticky_piston",
+            "x": 90
+        },
+        "extended=false,facing=east,color=lime": {
+            "model": "bunchofthings:block/lime_sticky_piston",
+            "y": 90
+        },
+        "extended=false,facing=north,color=lime": {
+            "model": "bunchofthings:block/lime_sticky_piston"
+        },
+        "extended=false,facing=south,color=lime": {
+            "model": "bunchofthings:block/lime_sticky_piston",
+            "y": 180
+        },
+        "extended=false,facing=up,color=lime": {
+            "model": "bunchofthings:block/lime_sticky_piston",
+            "x": 270
+        },
+        "extended=false,facing=west,color=lime": {
+            "model": "bunchofthings:block/lime_sticky_piston",
+            "y": 270
+        },
+        "extended=false,facing=down,color=pink": {
+            "model": "bunchofthings:block/pink_sticky_piston",
+            "x": 90
+        },
+        "extended=false,facing=east,color=pink": {
+            "model": "bunchofthings:block/pink_sticky_piston",
+            "y": 90
+        },
+        "extended=false,facing=north,color=pink": {
+            "model": "bunchofthings:block/pink_sticky_piston"
+        },
+        "extended=false,facing=south,color=pink": {
+            "model": "bunchofthings:block/pink_sticky_piston",
+            "y": 180
+        },
+        "extended=false,facing=up,color=pink": {
+            "model": "bunchofthings:block/pink_sticky_piston",
+            "x": 270
+        },
+        "extended=false,facing=west,color=pink": {
+            "model": "bunchofthings:block/pink_sticky_piston",
+            "y": 270
+        },
+        "extended=false,facing=down,color=gray": {
+            "model": "bunchofthings:block/gray_sticky_piston",
+            "x": 90
+        },
+        "extended=false,facing=east,color=gray": {
+            "model": "bunchofthings:block/gray_sticky_piston",
+            "y": 90
+        },
+        "extended=false,facing=north,color=gray": {
+            "model": "bunchofthings:block/gray_sticky_piston"
+        },
+        "extended=false,facing=south,color=gray": {
+            "model": "bunchofthings:block/gray_sticky_piston",
+            "y": 180
+        },
+        "extended=false,facing=up,color=gray": {
+            "model": "bunchofthings:block/gray_sticky_piston",
+            "x": 270
+        },
+        "extended=false,facing=west,color=gray": {
+            "model": "bunchofthings:block/gray_sticky_piston",
+            "y": 270
+        },
+        "extended=false,facing=down,color=light_gray": {
+            "model": "bunchofthings:block/light_gray_sticky_piston",
+            "x": 90
+        },
+        "extended=false,facing=east,color=light_gray": {
+            "model": "bunchofthings:block/light_gray_sticky_piston",
+            "y": 90
+        },
+        "extended=false,facing=north,color=light_gray": {
+            "model": "bunchofthings:block/light_gray_sticky_piston"
+        },
+        "extended=false,facing=south,color=light_gray": {
+            "model": "bunchofthings:block/light_gray_sticky_piston",
+            "y": 180
+        },
+        "extended=false,facing=up,color=light_gray": {
+            "model": "bunchofthings:block/light_gray_sticky_piston",
+            "x": 270
+        },
+        "extended=false,facing=west,color=light_gray": {
+            "model": "bunchofthings:block/light_gray_sticky_piston",
+            "y": 270
+        },
+        "extended=false,facing=down,color=cyan": {
+            "model": "bunchofthings:block/cyan_sticky_piston",
+            "x": 90
+        },
+        "extended=false,facing=east,color=cyan": {
+            "model": "bunchofthings:block/cyan_sticky_piston",
+            "y": 90
+        },
+        "extended=false,facing=north,color=cyan": {
+            "model": "bunchofthings:block/cyan_sticky_piston"
+        },
+        "extended=false,facing=south,color=cyan": {
+            "model": "bunchofthings:block/cyan_sticky_piston",
+            "y": 180
+        },
+        "extended=false,facing=up,color=cyan": {
+            "model": "bunchofthings:block/cyan_sticky_piston",
+            "x": 270
+        },
+        "extended=false,facing=west,color=cyan": {
+            "model": "bunchofthings:block/cyan_sticky_piston",
+            "y": 270
+        },
+        "extended=false,facing=down,color=purple": {
+            "model": "bunchofthings:block/purple_sticky_piston",
+            "x": 90
+        },
+        "extended=false,facing=east,color=purple": {
+            "model": "bunchofthings:block/purple_sticky_piston",
+            "y": 90
+        },
+        "extended=false,facing=north,color=purple": {
+            "model": "bunchofthings:block/purple_sticky_piston"
+        },
+        "extended=false,facing=south,color=purple": {
+            "model": "bunchofthings:block/purple_sticky_piston",
+            "y": 180
+        },
+        "extended=false,facing=up,color=purple": {
+            "model": "bunchofthings:block/purple_sticky_piston",
+            "x": 270
+        },
+        "extended=false,facing=west,color=purple": {
+            "model": "bunchofthings:block/purple_sticky_piston",
+            "y": 270
+        },
+        "extended=false,facing=down,color=blue": {
+            "model": "bunchofthings:block/blue_sticky_piston",
+            "x": 90
+        },
+        "extended=false,facing=east,color=blue": {
+            "model": "bunchofthings:block/blue_sticky_piston",
+            "y": 90
+        },
+        "extended=false,facing=north,color=blue": {
+            "model": "bunchofthings:block/blue_sticky_piston"
+        },
+        "extended=false,facing=south,color=blue": {
+            "model": "bunchofthings:block/blue_sticky_piston",
+            "y": 180
+        },
+        "extended=false,facing=up,color=blue": {
+            "model": "bunchofthings:block/blue_sticky_piston",
+            "x": 270
+        },
+        "extended=false,facing=west,color=blue": {
+            "model": "bunchofthings:block/blue_sticky_piston",
+            "y": 270
+        },
+        "extended=false,facing=down,color=brown": {
+            "model": "bunchofthings:block/brown_sticky_piston",
+            "x": 90
+        },
+        "extended=false,facing=east,color=brown": {
+            "model": "bunchofthings:block/brown_sticky_piston",
+            "y": 90
+        },
+        "extended=false,facing=north,color=brown": {
+            "model": "bunchofthings:block/brown_sticky_piston"
+        },
+        "extended=false,facing=south,color=brown": {
+            "model": "bunchofthings:block/brown_sticky_piston",
+            "y": 180
+        },
+        "extended=false,facing=up,color=brown": {
+            "model": "bunchofthings:block/brown_sticky_piston",
+            "x": 270
+        },
+        "extended=false,facing=west,color=brown": {
+            "model": "bunchofthings:block/brown_sticky_piston",
+            "y": 270
+        },
+        "extended=false,facing=down,color=green": {
+            "model": "bunchofthings:block/green_sticky_piston",
+            "x": 90
+        },
+        "extended=false,facing=east,color=green": {
+            "model": "bunchofthings:block/green_sticky_piston",
+            "y": 90
+        },
+        "extended=false,facing=north,color=green": {
+            "model": "bunchofthings:block/green_sticky_piston"
+        },
+        "extended=false,facing=south,color=green": {
+            "model": "bunchofthings:block/green_sticky_piston",
+            "y": 180
+        },
+        "extended=false,facing=up,color=green": {
+            "model": "bunchofthings:block/green_sticky_piston",
+            "x": 270
+        },
+        "extended=false,facing=west,color=green": {
+            "model": "bunchofthings:block/green_sticky_piston",
+            "y": 270
+        },
+        "extended=false,facing=down,color=red": {
+            "model": "bunchofthings:block/red_sticky_piston",
+            "x": 90
+        },
+        "extended=false,facing=east,color=red": {
+            "model": "bunchofthings:block/red_sticky_piston",
+            "y": 90
+        },
+        "extended=false,facing=north,color=red": {
+            "model": "bunchofthings:block/red_sticky_piston"
+        },
+        "extended=false,facing=south,color=red": {
+            "model": "bunchofthings:block/red_sticky_piston",
+            "y": 180
+        },
+        "extended=false,facing=up,color=red": {
+            "model": "bunchofthings:block/red_sticky_piston",
+            "x": 270
+        },
+        "extended=false,facing=west,color=red": {
+            "model": "bunchofthings:block/red_sticky_piston",
+            "y": 270
+        },
+        "extended=true,facing=down": {
+            "model": "minecraft:block/piston_base",
+            "x": 90
+        },
+        "extended=true,facing=east": {
+            "model": "minecraft:block/piston_base",
+            "y": 90
+        },
+        "extended=true,facing=north": {
+            "model": "minecraft:block/piston_base"
+        },
+        "extended=true,facing=south": {
+            "model": "minecraft:block/piston_base",
+            "y": 180
+        },
+        "extended=true,facing=up": {
+            "model": "minecraft:block/piston_base",
+            "x": 270
+        },
+        "extended=true,facing=west": {
+            "model": "minecraft:block/piston_base",
+            "y": 270
+        }
+    }
+}

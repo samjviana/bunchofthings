@@ -8,43 +8,50 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.ddns.samjviana.bunchofthings.block.ColoredStickyPistonHeadBlock;
 import net.ddns.samjviana.bunchofthings.block.ModBlocks;
 import net.ddns.samjviana.bunchofthings.client.particle.ModBreakingParticle;
 import net.ddns.samjviana.bunchofthings.client.renderer.entity.ColoredSlimeRenderer;
+import net.ddns.samjviana.bunchofthings.client.renderer.tileentity.ColoredPistonTileEntityRenderer;
+import net.ddns.samjviana.bunchofthings.enchantment.ModEnchantments;
 import net.ddns.samjviana.bunchofthings.entity.ModEntityType;
 import net.ddns.samjviana.bunchofthings.entity.monster.ColoredSlimeEntity;
 import net.ddns.samjviana.bunchofthings.item.ModItemGroup;
 import net.ddns.samjviana.bunchofthings.item.ModItems;
 import net.ddns.samjviana.bunchofthings.particles.ModParticleTypes;
+import net.ddns.samjviana.bunchofthings.state.properties.Colors;
+import net.ddns.samjviana.bunchofthings.tileentity.ModTileEntityType;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.ChatScreen;
-import net.minecraft.client.gui.screen.LecternScreen;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.inventory.InventoryScreen;
-import net.minecraft.client.gui.widget.Widget;
-import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.client.resources.I18n;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.RegistryKey;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.WorldGenRegistries;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraft.world.biome.MobSpawnInfo.Spawners;
 import net.minecraft.world.gen.Heightmap;
-import net.minecraftforge.client.event.GuiScreenEvent.InitGuiEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
@@ -61,12 +68,27 @@ public class ModEventSubscriber {
         final IForgeRegistry<Item> registry = event.getRegistry();
 
         ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get).forEach(block -> {
-            final Item.Properties properties = new Item.Properties().group(ModItemGroup.BLOCKS);
-            final BlockItem blockItem = new BlockItem(block, properties);
-
-            blockItem.setRegistryName(block.getRegistryName());
-            registry.register(blockItem);
+            if (!filterBlock(block)) {
+                return;
+            }
+            else {
+                final Item.Properties properties = new Item.Properties().group(ModItemGroup.BLOCKS);
+                final BlockItem blockItem = new BlockItem(block, properties);
+    
+                blockItem.setRegistryName(block.getRegistryName());
+                registry.register(blockItem);
+            }
         });
+    }
+
+    private static boolean filterBlock(Block block) {
+        if (block == ModBlocks.COLORED_STICKY_PISTON_HEAD.get()) {
+            return false;
+        }
+        else if (block == ModBlocks.COLORED_STICKY_PISTON.get()) {
+            return false;
+        }
+        return true;
     }
        
     @SubscribeEvent
@@ -94,6 +116,8 @@ public class ModEventSubscriber {
             });
         }
         */
+
+        ClientRegistry.bindTileEntityRenderer(ModTileEntityType.COLORED_PISTON.get(), ColoredPistonTileEntityRenderer::new);
 
         particleManager.registerFactory(ModParticleTypes.WHITE_SLIME_PARTICLE.get(),
                 new ModBreakingParticle.ColoredSlimeFactory(ModItems.WHITE_SLIME_BALL.get()));
