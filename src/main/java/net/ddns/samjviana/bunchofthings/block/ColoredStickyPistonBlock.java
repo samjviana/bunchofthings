@@ -104,8 +104,8 @@ public class ColoredStickyPistonBlock extends PistonBlock {
             int i = 1;
             if (blockstate.isIn(Blocks.MOVING_PISTON) && blockstate.get(FACING) == direction) {
                 TileEntity tileentity = worldIn.getTileEntity(blockpos);
-                if (tileentity instanceof PistonTileEntity) {
-                    PistonTileEntity pistontileentity = (PistonTileEntity)tileentity;
+                if (tileentity instanceof ColoredPistonTileEntity) {
+                    ColoredPistonTileEntity pistontileentity = (ColoredPistonTileEntity)tileentity;
                     if (pistontileentity.isExtending() && (pistontileentity.getProgress(0.0F) < 0.5F || worldIn.getGameTime() == pistontileentity.getLastTicked() || ((ServerWorld)worldIn).isInsideTick())) {
                         i = 2;
                     }
@@ -164,8 +164,8 @@ public class ColoredStickyPistonBlock extends PistonBlock {
         } else if (id == 1 || id == 2) {
             if (net.minecraftforge.event.ForgeEventFactory.onPistonMovePre(worldIn, pos, direction, false)) return false;
             TileEntity tileentity1 = worldIn.getTileEntity(pos.offset(direction));
-            if (tileentity1 instanceof PistonTileEntity) {
-                ((PistonTileEntity)tileentity1).clearPistonTileEntity();
+            if (tileentity1 instanceof ColoredPistonTileEntity) {
+                ((ColoredPistonTileEntity)tileentity1).clearPistonTileEntity();
             }
 
             BlockState blockstate = Blocks.MOVING_PISTON.getDefaultState().with(MovingPistonBlock.FACING, direction).with(MovingPistonBlock.TYPE, this.isSticky ? PistonType.STICKY : PistonType.DEFAULT);
@@ -179,8 +179,8 @@ public class ColoredStickyPistonBlock extends PistonBlock {
                 boolean flag1 = false;
                 if (blockstate1.isIn(Blocks.MOVING_PISTON)) {
                     TileEntity tileentity = worldIn.getTileEntity(blockpos);
-                    if (tileentity instanceof PistonTileEntity) {
-                    PistonTileEntity pistontileentity = (PistonTileEntity)tileentity;
+                    if (tileentity instanceof ColoredPistonTileEntity) {
+                        ColoredPistonTileEntity pistontileentity = (ColoredPistonTileEntity)tileentity;
                     if (pistontileentity.getFacing() == direction && pistontileentity.isExtending()) {
                         pistontileentity.clearPistonTileEntity();
                         flag1 = true;

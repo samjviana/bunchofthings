@@ -6,13 +6,13 @@
     ],
     "key": {
       "S": {
-        "item": "bunchofthings:pink_slime_ball"
+        "item": "bunchofthings:blue_slime_ball"
       },
       "P": {
         "item": "minecraft:piston"
       }
     },
     "result": {
-      "item": "bunchofthings:pink_sticky_piston"
+      "item": "bunchofthings:blue_sticky_piston"
     }
   }

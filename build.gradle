@@ -1,4 +1,4 @@
-buildscript {
+mismatchbuildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
         jcenter()
@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '0.4'
+version = '1.0.1'
 group = 'net.ddns.samjviana.bunchofthings' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'bunchofthings'
 

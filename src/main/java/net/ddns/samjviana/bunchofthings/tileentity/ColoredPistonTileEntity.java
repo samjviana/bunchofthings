@@ -7,6 +7,7 @@ import net.ddns.samjviana.bunchofthings.BunchOfThings;
 import net.ddns.samjviana.bunchofthings.block.ColoredStickyPistonBlock;
 import net.ddns.samjviana.bunchofthings.block.ColoredStickyPistonHeadBlock;
 import net.ddns.samjviana.bunchofthings.block.ModBlocks;
+import net.ddns.samjviana.bunchofthings.tags.ModBlockTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -129,9 +130,15 @@ public class ColoredPistonTileEntity extends TileEntity implements ITickableTile
           List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity((Entity)null, AabbHelper.func_227019_a_(axisalignedbb, direction, d0).union(axisalignedbb));
           if (!list.isEmpty()) {
              List<AxisAlignedBB> list1 = voxelshape.toBoundingBoxList();
-             boolean flag = this.pistonState.isSlimeBlock(); //TODO: is this patch really needed the logic of the original seems sound revisit later
+             boolean flag = this.pistonState.isSlimeBlock() || ModBlockTags.COLORED_SLIME_BLOCK.func_230235_a_(this.pistonState.getBlock()); //TODO: is this patch really needed the logic of the original seems sound revisit later
              Iterator iterator = list.iterator();
  
+             BunchOfThings.LOGGER.debug("OUTSIDE");
+             if(ModBlockTags.COLORED_SLIME_BLOCK.func_230235_a_(this.pistonState.getBlock())) {
+                BunchOfThings.LOGGER.debug("TESTING");
+                BunchOfThings.LOGGER.debug("TESTING");
+            }
+
              while(true) {
                 Entity entity;
                 while(true) {
