@@ -1,0 +1,21 @@
+{
+    "replace": false,
+    "values": [
+        "bunchofthings:white_sticky_piston_block",
+        "bunchofthings:orange_sticky_piston_block",
+        "bunchofthings:magenta_sticky_piston_block",
+        "bunchofthings:light_blue_sticky_piston_block",
+        "bunchofthings:yellow_sticky_piston_block",
+        "bunchofthings:lime_sticky_piston_block",
+        "bunchofthings:pink_sticky_piston_block",
+        "bunchofthings:gray_sticky_piston_block",
+        "bunchofthings:light_gray_sticky_piston_block",
+        "bunchofthings:cyan_sticky_piston_block",
+        "bunchofthings:purple_sticky_piston_block",
+        "bunchofthings:blue_sticky_piston_block",
+        "bunchofthings:brown_sticky_piston_block",
+        "bunchofthings:green_sticky_piston_block",
+        "bunchofthings:red_sticky_piston_block",
+        "bunchofthings:black_sticky_piston_block"
+    ]
+}

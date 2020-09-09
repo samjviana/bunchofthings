@@ -85,9 +85,6 @@ public class ModEventSubscriber {
         if (block == ModBlocks.COLORED_STICKY_PISTON_HEAD.get()) {
             return false;
         }
-        else if (block == ModBlocks.COLORED_STICKY_PISTON.get()) {
-            return false;
-        }
         return true;
     }
        

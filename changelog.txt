@@ -1,3 +1,6 @@
+Minecraft: 1.16.2 - Mod: 1.1.0 - Date: 09/09/2020
+    • Now Colored Sticky Blocks stick to each other
+
 Minecraft: 1.16.2 - Mod: 1.0.1 - Date: 07/09/2020
     • Colored Sticky Piston recipe mismatch solved
     • Lang file updated

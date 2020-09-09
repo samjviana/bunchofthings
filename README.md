@@ -37,26 +37,6 @@ For now the mod is under heavy development so i'll constantly add content to it.
 >![Magma Cream](https://i.ibb.co/6XJcFG4/lead.png)
 >
 
-## Changelog
-> #### Minecraft: 1.16.2 - Mod: 1.0.1 - Date: 07/09/2020
-> * Colored Sticky Piston recipe mismatch solved 
-> * Lang file updated
->
-> #### Minecraft: 1.16.2 - Mod: 0.4 - Date: 07/09/2020  
-> * Colored Sticky Piston added  
-> * Colored Sticky Piston recipe added  
-> * Vanilla Sticky Piston recipe replacement removed  
-> * Magma Cream and Lead recipe replacement added
->
-> #### Minecraft: 1.16.2 - Mod: 0.4 - Date: 31/08/2020  
-> * Vanilla Sticky Piston recipe replacement added  
-> * Colored Slime Ball and Block recipe from dyes  
-> 
-> #### Minecraft: 1.16.2 - Mod: 0.4 - Date: 31/08/2020  
-> * Colored Slime Entity added  
-> * Colored Slime Ball added  
-> * Colored Slime Block added
-
 ## Bugs/Issues
 Report any probleme on the [issue tracker](https://github.com/Maarsupial/morethings/issues).
 

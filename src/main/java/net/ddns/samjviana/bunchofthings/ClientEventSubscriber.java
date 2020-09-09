@@ -4,7 +4,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 
+import net.ddns.samjviana.bunchofthings.block.ModBlocks;
 import net.ddns.samjviana.bunchofthings.enchantment.ModEnchantments;
+import net.ddns.samjviana.bunchofthings.tags.ModBlockTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.RedstoneWireBlock;
@@ -36,17 +38,18 @@ import net.minecraftforge.items.SlotItemHandler;
 
 @Mod.EventBusSubscriber(modid = BunchOfThings.MODID, value = Dist.CLIENT)
 public class ClientEventSubscriber {
-    private static final boolean isDev = true;
+    private static final boolean isDev = false;
 
     @SubscribeEvent
     public static void onInitGui(final InitGuiEvent event) {
         final Screen gui = event.getGui();
-        if (gui instanceof InventoryScreen && !isDev) {
+        if (gui instanceof InventoryScreen && isDev) {
             InventoryScreen inventoryGui = (InventoryScreen) gui;
             ClientPlayerEntity player = gui.getMinecraft().player;
             event.addWidget(new Button(inventoryGui.field_230708_k_ + 50, inventoryGui.field_230709_l_, 20, 20,
-                    new StringTextComponent("<"),
-                    button -> Minecraft.getInstance().displayGuiScreen(new ChatScreen("defaultText"))));
+                new StringTextComponent("<"),
+                button -> Minecraft.getInstance().displayGuiScreen(new ChatScreen("defaultText")))
+                );
 
             Method addWidget = ObfuscationReflectionHelper.findMethod(Screen.class, "func_230480_a_",
                     Widget.class);

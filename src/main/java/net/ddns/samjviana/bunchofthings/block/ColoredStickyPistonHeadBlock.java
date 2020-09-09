@@ -2,6 +2,7 @@ package net.ddns.samjviana.bunchofthings.block;
 
 import net.ddns.samjviana.bunchofthings.state.properties.Colors;
 import net.ddns.samjviana.bunchofthings.state.properties.ModBlockStateProperties;
+import net.ddns.samjviana.bunchofthings.tags.ModBlockTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -78,8 +79,10 @@ public class ColoredStickyPistonHeadBlock extends PistonHeadBlock {
     }
 
     private boolean func_235682_a_(BlockState p_235682_1_, BlockState p_235682_2_) {
-        Block block = ModBlocks.COLORED_STICKY_PISTON.get();
-        return p_235682_2_.isIn(block) && p_235682_2_.get(ColoredStickyPistonBlock.EXTENDED) && p_235682_2_.get(FACING) == p_235682_1_.get(FACING);
+        if (p_235682_2_.getBlock() instanceof ColoredStickyPistonBlock) {
+            return p_235682_2_.get(ColoredStickyPistonBlock.EXTENDED) && p_235682_2_.get(FACING) == p_235682_1_.get(FACING);
+        }
+        return false;
     }
 
     @Override

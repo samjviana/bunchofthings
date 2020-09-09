@@ -28,6 +28,7 @@ public class BunchOfThings {
 
         ModBlocks.BLOCKS.register(modEventBus);
         ModBlocks.registerStickyPistons();
+        ModBlocks.registerSlimeBlocks();
         ModEntityType.ENTITIES.register(modEventBus);
         ModTileEntityType.TILE_ENTITIES.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);

@@ -14,4 +14,5 @@ public class ModBlockTags {
     public static final TagRegistry<Block> BLOCK_TAGS = TagRegistryManager.func_242196_a(new ResourceLocation("block"), ITagCollectionSupplier::func_241835_a);
 
     public static final INamedTag<Block> COLORED_SLIME_BLOCK = BLOCK_TAGS.func_232937_a_("colored_slime_block");
+    public static final INamedTag<Block> COLORED_STICKY_PISTON_BLOCK = BLOCK_TAGS.func_232937_a_("colored_sticky_piston_block");
 }
