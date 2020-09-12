@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "S",
+      "P"
+    ],
+    "key": {
+      "S": {
+        "item": "bunchofthings:light_gray_slime_ball"
+      },
+      "P": {
+        "item": "minecraft:piston"
+      }
+    },
+    "result": {
+      "item": "bunchofthings:light_gray_sticky_piston"
+    }
+  }

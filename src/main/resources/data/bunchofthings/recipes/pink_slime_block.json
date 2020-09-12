@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "XXX",
+      "XXX",
+      "XXX"
+    ],
+    "key": {
+      "X": {
+        "item": "bunchofthings:pink_slime_ball"
+      }
+    },
+    "result": {
+      "item": "bunchofthings:pink_slime_block"
+    }
+  }

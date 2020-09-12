@@ -1,0 +1,25 @@
+Minecraft: 1.16.3 - Mod: 1.1.1 - Date: 09/09/2020
+    • Fixed error that make sticky pistons don't drop on break
+    • Updated to 1.16.3
+
+Minecraft: 1.16.2 - Mod: 1.1.0 - Date: 09/09/2020
+    • Now Colored Slime Blocks stick to each other
+
+Minecraft: 1.16.2 - Mod: 1.0.1 - Date: 07/09/2020
+    • Colored Sticky Piston recipe mismatch solved
+    • Lang file updated
+
+Minecraft: 1.16.2 - Mod: 1.0.0 - Date: 07/09/2020
+    • Colored Sticky Piston added
+    • Colored Sticky Piston recipe added
+    • Vanilla Sticky Piston recipe replacement removed
+    • Magma Cream and Lead recipe replacement added
+
+Minecraft: 1.16.2 - Mod: 0.4 - Date: 31/08/2020
+    • Vanilla Sticky Piston recipe replacement added
+    • Colored Slime Ball and Block recipe from dyes
+
+Minecraft: 1.16.2 - Mod: 0.3 - Date: 31/08/2020
+    • Colored Slime Entity added
+    • Colored Slime Ball added
+    • Colored Slime Block added
