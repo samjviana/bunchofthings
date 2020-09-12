@@ -6,7 +6,7 @@
         "entries": [
           {
             "type": "minecraft:item",
-            "name": "bunchofthings:black_sticky_piston"
+            "name": "bunchofthings:yellow_sticky_piston"
         }
       ],
       "conditions": [

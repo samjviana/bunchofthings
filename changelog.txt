@@ -1,3 +1,6 @@
+Minecraft: 1.16.2 - Mod: 1.1.1 - Date: 12/09/2020
+    • Fixed error that make sticky pistons don't drop on break
+
 Minecraft: 1.16.2 - Mod: 1.1.0 - Date: 09/09/2020
     • Now Colored Slime Blocks stick to each other
 

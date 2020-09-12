@@ -49,24 +49,25 @@ public class ColoredStickyPistonHeadBlock extends PistonHeadBlock {
     public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
         Direction direction = state.get(FACING);
         BlockPos blockPos = new BlockPos(pos.getX(), pos.getY(), pos.getZ());
+        boolean dropBlock = !player.isCreative();
 
         if (direction.compareTo(Direction.UP) == 0) {
-            worldIn.destroyBlock(blockPos.down(), false);
+            worldIn.destroyBlock(blockPos.down(), dropBlock);
         }
         else if(direction.compareTo(Direction.DOWN) == 0) {
-            worldIn.destroyBlock(blockPos.up(), false);
+            worldIn.destroyBlock(blockPos.up(), dropBlock);
         }
         else if(direction.compareTo(Direction.EAST) == 0) {
-            worldIn.destroyBlock(blockPos.west(), false);
+            worldIn.destroyBlock(blockPos.west(), dropBlock);
         }
         else if(direction.compareTo(Direction.WEST) == 0) {
-            worldIn.destroyBlock(blockPos.east(), false);
+            worldIn.destroyBlock(blockPos.east(), dropBlock);
         }
         else if(direction.compareTo(Direction.NORTH) == 0) {
-            worldIn.destroyBlock(blockPos.south(), false);
+            worldIn.destroyBlock(blockPos.south(), dropBlock);
         }
         else if(direction.compareTo(Direction.SOUTH) == 0) {
-            worldIn.destroyBlock(blockPos.north(), false);
+            worldIn.destroyBlock(blockPos.north(), dropBlock);
         }
 
         super.onBlockHarvested(worldIn, pos, state, player);
