@@ -46,7 +46,7 @@ public class ClientEventSubscriber {
         if (gui instanceof InventoryScreen && isDev) {
             InventoryScreen inventoryGui = (InventoryScreen) gui;
             ClientPlayerEntity player = gui.getMinecraft().player;
-            event.addWidget(new Button(inventoryGui.field_230708_k_ + 50, inventoryGui.field_230709_l_, 20, 20,
+            event.addWidget(new Button(inventoryGui.width + 50, inventoryGui.height, 20, 20,
                 new StringTextComponent("<"),
                 button -> Minecraft.getInstance().displayGuiScreen(new ChatScreen("defaultText")))
                 );
@@ -55,7 +55,7 @@ public class ClientEventSubscriber {
                     Widget.class);
             try {
                 int xPos = inventoryGui.getGuiLeft() + 158;
-                int yPos = inventoryGui.field_230709_l_ / 2 - 14;
+                int yPos = inventoryGui.height / 2 - 14;
                 addWidget.invoke(inventoryGui,
                         new ImageButton(xPos, yPos, 11, 11,
                                 0, 0, 11, new ResourceLocation(BunchOfThings.MODID, "textures/gui/sorticon.png"), (p_214086_1_) -> {

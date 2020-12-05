@@ -121,14 +121,14 @@ public class ColoredSlimeEntity extends SlimeEntity {
     public static AttributeModifierMap getAttributes() {
         AttributeModifierMap.MutableAttribute attributes = SlimeEntity.func_233666_p_();
 
-        attributes.func_233814_a_(Attributes.field_233823_f_);
+        attributes.createMutableAttribute(Attributes.MAX_HEALTH);
 
-        return attributes.func_233813_a_();
+        return attributes.create();
     }
 
     public static boolean _canSpawn(EntityType<ColoredSlimeEntity> entityType, IWorld worldIn, SpawnReason reason, BlockPos pos, Random randomIn) {
         if (worldIn.getDifficulty() != Difficulty.PEACEFUL) {
-            if (Objects.equals(worldIn.func_242406_i(pos), Optional.of(Biomes.SWAMP)) && pos.getY() > 50 && pos.getY() < 70 && randomIn.nextFloat() < 0.5F && randomIn.nextFloat() < worldIn.func_242413_ae() && worldIn.getLight(pos) <= randomIn.nextInt(8)) {
+            if (Objects.equals(worldIn.func_242406_i(pos), Optional.of(Biomes.SWAMP)) && pos.getY() > 50 && pos.getY() < 70 && randomIn.nextFloat() < 0.5F && randomIn.nextFloat() < worldIn.getMoonFactor() && worldIn.getLight(pos) <= randomIn.nextInt(8)) {
                return canSpawnOn(entityType, worldIn, reason, pos, randomIn);
             }
    
@@ -180,7 +180,7 @@ public class ColoredSlimeEntity extends SlimeEntity {
     @SuppressWarnings("deprecation") /* this.removed is deprecated */
     public void remove(boolean keepData) {
         int i = this.getSlimeSize();
-        if (!this.world.isRemote && i > 1 && this.func_233643_dh_() && !this.removed) {
+        if (!this.world.isRemote && i > 1 && this.getShouldBeDead() && !this.removed) {
             ITextComponent itextcomponent = this.getCustomName();
             boolean flag = this.isAIDisabled();
             float f = (float) i / 4.0F;

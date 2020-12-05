@@ -1,5 +1,6 @@
 package net.ddns.samjviana.bunchofthings;
 
+import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -149,15 +150,15 @@ public class ModEventSubscriber {
         particleManager.registerFactory(ModParticleTypes.YELLOW_SLIME_PARTICLE.get(),
                 new ModBreakingParticle.ColoredSlimeFactory(ModItems.YELLOW_SLIME_BALL.get()));
 
-        for (Map.Entry<RegistryKey<Biome>, Biome> biome : WorldGenRegistries.field_243657_i.func_239659_c_() /* Collection of Biome Entries */) {
-            if (biome.getValue() != null && !biome.getValue().getCategory().equals(Biome.Category.NETHER) && !biome.getValue().getCategory().equals(Biome.Category.THEEND)) {
-                MobSpawnInfo mobSpawnInfo = biome.getValue().func_242433_b();
-                List<Spawners> spawnList = new ArrayList<Spawners>(mobSpawnInfo.func_242559_a(EntityClassification.MONSTER));
+                for (Biome biome : WorldGenRegistries.BIOME /* Collection of Biome Entries */) {
+                        if (biome != null && !biome.getCategory().equals(Biome.Category.NETHER) && !biome.getCategory().equals(Biome.Category.THEEND)) {
+                MobSpawnInfo mobSpawnInfo = biome.getMobSpawnInfo();
+                List<Spawners> spawnList = new ArrayList<Spawners>(mobSpawnInfo.getSpawners(EntityClassification.MONSTER));
 
                 Spawners spawnToRemove = null;
 
                 for (Spawners spawn : spawnList) {
-                    if (spawn.field_242588_c == EntityType.SLIME) {
+                    if (spawn.type == EntityType.SLIME) {
                         spawnToRemove = spawn;
                     }
                 }

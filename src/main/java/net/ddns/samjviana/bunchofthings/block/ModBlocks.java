@@ -46,10 +46,10 @@ public class ModBlocks {
         AbstractBlock.IPositionPredicate abstractblock$ipositionpredicate = (p_235440_0_, p_235440_1_, p_235440_2_) -> {
             return !p_235440_0_.get(ColoredStickyPistonBlock.EXTENDED);
         };
-        return new ColoredStickyPistonBlock(color, true, AbstractBlock.Properties.create(Material.PISTON).hardnessAndResistance(1.5F).func_235828_a_(ModBlocks::func_235436_b_).func_235842_b_(abstractblock$ipositionpredicate).func_235847_c_(abstractblock$ipositionpredicate));
+        return new ColoredStickyPistonBlock(color, true, AbstractBlock.Properties.create(Material.PISTON).hardnessAndResistance(1.5F).setOpaque(ModBlocks::isntSolid).setSuffocates(abstractblock$ipositionpredicate).setBlocksVision(abstractblock$ipositionpredicate));
     }
 
-    private static boolean func_235436_b_(BlockState p_235436_0_, IBlockReader p_235436_1_, BlockPos p_235436_2_) {
+    private static boolean isntSolid(BlockState state, IBlockReader reader, BlockPos pos) {
         return false;
     }
 

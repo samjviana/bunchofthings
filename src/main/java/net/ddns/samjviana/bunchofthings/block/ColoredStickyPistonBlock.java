@@ -178,7 +178,7 @@ public class ColoredStickyPistonBlock extends PistonBlock {
             worldIn.setBlockState(pos, blockstate, 20);
             worldIn.setTileEntity(pos, new ColoredPistonTileEntity(this.getDefaultState().with(FACING, Direction.byIndex(param & 7)), direction, false, true));
             worldIn.func_230547_a_(pos, blockstate.getBlock());
-            blockstate.func_235734_a_(worldIn, pos, 2);
+            blockstate.updateNeighbours(worldIn, pos, 2);
             if (this.isSticky) {
                 BlockPos blockpos = pos.add(direction.getXOffset() * 2, direction.getYOffset() * 2, direction.getZOffset() * 2);
                 BlockState blockstate1 = worldIn.getBlockState(blockpos);
@@ -216,7 +216,7 @@ public class ColoredStickyPistonBlock extends PistonBlock {
         if (pos.getY() >= 0 && pos.getY() <= worldIn.getHeight() - 1 && worldIn.getWorldBorder().contains(pos)) {
             if (blockStateIn.isAir()) {
                 return true;
-            } else if (!blockStateIn.isIn(Blocks.OBSIDIAN) && !blockStateIn.isIn(Blocks.field_235399_ni_) && !blockStateIn.isIn(Blocks.field_235400_nj_)) {
+            } else if (!blockStateIn.isIn(Blocks.OBSIDIAN) && !blockStateIn.isIn(Blocks.CRYING_OBSIDIAN) && !blockStateIn.isIn(Blocks.RESPAWN_ANCHOR)) {
                 if (facing == Direction.DOWN && pos.getY() == 0) {
                     return false;
                 } else if (facing == Direction.UP && pos.getY() == worldIn.getHeight() - 1) {
@@ -323,7 +323,7 @@ public class ColoredStickyPistonBlock extends PistonBlock {
                 BlockPos blockpos5 = entry.getKey();
                 BlockState blockstate2 = entry.getValue();
                 blockstate2.updateDiagonalNeighbors(worldIn, blockpos5, 2);
-                blockstate3.func_235734_a_(worldIn, blockpos5, 2);
+                blockstate3.updateNeighbours(worldIn, blockpos5, 2);
                 blockstate3.updateDiagonalNeighbors(worldIn, blockpos5, 2);
             }
 

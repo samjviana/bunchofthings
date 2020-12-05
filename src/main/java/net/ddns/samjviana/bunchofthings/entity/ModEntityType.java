@@ -17,7 +17,7 @@ public class ModEntityType {
         () -> EntityType.Builder.<ColoredSlimeEntity>create(
             ColoredSlimeEntity::new,
             EntityClassification.MONSTER
-        ).size(2.04f, 2.04f).func_233606_a_(10).build(
+        ).size(2.04f, 2.04f).trackingRange(10).build(
             new ResourceLocation(BunchOfThings.MODID, "colored_slime").toString()
         )
     );

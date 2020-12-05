@@ -22,6 +22,7 @@ import net.minecraft.nbt.NBTUtil;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.PistonType;
 import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.tileentity.PistonTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.AabbHelper;
@@ -68,7 +69,7 @@ public class ColoredPistonTileEntity extends TileEntity implements ITickableTile
      * many blocks change at once. This compound comes back to you clientside in {@link handleUpdateTag}
      */
     public CompoundNBT getUpdateTag() {
-       return this.write(new CompoundNBT());
+        return this.write(new CompoundNBT());
     }
  
     /**
@@ -130,11 +131,11 @@ public class ColoredPistonTileEntity extends TileEntity implements ITickableTile
           List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity((Entity)null, AabbHelper.func_227019_a_(axisalignedbb, direction, d0).union(axisalignedbb));
           if (!list.isEmpty()) {
              List<AxisAlignedBB> list1 = voxelshape.toBoundingBoxList();
-             boolean flag = this.pistonState.isSlimeBlock() || ModBlockTags.COLORED_SLIME_BLOCK.func_230235_a_(this.pistonState.getBlock()); //TODO: is this patch really needed the logic of the original seems sound revisit later
+             boolean flag = this.pistonState.isSlimeBlock() || ModBlockTags.COLORED_SLIME_BLOCK.contains(this.pistonState.getBlock()); //TODO: is this patch really needed the logic of the original seems sound revisit later
              Iterator iterator = list.iterator();
  
              BunchOfThings.LOGGER.debug("OUTSIDE");
-             if(ModBlockTags.COLORED_SLIME_BLOCK.func_230235_a_(this.pistonState.getBlock())) {
+             if(ModBlockTags.COLORED_SLIME_BLOCK.contains(this.pistonState.getBlock())) {
                 BunchOfThings.LOGGER.debug("TESTING");
                 BunchOfThings.LOGGER.debug("TESTING");
             }
@@ -224,7 +225,7 @@ public class ColoredPistonTileEntity extends TileEntity implements ITickableTile
     }
  
     private static boolean func_227021_a_(AxisAlignedBB p_227021_0_, Entity p_227021_1_) {
-       return p_227021_1_.getPushReaction() == PushReaction.NORMAL && p_227021_1_.func_233570_aj_() && p_227021_1_.getPosX() >= p_227021_0_.minX && p_227021_1_.getPosX() <= p_227021_0_.maxX && p_227021_1_.getPosZ() >= p_227021_0_.minZ && p_227021_1_.getPosZ() <= p_227021_0_.maxZ;
+       return p_227021_1_.getPushReaction() == PushReaction.NORMAL && p_227021_1_.isOnGround() && p_227021_1_.getPosX() >= p_227021_0_.minX && p_227021_1_.getPosX() <= p_227021_0_.maxX && p_227021_1_.getPosZ() >= p_227021_0_.minZ && p_227021_1_.getPosZ() <= p_227021_0_.maxZ;
     }
  
     private boolean func_227025_y_() {
@@ -316,7 +317,7 @@ public class ColoredPistonTileEntity extends TileEntity implements ITickableTile
                    this.world.setBlockState(this.pos, this.pistonState, 84);
                    Block.replaceBlock(this.pistonState, blockstate, this.world, this.pos, 3);
                 } else {
-                   if (blockstate.func_235901_b_(BlockStateProperties.WATERLOGGED) && blockstate.get(BlockStateProperties.WATERLOGGED)) {
+                   if (blockstate.hasProperty(BlockStateProperties.WATERLOGGED) && blockstate.get(BlockStateProperties.WATERLOGGED)) {
                       blockstate = blockstate.with(BlockStateProperties.WATERLOGGED, Boolean.valueOf(false));
                    }
  
@@ -337,17 +338,17 @@ public class ColoredPistonTileEntity extends TileEntity implements ITickableTile
  
        }
     }
- 
-    public void func_230337_a_(BlockState p_230337_1_, CompoundNBT p_230337_2_) {
-       super.func_230337_a_(p_230337_1_, p_230337_2_);
-       this.pistonState = NBTUtil.readBlockState(p_230337_2_.getCompound("blockState"));
-       this.pistonFacing = Direction.byIndex(p_230337_2_.getInt("facing"));
-       this.progress = p_230337_2_.getFloat("progress");
-       this.lastProgress = this.progress;
-       this.extending = p_230337_2_.getBoolean("extending");
-       this.shouldHeadBeRendered = p_230337_2_.getBoolean("source");
-    }
- 
+  
+	public void read(BlockState state, CompoundNBT nbt) {
+		super.read(state, nbt);
+		this.pistonState = NBTUtil.readBlockState(nbt.getCompound("blockState"));
+		this.pistonFacing = Direction.byIndex(nbt.getInt("facing"));
+		this.progress = nbt.getFloat("progress");
+		this.lastProgress = this.progress;
+		this.extending = nbt.getBoolean("extending");
+		this.shouldHeadBeRendered = nbt.getBoolean("source");
+	}  
+
     public CompoundNBT write(CompoundNBT compound) {
        super.write(compound);
        compound.put("blockState", NBTUtil.writeBlockState(this.pistonState));
