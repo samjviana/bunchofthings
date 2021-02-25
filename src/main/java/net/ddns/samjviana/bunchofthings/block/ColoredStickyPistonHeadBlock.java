@@ -1,5 +1,6 @@
 package net.ddns.samjviana.bunchofthings.block;
 
+import net.ddns.samjviana.bunchofthings.BunchOfThings;
 import net.ddns.samjviana.bunchofthings.state.properties.Colors;
 import net.ddns.samjviana.bunchofthings.state.properties.ModBlockStateProperties;
 import net.ddns.samjviana.bunchofthings.tags.ModBlockTags;
@@ -76,7 +77,7 @@ public class ColoredStickyPistonHeadBlock extends PistonHeadBlock {
     @Override
     public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
         BlockState blockstate = worldIn.getBlockState(pos.offset(state.get(FACING).getOpposite()));
-        return this.func_235682_a_(state, blockstate) || blockstate.isIn(Blocks.MOVING_PISTON) && blockstate.get(FACING) == state.get(FACING);
+        return this.isExtended(state, blockstate) || blockstate.isIn(Blocks.MOVING_PISTON) && blockstate.get(FACING) == state.get(FACING);
     }
 
     private boolean func_235682_a_(BlockState p_235682_1_, BlockState p_235682_2_) {
@@ -84,6 +85,11 @@ public class ColoredStickyPistonHeadBlock extends PistonHeadBlock {
             return p_235682_2_.get(ColoredStickyPistonBlock.EXTENDED) && p_235682_2_.get(FACING) == p_235682_1_.get(FACING);
         }
         return false;
+    }
+
+    private boolean isExtended(BlockState baseState, BlockState extendedState) {
+        Block block = ModBlocks.COLORED_STICKY_PISTON_HEAD.get();
+        return extendedState.isIn(block) && extendedState.get(ColoredStickyPistonBlock.EXTENDED) && extendedState.get(FACING) == baseState.get(FACING);
     }
 
     @Override

@@ -121,7 +121,7 @@ public class ColoredSlimeEntity extends SlimeEntity {
     public static AttributeModifierMap getAttributes() {
         AttributeModifierMap.MutableAttribute attributes = SlimeEntity.func_233666_p_();
 
-        attributes.createMutableAttribute(Attributes.MAX_HEALTH);
+        attributes.createMutableAttribute(Attributes.ATTACK_DAMAGE);
 
         return attributes.create();
     }

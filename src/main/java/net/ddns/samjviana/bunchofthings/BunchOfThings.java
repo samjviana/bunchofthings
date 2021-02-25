@@ -9,9 +9,7 @@ import net.ddns.samjviana.bunchofthings.entity.ModEntityType;
 import net.ddns.samjviana.bunchofthings.item.ModItems;
 import net.ddns.samjviana.bunchofthings.particles.ModParticleTypes;
 import net.ddns.samjviana.bunchofthings.tileentity.ModTileEntityType;
-import net.minecraft.block.Blocks;
-import net.minecraft.data.BlockTagsProvider;
-import net.minecraft.tags.BlockTags;
+import net.ddns.samjviana.bunchofthings.world.gen.feature.ModFeatures;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -19,8 +17,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod(BunchOfThings.MODID)
 public class BunchOfThings {
-    public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "bunchofthings";
+    public static final Logger LOGGER = LogManager.getLogger();
 
     public BunchOfThings() {
         final ModLoadingContext modLoadingContext = ModLoadingContext.get();
@@ -29,6 +27,7 @@ public class BunchOfThings {
         ModBlocks.BLOCKS.register(modEventBus);
         ModBlocks.registerStickyPistons();
         ModBlocks.registerSlimeBlocks();
+        ModFeatures.FEATURES.register(modEventBus);
         ModEntityType.ENTITIES.register(modEventBus);
         ModTileEntityType.TILE_ENTITIES.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);

@@ -1,8 +1,12 @@
 package net.ddns.samjviana.bunchofthings.particles;
 
+import com.mojang.serialization.Codec;
+
 import net.ddns.samjviana.bunchofthings.BunchOfThings;
 import net.minecraft.particles.BasicParticleType;
+import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleType;
+import net.minecraft.util.registry.Registry;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -26,4 +30,5 @@ public class ModParticleTypes {
     public static final RegistryObject<ParticleType<BasicParticleType>> GREEN_SLIME_PARTICLE = PARTICLE_TYPES.register("green_slime_particle", () -> new BasicParticleType(false));
     public static final RegistryObject<ParticleType<BasicParticleType>> RED_SLIME_PARTICLE = PARTICLE_TYPES.register("red_slime_particle", () -> new BasicParticleType(false));
     public static final RegistryObject<ParticleType<BasicParticleType>> BLACK_SLIME_PARTICLE = PARTICLE_TYPES.register("black_slime_particle", () -> new BasicParticleType(false));
+    public static final RegistryObject<BasicParticleType> YELLOW_MUSHROOM_GLOW_PARTICLE = PARTICLE_TYPES.register("yellow_mushroom_glow_particle", () -> new BasicParticleType(false));
 }

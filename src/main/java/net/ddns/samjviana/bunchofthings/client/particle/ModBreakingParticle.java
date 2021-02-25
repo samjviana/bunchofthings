@@ -7,6 +7,8 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particles.BasicParticleType;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class ModBreakingParticle extends BreakingParticle {
 
@@ -14,6 +16,7 @@ public class ModBreakingParticle extends BreakingParticle {
         super(p_i232348_1_, p_i232348_2_, p_i232348_4_, p_i232348_6_, p_i232348_8_);
     }
 
+    @OnlyIn(Dist.CLIENT)
     public static class ColoredSlimeFactory implements IParticleFactory<BasicParticleType> {
         private Item slimeBall; 
         public ColoredSlimeFactory(Item slimeBall) {
