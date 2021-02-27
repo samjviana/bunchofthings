@@ -17,13 +17,20 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ModFeatures {
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, BunchOfThings.MODID);
 
-    public static final RegistryObject<Feature<?>> PATCH_YELLOW_MUSHROOM = FEATURES.register(
+    public static final RegistryObject<Feature<BlockClusterFeatureConfig>> PATCH_YELLOW_MUSHROOM = FEATURES.register(
         "patch_yellow_mushroom", 
-        () -> new RandomPatchFeature(BlockClusterFeatureConfig.field_236587_a_).withConfiguration(
-            (new BlockClusterFeatureConfig.Builder(
-                new SimpleBlockStateProvider(((YellowMushroomBlock)ModBlocks.YELLOW_MUSHROOM.get()).getRandomState()),
-                SimpleBlockPlacer.PLACER
-            )).tries(64).func_227317_b_().build()
-        ).feature
+        () -> new YellowMushroomFeature(BlockClusterFeatureConfig.field_236587_a_)
     );
+
+    /*public static final ConfiguredFeature<?, ?> CONFIGURED_PATCH_YELLOW_MUSHROOM = new RandomPatchFeature(BlockClusterFeatureConfig.field_236587_a_).withConfiguration(
+        (new BlockClusterFeatureConfig.Builder(
+            new SimpleBlockStateProvider(((YellowMushroomBlock)ModBlocks.YELLOW_MUSHROOM.get()).getRandomState()),
+            SimpleBlockPlacer.PLACER
+        )).tries(64).func_227317_b_().build()
+    );
+
+    public static final RegistryObject<Feature<?>> PATCH_YELLOW_MUSHROOM = FEATURES.register(
+            "patch_yellow_mushroom", 
+        () -> CONFIGURED_PATCH_YELLOW_MUSHROOM.feature
+    );*/
 }

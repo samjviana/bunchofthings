@@ -10,6 +10,8 @@ import net.ddns.samjviana.bunchofthings.item.ModItems;
 import net.ddns.samjviana.bunchofthings.particles.ModParticleTypes;
 import net.ddns.samjviana.bunchofthings.tileentity.ModTileEntityType;
 import net.ddns.samjviana.bunchofthings.world.gen.feature.ModFeatures;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -23,7 +25,9 @@ public class BunchOfThings {
     public BunchOfThings() {
         final ModLoadingContext modLoadingContext = ModLoadingContext.get();
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        final IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
 
+        forgeEventBus.addListener(EventPriority.HIGH, ModEventSubscriber::onBiomeLoading);
         ModBlocks.BLOCKS.register(modEventBus);
         ModBlocks.registerStickyPistons();
         ModBlocks.registerSlimeBlocks();

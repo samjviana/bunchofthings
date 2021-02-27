@@ -1,25 +1,16 @@
 package net.ddns.samjviana.bunchofthings;
 
-import java.lang.reflect.Method;
-import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.function.BiConsumer;
-
-import com.electronwill.nightconfig.core.conversion.Path;
-import com.google.common.base.Supplier;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-import com.google.gson.JsonElement;
+import java.util.function.Supplier;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import io.netty.util.internal.shaded.org.jctools.queues.MessagePassingQueue.Consumer;
 import net.ddns.samjviana.bunchofthings.block.ModBlocks;
+import net.ddns.samjviana.bunchofthings.block.YellowMushroomBlock;
 import net.ddns.samjviana.bunchofthings.client.particle.ModBreakingParticle;
 import net.ddns.samjviana.bunchofthings.client.particle.YellowMushroomGlowParticle;
 import net.ddns.samjviana.bunchofthings.client.renderer.entity.ColoredSlimeRenderer;
@@ -29,50 +20,45 @@ import net.ddns.samjviana.bunchofthings.entity.monster.ColoredSlimeEntity;
 import net.ddns.samjviana.bunchofthings.item.ModItemGroup;
 import net.ddns.samjviana.bunchofthings.item.ModItems;
 import net.ddns.samjviana.bunchofthings.particles.ModParticleTypes;
-import net.ddns.samjviana.bunchofthings.state.properties.Colors;
 import net.ddns.samjviana.bunchofthings.tileentity.ModTileEntityType;
+import net.ddns.samjviana.bunchofthings.utils.BiomeAccessor;
+import net.ddns.samjviana.bunchofthings.utils.BiomeModifier;
 import net.ddns.samjviana.bunchofthings.world.gen.feature.ModFeatures;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.data.BlockModelProvider;
-import net.minecraft.data.IFinishedBlockState;
-import net.minecraft.data.ModelTextures;
-import net.minecraft.data.ModelsResourceUtil;
-import net.minecraft.data.StockModelShapes;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.particles.ParticleType;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.RegistryKey;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.WorldGenRegistries;
-import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeGenerationSettings;
+import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraft.world.biome.MobSpawnInfo.Spawners;
+import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.Heightmap;
+import net.minecraft.world.gen.blockplacer.SimpleBlockPlacer;
+import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
+import net.minecraft.world.gen.feature.BlockClusterFeatureConfig;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.Features;
+import net.minecraft.world.gen.feature.RandomPatchFeature;
+import net.minecraft.world.gen.placement.NoiseDependant;
+import net.minecraft.world.gen.placement.Placement;
+import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilders;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
-import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.RegistryObject;
@@ -82,8 +68,8 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 
 @EventBusSubscriber(modid = BunchOfThings.MODID, bus = Bus.MOD)
@@ -95,7 +81,7 @@ public class ModEventSubscriber {
         final IForgeRegistry<Feature<?>> registry = event.getRegistry();
 
         ModFeatures.FEATURES.getEntries().stream().map(RegistryObject::get).forEach(feature -> {
-            BunchOfThings.LOGGER.debug(feature.toString());
+            registry.register(feature);
         });
     }
 
@@ -177,6 +163,39 @@ public class ModEventSubscriber {
         return null;
     }
 
+    public static void onBiomeLoading(final BiomeLoadingEvent event) {
+        /*event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(
+            () -> new RandomPatchFeature(BlockClusterFeatureConfig.field_236587_a_).withConfiguration(
+                (new BlockClusterFeatureConfig.Builder(
+                    new SimpleBlockStateProvider(((YellowMushroomBlock)ModBlocks.YELLOW_MUSHROOM.get()).getRandomState()),
+                    SimpleBlockPlacer.PLACER
+                )).tries(64).func_227317_b_().build()
+            )
+        );*/
+        if (event.getCategory() == Biome.Category.TAIGA || event.getCategory() == Biome.Category.SWAMP) {
+            /*event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(
+                () -> Feature.RANDOM_PATCH.withConfiguration(
+                    (new BlockClusterFeatureConfig.Builder(
+                        new SimpleBlockStateProvider(((YellowMushroomBlock)ModBlocks.YELLOW_MUSHROOM.get()).getRandomState()), SimpleBlockPlacer.PLACER
+                    )).tries(4).build()
+                ).withPlacement(
+                    Features.Placements.PATCH_PLACEMENT
+                ).withPlacement(
+                    Placement.COUNT_NOISE.configure(new NoiseDependant(-0.8D, 5, 10))
+                )
+            );*/
+            event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(
+                () -> ModFeatures.PATCH_YELLOW_MUSHROOM.get().withConfiguration(
+                    (new BlockClusterFeatureConfig.Builder(
+                        new SimpleBlockStateProvider(((YellowMushroomBlock)ModBlocks.YELLOW_MUSHROOM.get()).getWithCount(1)), SimpleBlockPlacer.PLACER
+                    )).tries(32).func_227317_b_().build()
+                ).withPlacement(
+                    Features.Placements.PATCH_PLACEMENT
+                )
+            );
+        }
+    }
+
     @SubscribeEvent
     public static void onSetup(final FMLCommonSetupEvent event) {
         if (FMLEnvironment.dist == Dist.CLIENT) {
@@ -187,6 +206,20 @@ public class ModEventSubscriber {
         EntitySpawnPlacementRegistry.register(ModEntityType.COLORED_SLIME.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ColoredSlimeEntity::_canSpawn);
 
         for (Biome biome : WorldGenRegistries.BIOME /* Collection of Biome Entries */) {
+            /*BiomeModifier.addFeatureToBiome(
+                biome, 
+                GenerationStage.Decoration.VEGETAL_DECORATION, 
+                WorldGenRegistries.CONFIGURED_FEATURE.getOrDefault(ModBlocks.YELLOW_MUSHROOM.get().getRegistryName())
+            );*/
+            /*List<Supplier<ConfiguredFeature<?, ?>>> features = new ArrayList<>(biome.getGenerationSettings().getFeatures().get(GenerationStage.Decoration.VEGETAL_DECORATION.ordinal()));
+            features.add(() -> new RandomPatchFeature(BlockClusterFeatureConfig.field_236587_a_).withConfiguration(
+                (new BlockClusterFeatureConfig.Builder(
+                    new SimpleBlockStateProvider(((YellowMushroomBlock)ModBlocks.YELLOW_MUSHROOM.get()).getRandomState()),
+                    SimpleBlockPlacer.PLACER
+                )).tries(64).func_227317_b_().build()
+            ));
+            biome.getGenerationSettings().getFeatures().add(features);*/
+
             if (biome != null && !biome.getCategory().equals(Biome.Category.NETHER) && !biome.getCategory().equals(Biome.Category.THEEND)) {
                 MobSpawnInfo mobSpawnInfo = biome.getMobSpawnInfo();
                 List<Spawners> spawnList = new ArrayList<Spawners>(mobSpawnInfo.getSpawners(EntityClassification.MONSTER));

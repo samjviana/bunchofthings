@@ -56,6 +56,18 @@ public class YellowMushroomBlock extends BushBlock {
         return this.stateContainer.getBaseState().with(LIT, Boolean.valueOf(false)).with(MUSHROOMS, Integer.valueOf(1));
     }
 
+    public BlockState getWithCount(int count) {
+        switch (count) {
+            case 0:
+                return this.stateContainer.getBaseState().with(LIT, Boolean.valueOf(false)).with(MUSHROOMS, Integer.valueOf(1));
+            case 1:
+                return this.stateContainer.getBaseState().with(LIT, Boolean.valueOf(false)).with(MUSHROOMS, Integer.valueOf(2));
+            case 2:
+                return this.stateContainer.getBaseState().with(LIT, Boolean.valueOf(false)).with(MUSHROOMS, Integer.valueOf(3));
+        }
+        return this.stateContainer.getBaseState().with(LIT, Boolean.valueOf(false)).with(MUSHROOMS, Integer.valueOf(1));
+    }
+
     @Override
     public OffsetType getOffsetType() {
         return OffsetType.XZ;
@@ -119,10 +131,7 @@ public class YellowMushroomBlock extends BushBlock {
 
     @Override
     public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
-        if (state.get(LIT)) {
-            return 7;
-        }
-        return super.getLightValue(state, world, pos);
+        return 11;
     }
 
     @Override
