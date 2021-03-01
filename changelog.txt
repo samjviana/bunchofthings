@@ -1,3 +1,7 @@
+Minecraft: 1.16.5 - Mod: 1.2.3 - Date: 28/02/2021
+    • Fixed error that causes server crash
+	• Added some en-us lang entries
+
 Minecraft: 1.16.5 - Mod: 1.2.2 - Date: 28/02/2021
     • Added Yellow Mushroom
 	• Added Grass Walker Enchantment
