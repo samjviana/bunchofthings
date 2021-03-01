@@ -37,4 +37,10 @@ public class ModItemGroup {
             return new ItemStack(Items.ENCHANTED_BOOK);
         }
     };
+    public static final ItemGroup ENTITIES = new ItemGroup(ItemGroup.getGroupCountSafe(), "entities") {
+        @Override
+        public ItemStack createIcon() {
+            return new ItemStack(Items.ENCHANTED_BOOK);
+        }
+    };
 }
