@@ -15,6 +15,7 @@ import net.ddns.samjviana.bunchofthings.client.particle.ModBreakingParticle;
 import net.ddns.samjviana.bunchofthings.client.particle.YellowMushroomGlowParticle;
 import net.ddns.samjviana.bunchofthings.client.renderer.entity.ColoredSlimeRenderer;
 import net.ddns.samjviana.bunchofthings.client.renderer.tileentity.ColoredPistonTileEntityRenderer;
+import net.ddns.samjviana.bunchofthings.enchantment.ModEnchantments;
 import net.ddns.samjviana.bunchofthings.entity.ModEntityType;
 import net.ddns.samjviana.bunchofthings.entity.monster.ColoredSlimeEntity;
 import net.ddns.samjviana.bunchofthings.item.ModItemGroup;
@@ -25,18 +26,31 @@ import net.ddns.samjviana.bunchofthings.utils.BiomeAccessor;
 import net.ddns.samjviana.bunchofthings.utils.BiomeModifier;
 import net.ddns.samjviana.bunchofthings.world.gen.feature.ModFeatures;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentData;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.EnchantedBookItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.RegistryKey;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.WorldGenRegistries;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeGenerationSettings;
 import net.minecraft.world.biome.Biomes;
@@ -58,6 +72,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.TickEvent.ClientTickEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
@@ -77,11 +93,26 @@ public class ModEventSubscriber {
     private static final Logger LOGGER = LogManager.getLogger(BunchOfThings.MODID + "Mod Event Subscriber");
 
     @SubscribeEvent
-    public static void onRegister(final RegistryEvent.Register<Feature<?>> event) {
+    public static void onRegisterFeature(final RegistryEvent.Register<Feature<?>> event) {
         final IForgeRegistry<Feature<?>> registry = event.getRegistry();
 
         ModFeatures.FEATURES.getEntries().stream().map(RegistryObject::get).forEach(feature -> {
             registry.register(feature);
+        });
+    }
+
+    @SubscribeEvent
+    public static void onRegisterEnchantment(final RegistryEvent.Register<Enchantment> event) {
+        final IForgeRegistry<Enchantment> registry = event.getRegistry();
+
+        ModEnchantments.ENCHANTMENTS.getEntries().stream().map(RegistryObject::get).forEach(enchantment -> {
+            NonNullList<ItemStack> itemList = NonNullList.create();
+            for(int i = enchantment.getMinLevel(); i <= enchantment.getMaxLevel(); ++i) {
+                itemList.add(EnchantedBookItem.getEnchantedItemStack(new EnchantmentData(enchantment, i)));
+            }            
+            NonNullList<ItemStack> enchantmentList = NonNullList.create();
+            ModItemGroup.ENCHANTMENTS.fill(enchantmentList);
+            enchantmentList.addAll(itemList);
         });
     }
 
@@ -275,9 +306,4 @@ public class ModEventSubscriber {
             }
         }
     }
-    
-    /*
-    private void test(Item p_239866_1_) {
-        StockModelShapes.GENERATED.func_240234_a_(ModelsResourceUtil.func_240219_a_(p_239866_1_), ModelTextures.func_240352_b_(p_239866_1_), this.field_239835_b_);
-    }*/
 }

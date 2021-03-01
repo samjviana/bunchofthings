@@ -6,8 +6,11 @@ import net.ddns.samjviana.bunchofthings.BunchOfThings;
 import net.ddns.samjviana.bunchofthings.block.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.item.EnchantedBookItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -26,6 +29,12 @@ public class ModItemGroup {
         @Override
         public ItemStack createIcon() {
             return new ItemStack(ModItems.BLACK_SLIME_BALL.get());
+        }
+    };
+    public static final ItemGroup ENCHANTMENTS = new ItemGroup(ItemGroup.getGroupCountSafe(), "enchantments") {
+        @Override
+        public ItemStack createIcon() {
+            return new ItemStack(Items.ENCHANTED_BOOK);
         }
     };
 }
