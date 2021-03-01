@@ -31,6 +31,7 @@
     "block.bunchofthings.red_sticky_piston": "Red Sticky Piston",
     "block.bunchofthings.white_sticky_piston": "White Sticky Piston",
     "block.bunchofthings.yellow_sticky_piston": "Yellow Sticky Piston",
+    "block.bunchofthings.yellow_mushroom": "Yellow Mushroom",
     "item.bunchofthings.black_slime_ball": "Black Slime Ball",
     "item.bunchofthings.blue_slime_ball": "Blue Slime Ball",
     "item.bunchofthings.brown_slime_ball": "Brown Slime Ball",
@@ -47,10 +48,9 @@
     "item.bunchofthings.red_slime_ball": "Red Slime Ball",
     "item.bunchofthings.white_slime_ball": "White Slime Ball",
     "item.bunchofthings.yellow_slime_ball": "Yellow Slime Ball",
-    "item.bunchofthings.yellow_mushroom": "Yellow Mushroom",
     "entity.bunchofthings.colored_slime": "Colored Slime",
 	"itemGroup.blocks": "BunchOfThings Blocks",
 	"itemGroup.items": "BunchOfThings Items",
 	"itemGroup.enchantments": "BunchOfThings Enchantments",
-    "enchantment.bunchofthings.grass_walker": "Grass Walker"
+    "enchantment.grass_walker": "Grass Walker"
 }
