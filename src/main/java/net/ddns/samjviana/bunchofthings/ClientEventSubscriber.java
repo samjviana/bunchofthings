@@ -67,7 +67,7 @@ public class ClientEventSubscriber {
                         else if (blockState.getBlock() == Blocks.STONE_BRICKS) {
                             world.setBlockState(spreadPos, Blocks.MOSSY_STONE_BRICKS.getDefaultState());
                         }
-                        else if (blockState.getBlock() == Blocks.GRASS_BLOCK && level == 3 && world.rand.nextInt(100) < 2) {
+                        else if (blockState.getBlock() == Blocks.GRASS_BLOCK && level == 3 && world.rand.nextInt(100) < 5) {
                             IGrowable iGrowable = (IGrowable)blockState.getBlock();
                             if (iGrowable.canGrow(world, pos, blockState, world.isRemote)) {
                                 if (iGrowable.canUseBonemeal(world, world.rand, pos, blockState)) {

@@ -22,8 +22,6 @@ import net.ddns.samjviana.bunchofthings.item.ModItemGroup;
 import net.ddns.samjviana.bunchofthings.item.ModItems;
 import net.ddns.samjviana.bunchofthings.particles.ModParticleTypes;
 import net.ddns.samjviana.bunchofthings.tileentity.ModTileEntityType;
-import net.ddns.samjviana.bunchofthings.utils.BiomeAccessor;
-import net.ddns.samjviana.bunchofthings.utils.BiomeModifier;
 import net.ddns.samjviana.bunchofthings.world.gen.feature.ModFeatures;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -106,13 +104,7 @@ public class ModEventSubscriber {
         final IForgeRegistry<Enchantment> registry = event.getRegistry();
 
         ModEnchantments.ENCHANTMENTS.getEntries().stream().map(RegistryObject::get).forEach(enchantment -> {
-            NonNullList<ItemStack> itemList = NonNullList.create();
-            for(int i = enchantment.getMinLevel(); i <= enchantment.getMaxLevel(); ++i) {
-                itemList.add(EnchantedBookItem.getEnchantedItemStack(new EnchantmentData(enchantment, i)));
-            }            
-            NonNullList<ItemStack> enchantmentList = NonNullList.create();
-            ModItemGroup.ENCHANTMENTS.fill(enchantmentList);
-            enchantmentList.addAll(itemList);
+            
         });
     }
 
