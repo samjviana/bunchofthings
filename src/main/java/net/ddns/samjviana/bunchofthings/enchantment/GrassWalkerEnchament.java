@@ -1,5 +1,6 @@
 package net.ddns.samjviana.bunchofthings.enchantment;
 
+import net.ddns.samjviana.bunchofthings.BunchOfThings;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.inventory.EquipmentSlotType;

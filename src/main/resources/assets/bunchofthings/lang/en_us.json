@@ -48,9 +48,11 @@
     "item.bunchofthings.red_slime_ball": "Red Slime Ball",
     "item.bunchofthings.white_slime_ball": "White Slime Ball",
     "item.bunchofthings.yellow_slime_ball": "Yellow Slime Ball",
+    "item.bunchofthings.colored_slime_spawn_egg": "Colored Slime Spawn Egg",
     "entity.bunchofthings.colored_slime": "Colored Slime",
 	"itemGroup.blocks": "BunchOfThings Blocks",
 	"itemGroup.items": "BunchOfThings Items",
 	"itemGroup.enchantments": "BunchOfThings Enchantments",
-    "enchantment.grass_walker": "Grass Walker"
+	"itemGroup.entities": "BunchOfThings Entities",
+    "enchantment.bunchofthings.grass_walker": "Grass Walker"
 }

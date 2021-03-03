@@ -4,8 +4,10 @@ import java.rmi.registry.RegistryHandler;
 
 import net.ddns.samjviana.bunchofthings.BunchOfThings;
 import net.ddns.samjviana.bunchofthings.block.ModBlocks;
+import net.ddns.samjviana.bunchofthings.enchantment.ModEnchantments;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.item.EnchantedBookItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -36,6 +38,14 @@ public class ModItemGroup {
         public ItemStack createIcon() {
             return new ItemStack(Items.ENCHANTED_BOOK);
         }
+
+        @Override
+        public void fill(NonNullList<ItemStack> items) {
+            for(int i = ModEnchantments.GRASS_WALKER.get().getMinLevel(); i <= ModEnchantments.GRASS_WALKER.get().getMaxLevel(); ++i) {
+                items.add(EnchantedBookItem.getEnchantedItemStack(new EnchantmentData(ModEnchantments.GRASS_WALKER.get(), i)));
+            }
+            super.fill(items);
+        };
     };
     public static final ItemGroup ENTITIES = new ItemGroup(ItemGroup.getGroupCountSafe(), "entities") {
         @Override
