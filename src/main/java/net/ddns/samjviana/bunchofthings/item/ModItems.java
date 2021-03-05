@@ -1,7 +1,11 @@
 package net.ddns.samjviana.bunchofthings.item;
 
 import net.ddns.samjviana.bunchofthings.BunchOfThings;
+import net.ddns.samjviana.bunchofthings.entity.ModEntityType;
+import net.ddns.samjviana.bunchofthings.entity.monster.ColoredSlimeEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.SpawnEggItem;
+import net.minecraft.util.datafix.fixes.ItemSpawnEggSplit;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -25,4 +29,5 @@ public class ModItems {
     public static final RegistryObject<Item> GREEN_SLIME_BALL = ITEMS.register("green_slime_ball", () -> new Item((new Item.Properties()).group(ModItemGroup.ITEMS)));
     public static final RegistryObject<Item> RED_SLIME_BALL = ITEMS.register("red_slime_ball", () -> new Item((new Item.Properties()).group(ModItemGroup.ITEMS)));
     public static final RegistryObject<Item> BLACK_SLIME_BALL = ITEMS.register("black_slime_ball", () -> new Item((new Item.Properties()).group(ModItemGroup.ITEMS)));
+    public static final RegistryObject<Item> COLORED_SLIME_SPAWN_EGG = ITEMS.register("colored_slime_spawn_egg", () -> new SpawnEggItem(ModEntityType.COLORED_SLIME_ENTITY_TYPE, 0x00ff00, 0x0000ff, new Item.Properties().group(ModItemGroup.ENTITIES)));
 }
