@@ -1,3 +1,8 @@
+Minecraft: 1.16.5 - Mod: 1.2.6 - Date: 04/03/2021
+    • Some changes in Grass Walker Enchantment
+	• Fixed some en-us lang entries
+	• Added Colored Slime Spawn Egg
+
 Minecraft: 1.16.5 - Mod: 1.2.3 - Date: 28/02/2021
     • Fixed error that causes server crash
 	• Added some en-us lang entries
