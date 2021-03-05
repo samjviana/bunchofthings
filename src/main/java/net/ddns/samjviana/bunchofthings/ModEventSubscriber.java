@@ -108,6 +108,7 @@ public class ModEventSubscriber {
         });
     }
 
+
     @SubscribeEvent
     public static void onRegisterItem(final RegistryEvent.Register<Item> event) {
         final IForgeRegistry<Item> registry = event.getRegistry();
