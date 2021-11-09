@@ -31,7 +31,7 @@
       "projectName": "bunchofthings",
       "cwd": "${workspaceFolder}\\run",
       "vmArgs": "-Dforge.logging.console.level\u003ddebug -Dforge.logging.markers\u003dREGISTRIES",
-      "args": "--mod bunchofthings --all --output F:\\ftp_server\\coding\\minecraft\\bunchofthings\\src\\generated\\resources --existing F:\\ftp_server\\coding\\minecraft\\bunchofthings\\src\\main\\resources",
+      "args": "--mod bunchofthings --all --output F:\\ftp_server\\coding\\minecraft\\1.16.5\\bunchofthings\\src\\generated\\resources --existing F:\\ftp_server\\coding\\minecraft\\1.16.5\\bunchofthings\\src\\main\\resources",
       "env": {
         "MOD_CLASSES": "bunchofthings%%${workspaceFolder}\\bin\\main;bunchofthings%%${workspaceFolder}\\bin\\main",
         "MCP_MAPPINGS": "snapshot_20201028-1.16.3",
