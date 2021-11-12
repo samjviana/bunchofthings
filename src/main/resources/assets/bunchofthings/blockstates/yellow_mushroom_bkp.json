@@ -1,0 +1,55 @@
+{
+    "variants": {
+		"mushrooms=1": [
+			{
+				"model": "bunchofthings:block/yellow_mushroom"
+			},
+			{
+				"model": "bunchofthings:block/yellow_mushroom",
+				"y": 90
+			},
+			{
+				"model": "bunchofthings:block/yellow_mushroom",
+				"y": 180
+			},
+			{
+				"model": "bunchofthings:block/yellow_mushroom",
+				"y": 270
+			}		
+		],
+		"mushrooms=2": [
+			{
+				"model": "bunchofthings:block/two_yellow_mushroom"
+			},
+			{
+				"model": "bunchofthings:block/two_yellow_mushroom",
+				"y": 90
+			},
+			{
+				"model": "bunchofthings:block/two_yellow_mushroom",
+				"y": 180
+			},
+			{
+				"model": "bunchofthings:block/two_yellow_mushroom",
+				"y": 270
+			}		
+		],
+		"mushrooms=3": [
+			{
+				"model": "bunchofthings:block/three_yellow_mushroom"
+			},
+			{
+				"model": "bunchofthings:block/three_yellow_mushroom",
+				"y": 90
+			},
+			{
+				"model": "bunchofthings:block/three_yellow_mushroom",
+				"y": 180
+			},
+			{
+				"model": "bunchofthings:block/three_yellow_mushroom",
+				"y": 270
+			}		
+		]		
+    }
+}

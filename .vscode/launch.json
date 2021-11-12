@@ -9,7 +9,7 @@
       "projectName": "bunchofthings",
       "cwd": "${workspaceFolder}\\run",
       "vmArgs": "-Dforge.logging.console.level\u003ddebug -Dforge.logging.markers\u003dREGISTRIES -XX:HeapDumpPath\u003dMojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump \"-Dos.name\u003dWindows 10\" -Dos.version\u003d10.0",
-      "args": "",
+      "args": "--username=samjviana",
       "env": {
         "MOD_CLASSES": "bunchofthings%%${workspaceFolder}\\bin\\main;bunchofthings%%${workspaceFolder}\\bin\\main",
         "MCP_MAPPINGS": "snapshot_20201028-1.16.3",

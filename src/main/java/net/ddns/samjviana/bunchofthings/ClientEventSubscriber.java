@@ -42,7 +42,7 @@ public class ClientEventSubscriber {
         if (!event.getEntity().world.isRemote) {
             int maxLevel = EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.GRASS_WALKER.get(), event.getEntityLiving());
 
-            if (maxLevel > 0 && event.getEntityLiving().isOnGround()) {
+			if (maxLevel > 0 && event.getEntityLiving().isOnGround()) {
 				GrassWalkerEnchament.grassilizeNearby(event, maxLevel);
 			}
 		}

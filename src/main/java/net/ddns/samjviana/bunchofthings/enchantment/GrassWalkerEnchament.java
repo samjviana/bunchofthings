@@ -6,6 +6,8 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.StairsBlock;
+import net.minecraft.block.WallBlock;
+import net.minecraft.block.WallHeight;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentType;
@@ -48,7 +50,7 @@ public class GrassWalkerEnchament extends Enchantment {
 
 	public static void grassilizeNearby(final LivingUpdateEvent event, int maxLevel) {
 		Entity entity = event.getEntity();
-		if (entity instanceof ServerPlayerEntity && ((ServerPlayerEntity)entity).isSpectator()) {
+		if (/*entity instanceof ServerPlayerEntity &&*/((ServerPlayerEntity)entity).isSpectator()) {
 			return;
 		}
 
@@ -57,17 +59,21 @@ public class GrassWalkerEnchament extends Enchantment {
 		BlockPos pos = entity.getPosition();
 		for (int x = -level; x <= level; x++) {
 			for (int z = -level; z <= level; z++) {
-				if (world.rand.nextInt(100) < 95) {
+				if (world.rand.nextInt(100) < 0) {
 					continue;
 				}
-				BlockPos spreadPos = pos.add(x, 0, z);
-				if (entity.getPosY() % 1 == 0) {
-					spreadPos = pos.add(x, -1, z);
+				BlockPos spreadPos = pos.add(x, -1, z);
+				BlockState currentBlockState = world.getBlockState(new BlockPos(entity.getPosX(), entity.getPosY(), entity.getPosZ()));
+
+				if (currentBlockState.getBlock() instanceof SlabBlock) {
+					spreadPos = pos.add(x, 0, z);
 				}
-				BlockPos blockPos = new BlockPos(pos.getX(), Math.ceil(entity.getPosY()) - 1, pos.getZ());
 
 				double distance = spreadPos.distanceSq(pos.getX(), pos.getY(), pos.getZ(), false);
 				double levelPow = (level * level) - 1;
+				if (level == 1) {
+					levelPow = 1;
+				}
 				if (distance > levelPow) {
 					continue;
 				}
@@ -76,7 +82,7 @@ public class GrassWalkerEnchament extends Enchantment {
 				if (blockState.getBlock() == Blocks.AIR) {
 					continue;
 				}
-				BunchOfThings.LOGGER.info(blockState);
+
 				if (blockState.getBlock() == Blocks.DIRT) {
 					world.setBlockState(spreadPos, Blocks.GRASS_BLOCK.getDefaultState());
 				}
@@ -87,44 +93,113 @@ public class GrassWalkerEnchament extends Enchantment {
 					StairsShape stairsShape = blockState.get(StairsBlock.SHAPE);
 					Half stairsHalf = blockState.get(StairsBlock.HALF);
 					Direction stairsFacing = blockState.get(StairsBlock.FACING);
-					BunchOfThings.LOGGER.info(stairsFacing);
+					Boolean waterlogged = blockState.get(StairsBlock.WATERLOGGED);					
 					world.setBlockState(spreadPos, Blocks.MOSSY_COBBLESTONE_STAIRS.getDefaultState().with(
 						StairsBlock.SHAPE, stairsShape
 					).with(
 						StairsBlock.HALF, stairsHalf
 					).with(
 						StairsBlock.FACING, stairsFacing
+					).with(
+						StairsBlock.WATERLOGGED,
+						waterlogged
 					));
 				}
 				else if (blockState.getBlock() == Blocks.COBBLESTONE_SLAB) {
 					SlabType slabType = blockState.get(SlabBlock.TYPE);
-					world.setBlockState(spreadPos, Blocks.MOSSY_COBBLESTONE_SLAB.getDefaultState().with(SlabBlock.TYPE, slabType));
+					Boolean waterlogged = blockState.get(SlabBlock.WATERLOGGED);					
+					world.setBlockState(spreadPos, Blocks.MOSSY_COBBLESTONE_SLAB.getDefaultState().with(
+						SlabBlock.TYPE, 
+						slabType
+					).with(
+						SlabBlock.WATERLOGGED,
+						waterlogged
+					));
 				}
-				/*else if (blockState.getBlock() == Blocks.COBBLESTONE_WALL) {
-					world.setBlockState(spreadPos, Blocks.MOSSY_COBBLESTONE_WALL.getDefaultState());
-				}*/
+				else if (blockState.getBlock() == Blocks.COBBLESTONE_WALL) {
+					WallHeight east = blockState.get(WallBlock.WALL_HEIGHT_EAST);
+					WallHeight west = blockState.get(WallBlock.WALL_HEIGHT_WEST);
+					WallHeight north = blockState.get(WallBlock.WALL_HEIGHT_NORTH);
+					WallHeight south = blockState.get(WallBlock.WALL_HEIGHT_SOUTH);
+					Boolean up = blockState.get(WallBlock.UP);
+					Boolean waterlogged = blockState.get(WallBlock.WATERLOGGED);					
+					world.setBlockState(spreadPos, Blocks.MOSSY_COBBLESTONE_WALL.getDefaultState().with(
+						WallBlock.WALL_HEIGHT_EAST,
+						east
+					).with(
+						WallBlock.WALL_HEIGHT_WEST,
+						west
+					).with(
+						WallBlock.WALL_HEIGHT_NORTH,
+						north
+					).with(
+						WallBlock.WALL_HEIGHT_SOUTH,
+						south
+					).with(
+						WallBlock.UP,
+						up
+					).with(
+						WallBlock.WATERLOGGED,
+						waterlogged
+					));
+				}
 				else if (blockState.getBlock() == Blocks.STONE_BRICKS) {
 					world.setBlockState(spreadPos, Blocks.MOSSY_STONE_BRICKS.getDefaultState());
 				}
-				/*else if (blockState.getBlock() == Blocks.STONE_BRICK_WALL) {
-					world.setBlockState(spreadPos, Blocks.MOSSY_STONE_BRICK_WALL.getDefaultState());
-				}*/
+				else if (blockState.getBlock() == Blocks.STONE_BRICK_WALL) {
+					WallHeight east = blockState.get(WallBlock.WALL_HEIGHT_EAST);
+					WallHeight west = blockState.get(WallBlock.WALL_HEIGHT_WEST);
+					WallHeight north = blockState.get(WallBlock.WALL_HEIGHT_NORTH);
+					WallHeight south = blockState.get(WallBlock.WALL_HEIGHT_SOUTH);
+					Boolean up = blockState.get(WallBlock.UP);
+					Boolean waterlogged = blockState.get(WallBlock.WATERLOGGED);					
+					world.setBlockState(spreadPos, Blocks.MOSSY_STONE_BRICK_WALL.getDefaultState().with(
+						WallBlock.WALL_HEIGHT_EAST,
+						east
+					).with(
+						WallBlock.WALL_HEIGHT_WEST,
+						west
+					).with(
+						WallBlock.WALL_HEIGHT_NORTH,
+						north
+					).with(
+						WallBlock.WALL_HEIGHT_SOUTH,
+						south
+					).with(
+						WallBlock.UP,
+						up
+					).with(
+						WallBlock.WATERLOGGED,
+						waterlogged
+					));
+				}
 				else if (blockState.getBlock() == Blocks.STONE_BRICK_STAIRS) {
 					StairsShape stairsShape = blockState.get(StairsBlock.SHAPE);
 					Half stairsHalf = blockState.get(StairsBlock.HALF);
 					Direction stairsFacing = blockState.get(StairsBlock.FACING);
 					BunchOfThings.LOGGER.info(stairsFacing);
+					Boolean waterlogged = blockState.get(StairsBlock.WATERLOGGED);					
 					world.setBlockState(spreadPos, Blocks.MOSSY_STONE_BRICK_STAIRS.getDefaultState().with(
 						StairsBlock.SHAPE, stairsShape
 					).with(
 						StairsBlock.HALF, stairsHalf
 					).with(
 						StairsBlock.FACING, stairsFacing
+					).with(
+						StairsBlock.WATERLOGGED,
+						waterlogged
 					));
 				}
 				else if (blockState.getBlock() == Blocks.STONE_BRICK_SLAB) {
 					SlabType slabType = blockState.get(SlabBlock.TYPE);
-					world.setBlockState(spreadPos, Blocks.MOSSY_STONE_BRICK_SLAB.getDefaultState().with(SlabBlock.TYPE, slabType));
+					Boolean waterlogged = blockState.get(SlabBlock.WATERLOGGED);					
+					world.setBlockState(spreadPos, Blocks.MOSSY_STONE_BRICK_SLAB.getDefaultState().with(
+						SlabBlock.TYPE, 
+						slabType
+					).with(
+						SlabBlock.WATERLOGGED,
+						waterlogged
+					));
 				}
 				else if (blockState.getBlock() == Blocks.INFESTED_STONE_BRICKS) {
 					world.setBlockState(spreadPos, Blocks.INFESTED_MOSSY_STONE_BRICKS.getDefaultState());

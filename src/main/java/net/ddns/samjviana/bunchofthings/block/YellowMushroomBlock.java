@@ -20,6 +20,7 @@ import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -33,8 +34,8 @@ import net.minecraftforge.client.model.generators.ModelBuilder.FaceRotation;
 
 public class YellowMushroomBlock extends BushBlock {
     protected static final VoxelShape SHAPE_1 = Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 10.0D, 12.0D);
-    protected static final VoxelShape SHAPE_2 = Block.makeCuboidShape(2.0D, 0.0D, 3.0D, 15.0D, 10.0D, 15.0D);
-    protected static final VoxelShape SHAPE_3 = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 15.0D, 10.0D, 15.0D);
+    protected static final VoxelShape SHAPE_2 = Block.makeCuboidShape(3.0D, 0.0D, 2.0D, 13.0D, 10.0D, 15.0D);
+    protected static final VoxelShape SHAPE_3 = Block.makeCuboidShape(2.0D, 0.0D, 1.0D, 13.0D, 10.0D, 15.0D);
     public static final IntegerProperty MUSHROOMS = IntegerProperty.create("mushrooms", 1, 3);
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
@@ -73,9 +74,9 @@ public class YellowMushroomBlock extends BushBlock {
         return OffsetType.XZ;
     }
 
-    @Override
+	@Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        Vector3d vector3d = state.getOffset(worldIn, pos);
+		Vector3d vector3d = state.getOffset(worldIn, pos);
         switch (state.get(MUSHROOMS)) {
             case 1:
             default:
@@ -89,7 +90,7 @@ public class YellowMushroomBlock extends BushBlock {
 
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        BlockState blockstate = context.getWorld().getBlockState(context.getPos());
+		BlockState blockstate = context.getWorld().getBlockState(context.getPos());
         if (blockstate.isIn(this)) {
             return blockstate.with(MUSHROOMS, Integer.valueOf(Math.min(3, blockstate.get(MUSHROOMS) + 1)));
         }
