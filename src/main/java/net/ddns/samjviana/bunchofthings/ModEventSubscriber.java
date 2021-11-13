@@ -1,114 +1,50 @@
 package net.ddns.samjviana.bunchofthings;
 
-import java.rmi.registry.RegistryHandler;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Supplier;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import net.ddns.samjviana.bunchofthings.block.ModBlocks;
-import net.ddns.samjviana.bunchofthings.block.YellowMushroomBlock;
-import net.ddns.samjviana.bunchofthings.client.particle.ModBreakingParticle;
 import net.ddns.samjviana.bunchofthings.client.particle.YellowMushroomGlowParticle;
-import net.ddns.samjviana.bunchofthings.client.renderer.entity.ColoredSlimeRenderer;
-import net.ddns.samjviana.bunchofthings.client.renderer.tileentity.ColoredPistonTileEntityRenderer;
-import net.ddns.samjviana.bunchofthings.enchantment.ModEnchantments;
-import net.ddns.samjviana.bunchofthings.entity.ModEntityType;
-import net.ddns.samjviana.bunchofthings.entity.monster.ColoredSlimeEntity;
-import net.ddns.samjviana.bunchofthings.item.ModItemGroup;
-import net.ddns.samjviana.bunchofthings.item.ModItems;
+import net.ddns.samjviana.bunchofthings.item.ModCreativeTab;
 import net.ddns.samjviana.bunchofthings.particles.ModParticleTypes;
-import net.ddns.samjviana.bunchofthings.tileentity.ModTileEntityType;
-import net.ddns.samjviana.bunchofthings.world.gen.feature.ModFeatures;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
-import net.minecraft.client.particle.ParticleManager;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentData;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntitySpawnPlacementRegistry;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.EnchantedBookItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.RegistryKey;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.WorldGenRegistries;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeGenerationSettings;
-import net.minecraft.world.biome.Biomes;
-import net.minecraft.world.biome.MobSpawnInfo;
-import net.minecraft.world.biome.MobSpawnInfo.Spawners;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.blockplacer.SimpleBlockPlacer;
-import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
-import net.minecraft.world.gen.feature.BlockClusterFeatureConfig;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.Features;
-import net.minecraft.world.gen.feature.OreFeatureConfig;
-import net.minecraft.world.gen.feature.RandomPatchFeature;
-import net.minecraft.world.gen.placement.DepthAverageConfig;
-import net.minecraft.world.gen.placement.NoiseDependant;
-import net.minecraft.world.gen.placement.Placement;
-import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilders;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.TickEvent.ClientTickEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.loading.FMLEnvironment;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.IForgeRegistry;
 
 @EventBusSubscriber(modid = BunchOfThings.MODID, bus = Bus.MOD)
 public class ModEventSubscriber {
-    private static final Logger LOGGER = LogManager.getLogger(BunchOfThings.MODID + "Mod Event Subscriber");
+	private static final Minecraft INSTANCE = Minecraft.getInstance();
 
-    @SubscribeEvent
+	@SubscribeEvent
     public static void onRegisterFeature(final RegistryEvent.Register<Feature<?>> event) {
         final IForgeRegistry<Feature<?>> registry = event.getRegistry();
 
-        ModFeatures.FEATURES.getEntries().stream().map(RegistryObject::get).forEach(feature -> {
+        /*ModFeatures.FEATURES.getEntries().stream().map(RegistryObject::get).forEach(feature -> {
             registry.register(feature);
-        });
+        });*/
     }
 
     @SubscribeEvent
     public static void onRegisterEnchantment(final RegistryEvent.Register<Enchantment> event) {
         final IForgeRegistry<Enchantment> registry = event.getRegistry();
 
-        ModEnchantments.ENCHANTMENTS.getEntries().stream().map(RegistryObject::get).forEach(enchantment -> {
+        /*ifModEnchantments.ENCHANTMENTS.getEntries().stream().map(RegistryObject::get).forEach(enchantment -> {
             
-        });
+        });*/
     }
 
 
@@ -116,7 +52,24 @@ public class ModEventSubscriber {
     public static void onRegisterItem(final RegistryEvent.Register<Item> event) {
         final IForgeRegistry<Item> registry = event.getRegistry();
 
-        ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get).forEach(block -> {
+		ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get).forEach((block) -> {
+			final Item.Properties properties;
+			if (shouldHide(block)) {
+				return;
+			}
+			else if (isBlockItem(block)) {
+				properties = new Item.Properties().tab(ModCreativeTab.ITEMS);
+			}
+			else {
+				properties = new Item.Properties().tab(ModCreativeTab.BLOCKS);
+			}
+			final BlockItem blockItem = new BlockItem(block, properties);
+
+			blockItem.setRegistryName(block.getRegistryName());
+			registry.register(blockItem);
+	});
+        
+		/*ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get).forEach(block -> {
             if (!filterBlock(block)) {
                 return;
             }
@@ -134,20 +87,28 @@ public class ModEventSubscriber {
                 blockItem.setRegistryName(block.getRegistryName());
                 registry.register(blockItem);
             }
-        });
+        });*/
     }
 
-    private static boolean filterBlock(Block block) {
-        if (block == ModBlocks.COLORED_STICKY_PISTON_HEAD.get()) {
-            return false;
-        }
-        return true;
-    }
+	private static boolean shouldHide(Block block) {
+		return false;
+	}
+
+	private static boolean isBlockItem(Block block) {
+		List<Block> blockItems = new ArrayList<Block>(List.of(
+			ModBlocks.YELLOW_MUSHROOM.get()
+		));
+
+		if (blockItems.contains(block)) {
+			return true;
+		}
+		return false;
+	}
        
     @SubscribeEvent
     @OnlyIn(Dist.CLIENT)
     public static void onParticleFactoryRegistration(ParticleFactoryRegisterEvent event) {
-        Minecraft.getInstance().particles.registerFactory(
+        INSTANCE.particleEngine.register(
             ModParticleTypes.YELLOW_MUSHROOM_GLOW_PARTICLE.get(), 
             sprite -> new YellowMushroomGlowParticle.GlowParticleFactory(sprite)
         );
@@ -155,7 +116,7 @@ public class ModEventSubscriber {
 
     @OnlyIn(Dist.CLIENT)
     public static Object clientOnlySetup() {
-        for (RegistryObject<Block> regBlock : ModBlocks.BLOCKS.getEntries()) {
+        /*for (RegistryObject<Block> regBlock : ModBlocks.BLOCKS.getEntries()) {
             if (regBlock.getId().toString().contains("slime_block")) {
                 RenderTypeLookup.setRenderLayer(regBlock.get(), RenderType.getTranslucent());
             }
@@ -185,8 +146,7 @@ public class ModEventSubscriber {
         particleManager.registerFactory(ModParticleTypes.PURPLE_SLIME_PARTICLE.get(), new ModBreakingParticle.ColoredSlimeFactory(ModItems.PURPLE_SLIME_BALL.get()));
         particleManager.registerFactory(ModParticleTypes.RED_SLIME_PARTICLE.get(), new ModBreakingParticle.ColoredSlimeFactory(ModItems.RED_SLIME_BALL.get()));
         particleManager.registerFactory(ModParticleTypes.YELLOW_SLIME_PARTICLE.get(), new ModBreakingParticle.ColoredSlimeFactory(ModItems.YELLOW_SLIME_BALL.get()));
-
-
+		*/
         return null;
     }
 
@@ -199,7 +159,7 @@ public class ModEventSubscriber {
                 )).tries(64).func_227317_b_().build()
             )
         );*/
-        if (event.getCategory() == Biome.Category.TAIGA || event.getCategory() == Biome.Category.SWAMP) {
+        //if (event.getCategory() == Biome.Category.TAIGA || event.getCategory() == Biome.Category.SWAMP) {
             /*event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(
                 () -> Feature.RANDOM_PATCH.withConfiguration(
                     (new BlockClusterFeatureConfig.Builder(
@@ -211,7 +171,7 @@ public class ModEventSubscriber {
                     Placement.COUNT_NOISE.configure(new NoiseDependant(-0.8D, 5, 10))
                 )
             );*/
-            event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(
+            /*event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(
                 () -> ModFeatures.PATCH_YELLOW_MUSHROOM.get().withConfiguration(
                     (new BlockClusterFeatureConfig.Builder(
                         new SimpleBlockStateProvider(((YellowMushroomBlock)ModBlocks.YELLOW_MUSHROOM.get()).getWithCount(1)), SimpleBlockPlacer.PLACER
@@ -220,19 +180,19 @@ public class ModEventSubscriber {
                     Features.Placements.PATCH_PLACEMENT
                 )
             );
-        }
+        }*/
     }
 
     @SubscribeEvent
     public static void onSetup(final FMLCommonSetupEvent event) {
-        if (FMLEnvironment.dist == Dist.CLIENT) {
+        /*if (FMLEnvironment.dist == Dist.CLIENT) {
             DistExecutor.callWhenOn(Dist.CLIENT, () -> ModEventSubscriber::clientOnlySetup);
         }
 
         GlobalEntityTypeAttributes.put(ModEntityType.COLORED_SLIME.get(), ColoredSlimeEntity.getAttributes());
         EntitySpawnPlacementRegistry.register(ModEntityType.COLORED_SLIME.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ColoredSlimeEntity::_canSpawn);
-
-        for (Biome biome : WorldGenRegistries.BIOME /* Collection of Biome Entries */) {
+		*/
+        //for (Biome biome : WorldGenRegistries.BIOME /* Collection of Biome Entries */) {
             /*BiomeModifier.addFeatureToBiome(
                 biome, 
                 GenerationStage.Decoration.VEGETAL_DECORATION, 
@@ -247,7 +207,7 @@ public class ModEventSubscriber {
             ));
             biome.getGenerationSettings().getFeatures().add(features);*/
 
-            if (biome != null && !biome.getCategory().equals(Biome.Category.NETHER) && !biome.getCategory().equals(Biome.Category.THEEND)) {
+            /*if (biome != null && !biome.getCategory().equals(Biome.Category.NETHER) && !biome.getCategory().equals(Biome.Category.THEEND)) {
                 MobSpawnInfo mobSpawnInfo = biome.getMobSpawnInfo();
                 List<Spawners> spawnList = new ArrayList<Spawners>(mobSpawnInfo.getSpawners(EntityClassification.MONSTER));
 
@@ -261,12 +221,12 @@ public class ModEventSubscriber {
                 if (spawnToRemove != null) {
                     spawnList.remove(spawnToRemove);
                 }
-                spawnList.add(new Spawners(ModEntityType.COLORED_SLIME.get(), 100, 4, 4));
+                spawnList.add(new Spawners(ModEntityType.COLORED_SLIME.get(), 100, 4, 4));*/
 
                 /* Change field_242484_f that contains the Configured Features of the Biome*/
-                final Map<EntityClassification, List<Spawners>> privateSpawnList = new HashMap<>(ObfuscationReflectionHelper.getPrivateValue(MobSpawnInfo.class, mobSpawnInfo, "field_242554_e"));
+                /*final Map<EntityClassification, List<Spawners>> privateSpawnList = new HashMap<>(ObfuscationReflectionHelper.getPrivateValue(MobSpawnInfo.class, mobSpawnInfo, "field_242554_e"));
                 privateSpawnList.replace(EntityClassification.MONSTER, spawnList);
-                ObfuscationReflectionHelper.setPrivateValue(MobSpawnInfo.class, mobSpawnInfo, privateSpawnList, "field_242554_e");
+                ObfuscationReflectionHelper.setPrivateValue(MobSpawnInfo.class, mobSpawnInfo, privateSpawnList, "field_242554_e");*/
                 
                 /*
                 ModelProvider.BLOCK_FOLDER
@@ -299,7 +259,7 @@ public class ModEventSubscriber {
                 Method func_239866_a_ = ObfuscationReflectionHelper.findMethod(BlockModelProvider.class, "func_239866_a_", Item.class);
                 StockModelShapes.GENERATED.func_240234_a_(p_240234_1_, p_240234_2_, p_240234_3_)
                 func_239866_a_.invoke(obj, args)*/
-            }
-        }
+            //}
+        //}
     }
 }
