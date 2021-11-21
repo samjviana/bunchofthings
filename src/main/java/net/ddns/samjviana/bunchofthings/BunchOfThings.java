@@ -4,7 +4,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import net.ddns.samjviana.bunchofthings.block.ModBlocks;
+import net.ddns.samjviana.bunchofthings.enchantment.ModEnchantments;
 import net.ddns.samjviana.bunchofthings.particles.ModParticleTypes;
+import net.ddns.samjviana.bunchofthings.world.gen.feature.ModFeatures;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -23,13 +25,13 @@ public class BunchOfThings {
 
         forgeEventBus.addListener(EventPriority.HIGH, ModEventSubscriber::onBiomeLoading);
         ModBlocks.BLOCKS.register(modEventBus);
+        ModFeatures.FEATURES.register(modEventBus);
         /*ModBlocks.registerStickyPistons();
         ModBlocks.registerSlimeBlocks();
-        ModFeatures.FEATURES.register(modEventBus);
         ModEntityType.ENTITIES.register(modEventBus);
         ModTileEntityType.BLOCK_ENTITIES.register(modEventBus);
-        ModItems.ITEMS.register(modEventBus);
-        ModEnchantments.ENCHANTMENTS.register(modEventBus);*/
+        ModItems.ITEMS.register(modEventBus);*/
+        ModEnchantments.ENCHANTMENTS.register(modEventBus);
         ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
     }
 }

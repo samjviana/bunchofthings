@@ -11,6 +11,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -40,8 +41,8 @@ public class YellowMushroomBlock extends BushBlock {
 
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		BlockState blockState = context.getLevel().getBlockState(context.getClickedPos());
-		if (blockState.is(this)) {
+		BlockState blockState = context.getLevel().getBlockState(context.getClickedPos());		
+		if (blockState.is(this)) {				
 			return blockState.setValue(MUSHROOMS, Integer.valueOf(Math.min(MAX_MUSHROOMS, blockState.getValue(MUSHROOMS) + 1)));
 		}
 		return super.getStateForPlacement(context);
@@ -71,8 +72,23 @@ public class YellowMushroomBlock extends BushBlock {
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public VoxelShape getShape(BlockState state, BlockGetter levelIn, BlockPos pos, CollisionContext context) {
 		Vec3 vec3 = state.getOffset(levelIn, pos);
+		int rand = RANDOM.nextInt(4);
+		Rotation rotation;
+		switch (rand) {
+			case 0:
+			default:
+				rotation = Rotation.NONE;
+			case 1:
+				rotation = Rotation.CLOCKWISE_90;
+			case 2:
+				rotation = Rotation.CLOCKWISE_180;
+			case 3:
+				rotation = Rotation.COUNTERCLOCKWISE_90;
+		}
+		rotate(state, rotation);
 		switch (state.getValue(MUSHROOMS)) {
 			case 1:
 			default:
@@ -109,4 +125,29 @@ public class YellowMushroomBlock extends BushBlock {
 			}
 		}
 	}
+
+    public BlockState getWithCount(int count) {
+        switch (count) {
+            case 0:
+                return this.stateDefinition.any().setValue(LIT, Boolean.valueOf(false)).setValue(MUSHROOMS, Integer.valueOf(1));
+            case 1:
+                return this.stateDefinition.any().setValue(LIT, Boolean.valueOf(false)).setValue(MUSHROOMS, Integer.valueOf(2));
+            case 2:
+                return this.stateDefinition.any().setValue(LIT, Boolean.valueOf(false)).setValue(MUSHROOMS, Integer.valueOf(3));
+        }
+        return this.stateDefinition.any().setValue(LIT, Boolean.valueOf(false)).setValue(MUSHROOMS, Integer.valueOf(1));
+    }
+
+    public BlockState getRandomState() {
+		int randState = RANDOM.nextInt(3);
+        switch (randState) {
+            case 0:
+                return this.stateDefinition.any().setValue(LIT, Boolean.valueOf(false)).setValue(MUSHROOMS, Integer.valueOf(1));
+            case 1:
+                return this.stateDefinition.any().setValue(LIT, Boolean.valueOf(false)).setValue(MUSHROOMS, Integer.valueOf(2));
+            case 2:
+                return this.stateDefinition.any().setValue(LIT, Boolean.valueOf(false)).setValue(MUSHROOMS, Integer.valueOf(3));
+        }
+        return this.stateDefinition.any().setValue(LIT, Boolean.valueOf(false)).setValue(MUSHROOMS, Integer.valueOf(1));
+    }
 }

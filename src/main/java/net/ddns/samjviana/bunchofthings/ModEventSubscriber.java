@@ -4,15 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.ddns.samjviana.bunchofthings.block.ModBlocks;
+import net.ddns.samjviana.bunchofthings.block.YellowMushroomBlock;
 import net.ddns.samjviana.bunchofthings.client.particle.YellowMushroomGlowParticle;
+import net.ddns.samjviana.bunchofthings.enchantment.ModEnchantments;
 import net.ddns.samjviana.bunchofthings.item.ModCreativeTab;
 import net.ddns.samjviana.bunchofthings.particles.ModParticleTypes;
+import net.ddns.samjviana.bunchofthings.world.gen.feature.ModFeatures;
 import net.minecraft.client.Minecraft;
+import net.minecraft.data.worldgen.Features;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.level.biome.Biome.BiomeCategory;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
+import net.minecraft.world.level.levelgen.feature.blockplacers.SimpleBlockPlacer;
+import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
+import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
@@ -28,25 +36,6 @@ import net.minecraftforge.registries.IForgeRegistry;
 @EventBusSubscriber(modid = BunchOfThings.MODID, bus = Bus.MOD)
 public class ModEventSubscriber {
 	private static final Minecraft INSTANCE = Minecraft.getInstance();
-
-	@SubscribeEvent
-    public static void onRegisterFeature(final RegistryEvent.Register<Feature<?>> event) {
-        final IForgeRegistry<Feature<?>> registry = event.getRegistry();
-
-        /*ModFeatures.FEATURES.getEntries().stream().map(RegistryObject::get).forEach(feature -> {
-            registry.register(feature);
-        });*/
-    }
-
-    @SubscribeEvent
-    public static void onRegisterEnchantment(final RegistryEvent.Register<Enchantment> event) {
-        final IForgeRegistry<Enchantment> registry = event.getRegistry();
-
-        /*ifModEnchantments.ENCHANTMENTS.getEntries().stream().map(RegistryObject::get).forEach(enchantment -> {
-            
-        });*/
-    }
-
 
     @SubscribeEvent
     public static void onRegisterItem(final RegistryEvent.Register<Item> event) {
@@ -67,27 +56,7 @@ public class ModEventSubscriber {
 
 			blockItem.setRegistryName(block.getRegistryName());
 			registry.register(blockItem);
-	});
-        
-		/*ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get).forEach(block -> {
-            if (!filterBlock(block)) {
-                return;
-            }
-            else if (block == ModBlocks.YELLOW_MUSHROOM.get()) {
-                final Item.Properties properties = new Item.Properties().group(ModItemGroup.ITEMS);
-                final BlockItem blockItem = new BlockItem(block, properties);
-    
-                blockItem.setRegistryName(block.getRegistryName());
-                registry.register(blockItem);
-            }
-            else {
-                final Item.Properties properties = new Item.Properties().group(ModItemGroup.BLOCKS);
-                final BlockItem blockItem = new BlockItem(block, properties);
-    
-                blockItem.setRegistryName(block.getRegistryName());
-                registry.register(blockItem);
-            }
-        });*/
+		});
     }
 
 	private static boolean shouldHide(Block block) {
@@ -114,74 +83,30 @@ public class ModEventSubscriber {
         );
     }
 
-    @OnlyIn(Dist.CLIENT)
-    public static Object clientOnlySetup() {
-        /*for (RegistryObject<Block> regBlock : ModBlocks.BLOCKS.getEntries()) {
-            if (regBlock.getId().toString().contains("slime_block")) {
-                RenderTypeLookup.setRenderLayer(regBlock.get(), RenderType.getTranslucent());
-            }
-            else if (regBlock.getId().toString().contains("yellow_mushroom")) {
-                RenderTypeLookup.setRenderLayer(regBlock.get(), RenderType.getCutout());
-            }
-        }
+	public static void onBiomeLoading(final BiomeLoadingEvent event) {
+		BiomeCategory category = event.getCategory();
+		if (category == BiomeCategory.TAIGA || category == BiomeCategory.SWAMP) {
+			event.getGeneration().getFeatures(Decoration.VEGETAL_DECORATION).add(
+				() -> ModFeatures.PATCH_YELLOW_MUSHROOM.get().configured(
+					(new RandomPatchConfiguration.GrassConfigurationBuilder(
+						new SimpleStateProvider(((YellowMushroomBlock)ModBlocks.YELLOW_MUSHROOM.get()).getRandomState()), 
+						SimpleBlockPlacer.INSTANCE
+					)).tries(8).noProjection().build()
+				).decorated(Features.Decorators.HEIGHTMAP_SQUARE).rarity(8)
+			);
+		}
+	}
 
-        RenderingRegistry.registerEntityRenderingHandler(ModEntityType.COLORED_SLIME.get(), ColoredSlimeRenderer::new);
-        ClientRegistry.bindTileEntityRenderer(ModTileEntityType.COLORED_PISTON.get(), ColoredPistonTileEntityRenderer::new);
+	@SubscribeEvent
+	public static void onRegisterEnchantment(final RegistryEvent.Register<Enchantment> event) {
+		final IForgeRegistry<Enchantment> registry = event.getRegistry();
 
-        ParticleManager particleManager = Minecraft.getInstance().particles;
+		ModEnchantments.ENCHANTMENTS.getEntries().stream().map(RegistryObject::get).forEach(enchantment -> {
+			
+		});
+	}
 
-        particleManager.registerFactory(ModParticleTypes.WHITE_SLIME_PARTICLE.get(),new ModBreakingParticle.ColoredSlimeFactory(ModItems.WHITE_SLIME_BALL.get()));
-        particleManager.registerFactory(ModParticleTypes.BLACK_SLIME_PARTICLE.get(), new ModBreakingParticle.ColoredSlimeFactory(ModItems.BLACK_SLIME_BALL.get()));
-        particleManager.registerFactory(ModParticleTypes.BLUE_SLIME_PARTICLE.get(), new ModBreakingParticle.ColoredSlimeFactory(ModItems.BLUE_SLIME_BALL.get()));
-        particleManager.registerFactory(ModParticleTypes.BROWN_SLIME_PARTICLE.get(), new ModBreakingParticle.ColoredSlimeFactory(ModItems.BROWN_SLIME_BALL.get()));
-        particleManager.registerFactory(ModParticleTypes.CYAN_SLIME_PARTICLE.get(), new ModBreakingParticle.ColoredSlimeFactory(ModItems.CYAN_SLIME_BALL.get()));
-        particleManager.registerFactory(ModParticleTypes.GRAY_SLIME_PARTICLE.get(), new ModBreakingParticle.ColoredSlimeFactory(ModItems.GRAY_SLIME_BALL.get()));
-        particleManager.registerFactory(ModParticleTypes.GREEN_SLIME_PARTICLE.get(), new ModBreakingParticle.ColoredSlimeFactory(ModItems.GREEN_SLIME_BALL.get()));
-        particleManager.registerFactory(ModParticleTypes.LIGHT_BLUE_SLIME_PARTICLE.get(), new ModBreakingParticle.ColoredSlimeFactory(ModItems.LIGHT_BLUE_SLIME_BALL.get()));
-        particleManager.registerFactory(ModParticleTypes.LIGHT_GRAY_SLIME_PARTICLE.get(), new ModBreakingParticle.ColoredSlimeFactory(ModItems.LIGHT_GRAY_SLIME_BALL.get()));
-        particleManager.registerFactory(ModParticleTypes.LIME_SLIME_PARTICLE.get(), new ModBreakingParticle.ColoredSlimeFactory(ModItems.LIME_SLIME_BALL.get()));
-        particleManager.registerFactory(ModParticleTypes.MAGENTA_SLIME_PARTICLE.get(), new ModBreakingParticle.ColoredSlimeFactory(ModItems.MAGENTA_SLIME_BALL.get()));
-        particleManager.registerFactory(ModParticleTypes.ORANGE_SLIME_PARTICLE.get(), new ModBreakingParticle.ColoredSlimeFactory(ModItems.ORANGE_SLIME_BALL.get()));
-        particleManager.registerFactory(ModParticleTypes.PINK_SLIME_PARTICLE.get(), new ModBreakingParticle.ColoredSlimeFactory(ModItems.PINK_SLIME_BALL.get()));
-        particleManager.registerFactory(ModParticleTypes.PURPLE_SLIME_PARTICLE.get(), new ModBreakingParticle.ColoredSlimeFactory(ModItems.PURPLE_SLIME_BALL.get()));
-        particleManager.registerFactory(ModParticleTypes.RED_SLIME_PARTICLE.get(), new ModBreakingParticle.ColoredSlimeFactory(ModItems.RED_SLIME_BALL.get()));
-        particleManager.registerFactory(ModParticleTypes.YELLOW_SLIME_PARTICLE.get(), new ModBreakingParticle.ColoredSlimeFactory(ModItems.YELLOW_SLIME_BALL.get()));
-		*/
-        return null;
-    }
-
-    public static void onBiomeLoading(final BiomeLoadingEvent event) {
-        /*event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(
-            () -> new RandomPatchFeature(BlockClusterFeatureConfig.field_236587_a_).withConfiguration(
-                (new BlockClusterFeatureConfig.Builder(
-                    new SimpleBlockStateProvider(((YellowMushroomBlock)ModBlocks.YELLOW_MUSHROOM.get()).getRandomState()),
-                    SimpleBlockPlacer.PLACER
-                )).tries(64).func_227317_b_().build()
-            )
-        );*/
-        //if (event.getCategory() == Biome.Category.TAIGA || event.getCategory() == Biome.Category.SWAMP) {
-            /*event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(
-                () -> Feature.RANDOM_PATCH.withConfiguration(
-                    (new BlockClusterFeatureConfig.Builder(
-                        new SimpleBlockStateProvider(((YellowMushroomBlock)ModBlocks.YELLOW_MUSHROOM.get()).getRandomState()), SimpleBlockPlacer.PLACER
-                    )).tries(4).build()
-                ).withPlacement(
-                    Features.Placements.PATCH_PLACEMENT
-                ).withPlacement(
-                    Placement.COUNT_NOISE.configure(new NoiseDependant(-0.8D, 5, 10))
-                )
-            );*/
-            /*event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(
-                () -> ModFeatures.PATCH_YELLOW_MUSHROOM.get().withConfiguration(
-                    (new BlockClusterFeatureConfig.Builder(
-                        new SimpleBlockStateProvider(((YellowMushroomBlock)ModBlocks.YELLOW_MUSHROOM.get()).getWithCount(1)), SimpleBlockPlacer.PLACER
-                    )).tries(32).func_227317_b_().build()
-                ).withPlacement(
-                    Features.Placements.PATCH_PLACEMENT
-                )
-            );
-        }*/
-    }
+	//Feature.SEA_PICKLE.configured(new CountConfiguration(20)).decorated(Features.Decorators.TOP_SOLID_HEIGHTMAP_SQUARE).rarity(16)
 
     @SubscribeEvent
     public static void onSetup(final FMLCommonSetupEvent event) {
