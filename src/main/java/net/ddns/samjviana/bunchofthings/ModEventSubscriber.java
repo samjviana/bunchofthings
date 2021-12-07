@@ -3,6 +3,7 @@ package net.ddns.samjviana.bunchofthings;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.ddns.samjviana.bunchofthings.block.ColoredSlimeBlock;
 import net.ddns.samjviana.bunchofthings.block.ModBlocks;
 import net.ddns.samjviana.bunchofthings.block.YellowMushroomBlock;
 import net.ddns.samjviana.bunchofthings.client.particle.YellowMushroomGlowParticle;
@@ -11,12 +12,15 @@ import net.ddns.samjviana.bunchofthings.item.ModCreativeTab;
 import net.ddns.samjviana.bunchofthings.particles.ModParticleTypes;
 import net.ddns.samjviana.bunchofthings.world.gen.feature.ModFeatures;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.worldgen.Features;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.biome.Biome.BiomeCategory;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SlimeBlock;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraft.world.level.levelgen.feature.blockplacers.SimpleBlockPlacer;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
@@ -27,9 +31,11 @@ import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -58,6 +64,15 @@ public class ModEventSubscriber {
 			registry.register(blockItem);
 		});
     }
+
+	@SubscribeEvent
+	public static void onRegisterBlock(final RegistryEvent.Register<Block> event) {
+		final IForgeRegistry<Block> registry = event.getRegistry();
+
+		ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get).forEach((block) -> {
+			registry.register(block);
+		});
+	}
 
 	private static boolean shouldHide(Block block) {
 		return false;
@@ -110,11 +125,19 @@ public class ModEventSubscriber {
 
     @SubscribeEvent
     public static void onSetup(final FMLCommonSetupEvent event) {
-        /*if (FMLEnvironment.dist == Dist.CLIENT) {
-            DistExecutor.callWhenOn(Dist.CLIENT, () -> ModEventSubscriber::clientOnlySetup);
-        }
-
-        GlobalEntityTypeAttributes.put(ModEntityType.COLORED_SLIME.get(), ColoredSlimeEntity.getAttributes());
+		/*if (FMLEnvironment.dist == Dist.CLIENT) {
+			DistExecutor.callWhenOn(Dist.CLIENT, () -> ModEventSubscriber::clientOnlySetup);
+		}*/
+		for (RegistryObject<Block> regBlock : ModBlocks.BLOCKS.getEntries()) {
+			if (regBlock.get() instanceof ColoredSlimeBlock) {
+				ItemBlockRenderTypes.setRenderLayer(regBlock.get(), RenderType.translucent());
+			}
+			else if (regBlock.get() instanceof YellowMushroomBlock) {
+				ItemBlockRenderTypes.setRenderLayer(regBlock.get(), RenderType.cutout());
+			}
+		}
+        
+		/*GlobalEntityTypeAttributes.put(ModEntityType.COLORED_SLIME.get(), ColoredSlimeEntity.getAttributes());
         EntitySpawnPlacementRegistry.register(ModEntityType.COLORED_SLIME.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ColoredSlimeEntity::_canSpawn);
 		*/
         //for (Biome biome : WorldGenRegistries.BIOME /* Collection of Biome Entries */) {
@@ -187,4 +210,19 @@ public class ModEventSubscriber {
             //}
         //}
     }
+
+	@OnlyIn(Dist.CLIENT)
+	public static Object clientOnlySetup() {
+		for (RegistryObject<Block> regBlock : ModBlocks.BLOCKS.getEntries()) {
+			if (regBlock.get() instanceof ColoredSlimeBlock) {
+				ItemBlockRenderTypes.setRenderLayer(regBlock.get(), RenderType.translucent());
+			}
+			else if (regBlock.get() instanceof YellowMushroomBlock) {
+				ItemBlockRenderTypes.setRenderLayer(regBlock.get(), RenderType.cutout());
+			}
+		}
+
+		
+		return null;
+	}
 }

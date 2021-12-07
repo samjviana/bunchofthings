@@ -13,7 +13,7 @@ public class ModCreativeTab {
 	public static final CreativeModeTab BLOCKS = new CreativeModeTab(CreativeModeTab.getGroupCountSafe(), "blocks") {
 		@Override
 		public ItemStack makeIcon() {
-			return new ItemStack(ModBlocks.YELLOW_MUSHROOM.get());
+			return new ItemStack(ModBlocks.PURPLE_SLIME_BLOCK.get());
 		}
 	};
 
