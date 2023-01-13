@@ -79,11 +79,8 @@ Vanilla Magma Cream and Lead can be made with any Colored Slime Ball
 Changelog
 ---------
 
-<details>
-  <summary> Click to reveal the spoiler </summary>
-  <p> The spoiler content goes here </p>
-</details>
-
+<details> <summary> Click to reveal the spoiler </summary>
+  
 Version: 1.3.0 - Date: 12/11/2021   
 
     • Some improvements in Grass Walker Enchantment
@@ -154,6 +151,7 @@ Version: 0.3 - Date: 31/08/2020
     • Colored Slime Entity added  
     • Colored Slime Ball added  
     • Colored Slime Block added
+</details>
 
 Bugs/Issues
 -----------
