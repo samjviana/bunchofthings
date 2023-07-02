@@ -1,7 +1,6 @@
 package net.ddns.samjviana.bunchofthings.state.properties;
 
 import net.minecraft.util.StringRepresentable;
-import net.minecraft.world.level.block.WallBlock;
 
 public enum Colors implements StringRepresentable {
     WHITE("white"),

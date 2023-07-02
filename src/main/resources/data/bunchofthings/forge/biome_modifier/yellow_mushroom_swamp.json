@@ -1,0 +1,6 @@
+{
+    "type": "forge:add_features",
+    "features": "bunchofthings:yellow_mushroom_swamp",
+    "biomes": "minecraft:swamp",
+    "step": "vegetal_decoration"
+}

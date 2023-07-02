@@ -1,10 +1,8 @@
-package net.ddns.samjviana.bunchofthings.block;
+package net.ddns.samjviana.bunchofthings.world.level.block;
 
-import net.ddns.samjviana.bunchofthings.BunchOfThings;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.SlimeBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.ddns.samjviana.bunchofthings.block.ColoredStickyPistonHeadBlock;
 
 public class ColoredSlimeBlock extends SlimeBlock {
 	public ColoredSlimeBlock(Properties properties) {

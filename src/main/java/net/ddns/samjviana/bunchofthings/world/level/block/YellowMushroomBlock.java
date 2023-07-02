@@ -1,10 +1,11 @@
-package net.ddns.samjviana.bunchofthings.block;
+package net.ddns.samjviana.bunchofthings.world.level.block;
 
 import java.util.Random;
 
-import net.ddns.samjviana.bunchofthings.particles.ModParticleTypes;
+import net.ddns.samjviana.bunchofthings.core.particles.ModParticleTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -30,8 +31,19 @@ public class YellowMushroomBlock extends BushBlock {
     protected static final VoxelShape SHAPE_3 = Block.box(2.0D, 0.0D, 1.0D, 13.0D, 10.0D, 15.0D);
 
 	public YellowMushroomBlock(Properties properties) {
-		super(properties);
+		super(properties.lightLevel(YellowMushroomBlock::calculateLightLevel));
 		this.registerDefaultState(this.stateDefinition.any().setValue(MUSHROOMS, Integer.valueOf(1)).setValue(LIT, Boolean.valueOf(false)));
+	}
+
+	private static int calculateLightLevel(BlockState state) {
+		if (state.getValue(LIT)) {
+			double x = state.getValue(MUSHROOMS);
+			double lightLevel = (-1 * Math.pow(x, 2)) + (8 * x) - 5;
+			return (int) Math.round(lightLevel);
+		}
+		else {
+			return 0;
+		}
 	}
 
 	@Override
@@ -42,7 +54,8 @@ public class YellowMushroomBlock extends BushBlock {
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		BlockState blockState = context.getLevel().getBlockState(context.getClickedPos());		
-		if (blockState.is(this)) {				
+		if (blockState.is(this)) {
+
 			return blockState.setValue(MUSHROOMS, Integer.valueOf(Math.min(MAX_MUSHROOMS, blockState.getValue(MUSHROOMS) + 1)));
 		}
 		return super.getStateForPlacement(context);
@@ -59,7 +72,7 @@ public class YellowMushroomBlock extends BushBlock {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	public void randomTick(BlockState state, ServerLevel levelIn, BlockPos pos, Random random) {
+	public void randomTick(BlockState state, ServerLevel levelIn, BlockPos pos, RandomSource random) {
 		if (state.getValue(LIT)) {
 			levelIn.setBlock(pos, state.setValue(LIT, Boolean.valueOf(false)), 3);
 		}
@@ -67,15 +80,10 @@ public class YellowMushroomBlock extends BushBlock {
 	}
 
 	@Override
-	public OffsetType getOffsetType() {
-		return OffsetType.XZ;
-	}
-
-	@Override
 	@SuppressWarnings("deprecation")
 	public VoxelShape getShape(BlockState state, BlockGetter levelIn, BlockPos pos, CollisionContext context) {
 		Vec3 vec3 = state.getOffset(levelIn, pos);
-		int rand = RANDOM.nextInt(4);
+		int rand = new Random().nextInt(4);
 		Rotation rotation;
 		switch (rand) {
 			case 0:
@@ -107,7 +115,23 @@ public class YellowMushroomBlock extends BushBlock {
 	}
 
 	@Override
-	public void animateTick(BlockState state, Level level, BlockPos pos, Random random) {
+	public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+		/*int i = pos.getX();
+		int j = pos.getY();
+		int k = pos.getZ();
+		double d0 = (double)i + random.nextDouble();
+		double d1 = (double)j + 0.7D;
+		double d2 = (double)k + random.nextDouble();
+		level.addParticle(ModParticleTypes.YELLOW_MUSHROOM_GLOW_PARTICLE.get(), d0, d1, d2, 0.0D, 0.0D, 0.0D);
+		BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+  
+		for(int l = 0; l < 14; ++l) {
+		   blockpos$mutableblockpos.set(i + Mth.nextInt(random, -10, 10), j - random.nextInt(10), k + Mth.nextInt(random, -10, 10));
+		   BlockState blockstate = level.getBlockState(blockpos$mutableblockpos);
+		   if (!blockstate.isCollisionShapeFullBlock(level, blockpos$mutableblockpos)) {
+			level.addParticle(ModParticleTypes.YELLOW_MUSHROOM_GLOW_PARTICLE.get(), (double)blockpos$mutableblockpos.getX() + random.nextDouble(), (double)blockpos$mutableblockpos.getY() + random.nextDouble(), (double)blockpos$mutableblockpos.getZ() + random.nextDouble(), 0.0D, 0.0D, 0.0D);
+		   }
+		}*/
 		super.animateTick(state, level, pos, random);
 		for (int i = -1; i <= 1; i++) {
 			for (int j = -1; j <= 1; j++) {
@@ -139,7 +163,7 @@ public class YellowMushroomBlock extends BushBlock {
     }
 
     public BlockState getRandomState() {
-		int randState = RANDOM.nextInt(3);
+		int randState = new Random().nextInt(3);
         switch (randState) {
             case 0:
                 return this.stateDefinition.any().setValue(LIT, Boolean.valueOf(false)).setValue(MUSHROOMS, Integer.valueOf(1));

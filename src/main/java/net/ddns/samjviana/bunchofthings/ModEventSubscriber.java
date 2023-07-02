@@ -3,47 +3,75 @@ package net.ddns.samjviana.bunchofthings;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.ddns.samjviana.bunchofthings.block.ColoredSlimeBlock;
-import net.ddns.samjviana.bunchofthings.block.ModBlocks;
-import net.ddns.samjviana.bunchofthings.block.YellowMushroomBlock;
 import net.ddns.samjviana.bunchofthings.client.particle.YellowMushroomGlowParticle;
-import net.ddns.samjviana.bunchofthings.enchantment.ModEnchantments;
-import net.ddns.samjviana.bunchofthings.item.ModCreativeTab;
-import net.ddns.samjviana.bunchofthings.particles.ModParticleTypes;
-import net.ddns.samjviana.bunchofthings.world.gen.feature.ModFeatures;
+import net.ddns.samjviana.bunchofthings.core.particles.ModParticleTypes;
+import net.ddns.samjviana.bunchofthings.world.item.ModItems;
+import net.ddns.samjviana.bunchofthings.world.level.block.ColoredSlimeBlock;
+import net.ddns.samjviana.bunchofthings.world.level.block.ModBlocks;
+import net.ddns.samjviana.bunchofthings.world.level.block.YellowMushroomBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.data.worldgen.Features;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.level.biome.Biome.BiomeCategory;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SlimeBlock;
-import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
-import net.minecraft.world.level.levelgen.feature.blockplacers.SimpleBlockPlacer;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
-import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.world.BiomeLoadingEvent;
+import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
+import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.loading.FMLEnvironment;
-import net.minecraftforge.fmllegacy.RegistryObject;
-import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.RegistryObject;
 
 @EventBusSubscriber(modid = BunchOfThings.MODID, bus = Bus.MOD)
 public class ModEventSubscriber {
 	private static final Minecraft INSTANCE = Minecraft.getInstance();
 
-    @SubscribeEvent
+	@SubscribeEvent
+	public static void onRegisterCreativeModeTab(CreativeModeTabEvent.Register event) {
+		event.registerCreativeModeTab(
+			new ResourceLocation(BunchOfThings.MODID, "blocks"),
+			builder -> builder.title(
+				Component.translatable("itemGroup.blocks")
+			).icon(
+				() -> new ItemStack(ModBlocks.PURPLE_SLIME_BLOCK.get())
+			).displayItems((params, output) -> {
+				ModItems.ITEMS.getEntries().stream().map(RegistryObject::get).forEach((item) -> {
+					output.accept(item.getDefaultInstance());
+				});
+			})
+		);
+	}
+
+	@SubscribeEvent
+	public static void onRegisterParticleProviders(RegisterParticleProvidersEvent event) {
+		event.register(
+			ModParticleTypes.YELLOW_MUSHROOM_GLOW_PARTICLE.get(), 
+			sprite -> new YellowMushroomGlowParticle.GlowParticleFactory(sprite)
+		);
+	}
+
+	// @SubscribeEvent
+	// public static void onGatherData(GatherDataEvent event) {
+	// 	DataGenerator dataGenerator = event.getGenerator();
+	// 	PackOutput packOutput = dataGenerator.getPackOutput();
+	// 	ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+
+	// 	dataGenerator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(packOutput, event.getLookupProvider(), BUILDER, Set.of(BunchOfThings.MODID)));
+	// }
+
+	/*@SubscribeEvent
+	public static void onRegister(RegisterEvent event) {
+		event.register(
+			ForgeRegistries.Keys.BLOCKS,
+        	helper -> helper.register(new ResourceLocation(BunchOfThings.MODID, "orange_slime_block"), ModBlocks.ORANGE_SLIME_BLOCK.get())
+    	);
+	}*/
+
+    /*@SubscribeEvent
     public static void onRegisterItem(final RegistryEvent.Register<Item> event) {
         final IForgeRegistry<Item> registry = event.getRegistry();
 
@@ -72,7 +100,7 @@ public class ModEventSubscriber {
 		ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get).forEach((block) -> {
 			registry.register(block);
 		});
-	}
+	}*/
 
 	private static boolean shouldHide(Block block) {
 		return false;
@@ -80,7 +108,7 @@ public class ModEventSubscriber {
 
 	private static boolean isBlockItem(Block block) {
 		List<Block> blockItems = new ArrayList<Block>(List.of(
-			ModBlocks.YELLOW_MUSHROOM.get()
+			//ModBlocks.YELLOW_MUSHROOM.get()
 		));
 
 		if (blockItems.contains(block)) {
@@ -89,16 +117,17 @@ public class ModEventSubscriber {
 		return false;
 	}
        
-    @SubscribeEvent
+    /*@SubscribeEvent
     @OnlyIn(Dist.CLIENT)
-    public static void onParticleFactoryRegistration(ParticleFactoryRegisterEvent event) {
+	@SuppressWarnings("deprecation")
+    public static void onParticleFactoryRegistration(RegisterParticleProvidersEvent event) {
         INSTANCE.particleEngine.register(
             ModParticleTypes.YELLOW_MUSHROOM_GLOW_PARTICLE.get(), 
             sprite -> new YellowMushroomGlowParticle.GlowParticleFactory(sprite)
         );
-    }
+    }*/
 
-	public static void onBiomeLoading(final BiomeLoadingEvent event) {
+	/*public static void onBiomeLoading(final BiomeLoadingEvent event) {
 		BiomeCategory category = event.getCategory();
 		if (category == BiomeCategory.TAIGA || category == BiomeCategory.SWAMP) {
 			event.getGeneration().getFeatures(Decoration.VEGETAL_DECORATION).add(
@@ -110,24 +139,30 @@ public class ModEventSubscriber {
 				).decorated(Features.Decorators.HEIGHTMAP_SQUARE).rarity(8)
 			);
 		}
-	}
+	}*/
 
-	@SubscribeEvent
+	/*@SubscribeEvent
 	public static void onRegisterEnchantment(final RegistryEvent.Register<Enchantment> event) {
 		final IForgeRegistry<Enchantment> registry = event.getRegistry();
 
 		ModEnchantments.ENCHANTMENTS.getEntries().stream().map(RegistryObject::get).forEach(enchantment -> {
 			
 		});
-	}
+	}*/
 
 	//Feature.SEA_PICKLE.configured(new CountConfiguration(20)).decorated(Features.Decorators.TOP_SOLID_HEIGHTMAP_SQUARE).rarity(16)
 
     @SubscribeEvent
     public static void onSetup(final FMLCommonSetupEvent event) {
+		for (RegistryObject<Block> registryObject : ModBlocks.BLOCKS.getEntries()) {
+			//ItemBlockRenderTypes.setRenderLayer(registryObject.get(), RenderType.translucent());
+		}
+
 		/*if (FMLEnvironment.dist == Dist.CLIENT) {
 			DistExecutor.callWhenOn(Dist.CLIENT, () -> ModEventSubscriber::clientOnlySetup);
 		}*/
+		
+		/* *
 		for (RegistryObject<Block> regBlock : ModBlocks.BLOCKS.getEntries()) {
 			if (regBlock.get() instanceof ColoredSlimeBlock) {
 				ItemBlockRenderTypes.setRenderLayer(regBlock.get(), RenderType.translucent());
@@ -135,7 +170,7 @@ public class ModEventSubscriber {
 			else if (regBlock.get() instanceof YellowMushroomBlock) {
 				ItemBlockRenderTypes.setRenderLayer(regBlock.get(), RenderType.cutout());
 			}
-		}
+		}*/
         
 		/*GlobalEntityTypeAttributes.put(ModEntityType.COLORED_SLIME.get(), ColoredSlimeEntity.getAttributes());
         EntitySpawnPlacementRegistry.register(ModEntityType.COLORED_SLIME.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ColoredSlimeEntity::_canSpawn);
@@ -222,7 +257,6 @@ public class ModEventSubscriber {
 			}
 		}
 
-		
 		return null;
 	}
 }
