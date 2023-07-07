@@ -1,0 +1,6 @@
+{
+    "type": "forge:add_features",
+    "features": "bunchofthings:yellow_mushroom_nether",
+    "biomes": ["minecraft:basalt_deltas", "minecraft:nether_wastes"],
+    "step": "vegetal_decoration"
+}

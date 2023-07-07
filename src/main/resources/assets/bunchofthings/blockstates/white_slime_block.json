@@ -1,5 +1,5 @@
 {
-	"variants": {
-		"": { "model": "bunchofthings:block/white_slime_block" }
-	}
+    "variants": {
+        "": { "model": "bunchofthings:block/white_slime_block" }
+    }
 }

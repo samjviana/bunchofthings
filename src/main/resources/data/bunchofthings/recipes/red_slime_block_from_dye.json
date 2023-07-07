@@ -1,14 +1,14 @@
 {
     "type": "minecraft:crafting_shapeless",
     "ingredients": [
-      {
-        "item": "minecraft:red_dye"
-      },
-      {
-        "item": "bunchofthings:white_slime_block"
-      }
+        {
+            "item": "minecraft:red_dye"
+        },
+        {
+            "item": "bunchofthings:white_slime_block"
+        }
     ],
     "result": {
-      "item": "bunchofthings:red_slime_block"
+        "item": "bunchofthings:red_slime_block"
     }
 }

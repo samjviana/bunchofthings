@@ -1,23 +1,23 @@
 {
-  "type": "minecraft:entity",
-  "pools": [
-    {
-      "rolls": 1,
-      "entries": [
+    "type": "minecraft:entity",
+    "pools": [
         {
-          "type": "minecraft:item",
-          "name": "bunchofthings:yellow_slime_ball"
-        }
-      ]
-    },
-    {
-      "rolls": 1,
-      "entries": [
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "minecraft:item",
+                    "name": "bunchofthings:yellow_slime_ball"
+                }
+            ]
+        },
         {
-          "type": "minecraft:loot_table",
-          "name": "bunchofthings:entities/colored_slime"
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "minecraft:loot_table",
+                    "name": "bunchofthings:entities/colored_slime"
+                }
+            ]
         }
-      ]
-    }
-  ]
+    ]
 }

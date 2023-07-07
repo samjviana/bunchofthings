@@ -1,10 +1,6 @@
 {
     "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "XXX",
-        "XXX",
-        "XXX"
-    ],
+    "pattern": ["XXX", "XXX", "XXX"],
     "key": {
         "X": {
             "item": "bunchofthings:black_slime_ball"

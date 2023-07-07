@@ -1,18 +1,15 @@
 {
     "type": "minecraft:crafting_shaped",
-    "pattern": [
-      "S",
-      "P"
-    ],
+    "pattern": ["S", "P"],
     "key": {
-      "S": {
-        "item": "bunchofthings:cyan_slime_ball"
-      },
-      "P": {
-        "item": "minecraft:piston"
-      }
+        "S": {
+            "item": "bunchofthings:cyan_slime_ball"
+        },
+        "P": {
+            "item": "minecraft:piston"
+        }
     },
     "result": {
-      "item": "bunchofthings:cyan_sticky_piston"
+        "item": "bunchofthings:cyan_sticky_piston"
     }
-  }
+}

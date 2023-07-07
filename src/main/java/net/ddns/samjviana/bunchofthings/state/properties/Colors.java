@@ -19,20 +19,19 @@ public enum Colors implements StringRepresentable {
     GREEN("green"),
     RED("red"),
     BLACK("black");
-     
+
     private final String name;
- 
+
     private Colors(String name) {
         this.name = name;
     }
- 
+
     public String toString() {
         return this.name;
     }
-    
-	@Override
-	public String getSerializedName() {
-		return this.name;
-	}
-	
+
+    @Override
+    public String getSerializedName() {
+        return this.name;
+    }
 }

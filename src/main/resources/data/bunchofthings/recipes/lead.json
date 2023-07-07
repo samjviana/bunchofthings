@@ -1,10 +1,6 @@
 {
     "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "~~ ",
-        "~O ",
-        "  ~"
-    ],
+    "pattern": ["~~ ", "~O ", "  ~"],
     "key": {
         "~": {
             "item": "minecraft:string"

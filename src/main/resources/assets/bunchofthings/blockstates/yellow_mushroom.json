@@ -1,55 +1,106 @@
 {
     "variants": {
-		"mushrooms=1": [
-			{
-				"model": "bunchofthings:block/yellow_mushroom"
-			},
-			{
-				"model": "bunchofthings:block/yellow_mushroom",
-				"y": 90
-			},
-			{
-				"model": "bunchofthings:block/yellow_mushroom",
-				"y": 180
-			},
-			{
-				"model": "bunchofthings:block/yellow_mushroom",
-				"y": 270
-			}		
-		],
-		"mushrooms=2": [
-			{
-				"model": "bunchofthings:block/two_yellow_mushroom"
-			},
-			{
-				"model": "bunchofthings:block/two_yellow_mushroom",
-				"y": 90
-			},
-			{
-				"model": "bunchofthings:block/two_yellow_mushroom",
-				"y": 180
-			},
-			{
-				"model": "bunchofthings:block/two_yellow_mushroom",
-				"y": 270
-			}		
-		],
-		"mushrooms=3": [
-			{
-				"model": "bunchofthings:block/three_yellow_mushroom"
-			},
-			{
-				"model": "bunchofthings:block/three_yellow_mushroom",
-				"y": 90
-			},
-			{
-				"model": "bunchofthings:block/three_yellow_mushroom",
-				"y": 180
-			},
-			{
-				"model": "bunchofthings:block/three_yellow_mushroom",
-				"y": 270
-			}		
-		]		
+        "mushrooms=1,lit=false": [
+            {
+                "model": "bunchofthings:block/yellow_mushroom"
+            },
+            {
+                "model": "bunchofthings:block/yellow_mushroom",
+                "y": 90
+            },
+            {
+                "model": "bunchofthings:block/yellow_mushroom",
+                "y": 180
+            },
+            {
+                "model": "bunchofthings:block/yellow_mushroom",
+                "y": 270
+            }
+        ],
+        "mushrooms=2,lit=false": [
+            {
+                "model": "bunchofthings:block/two_yellow_mushroom"
+            },
+            {
+                "model": "bunchofthings:block/two_yellow_mushroom",
+                "y": 90
+            },
+            {
+                "model": "bunchofthings:block/two_yellow_mushroom",
+                "y": 180
+            },
+            {
+                "model": "bunchofthings:block/two_yellow_mushroom",
+                "y": 270
+            }
+        ],
+        "mushrooms=3,lit=false": [
+            {
+                "model": "bunchofthings:block/three_yellow_mushroom"
+            },
+            {
+                "model": "bunchofthings:block/three_yellow_mushroom",
+                "y": 90
+            },
+            {
+                "model": "bunchofthings:block/three_yellow_mushroom",
+                "y": 180
+            },
+            {
+                "model": "bunchofthings:block/three_yellow_mushroom",
+                "y": 270
+            }
+        ],
+        "mushrooms=1,lit=true": [
+            {
+                "model": "bunchofthings:block/yellow_mushroom_lit"
+            },
+            {
+                "model": "bunchofthings:block/yellow_mushroom_lit",
+                "y": 90
+            },
+            {
+                "model": "bunchofthings:block/yellow_mushroom_lit",
+                "y": 180
+            },
+            {
+                "model": "bunchofthings:block/yellow_mushroom_lit",
+                "y": 270
+            }
+        ],
+        "mushrooms=2,lit=true": [
+            {
+                "model": "bunchofthings:block/two_yellow_mushroom_lit"
+            },
+            {
+                "model": "bunchofthings:block/two_yellow_mushroom_lit",
+                "y": 90
+            },
+            {
+                "model": "bunchofthings:block/two_yellow_mushroom_lit",
+                "y": 180
+            },
+            {
+                "model": "bunchofthings:block/two_yellow_mushroom_lit",
+                "y": 270
+            }
+        ],
+        "mushrooms=3,lit=true": [
+            {
+                "model": "bunchofthings:block/three_yellow_mushroom_lit"
+            },
+            {
+                "model": "bunchofthings:block/three_yellow_mushroom_lit",
+                "y": 90
+            },
+            {
+                "model": "bunchofthings:block/three_yellow_mushroom_lit",
+                "y": 180
+            },
+            {
+                "model": "bunchofthings:block/three_yellow_mushroom_lit",
+                "y": 270
+            }
+        ]
     }
 }

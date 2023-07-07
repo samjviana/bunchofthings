@@ -1,0 +1,9 @@
+{
+    "type": "forge:add_features",
+    "features": "bunchofthings:yellow_mushroom_old_growth",
+    "biomes": [
+        "minecraft:old_growth_pine_taiga",
+        "minecraft:old_growth_spruce_taiga"
+    ],
+    "step": "vegetal_decoration"
+}

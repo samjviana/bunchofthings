@@ -1,0 +1,10 @@
+{
+    "type": "forge:add_features",
+    "features": "bunchofthings:yellow_mushroom_taiga",
+    "biomes": [
+        "minecraft:taiga",
+        "minecraft:snowy_taiga",
+        "minecraft:mushroom_fields"
+    ],
+    "step": "vegetal_decoration"
+}

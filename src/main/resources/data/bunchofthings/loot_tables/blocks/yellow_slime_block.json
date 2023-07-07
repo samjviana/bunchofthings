@@ -1,14 +1,14 @@
 {
     "type": "minecraft:block",
     "pools": [
-      {
-        "rolls": 1,
-        "entries": [
-          {
-            "type": "minecraft:item",
-            "name": "bunchofthings:yellow_slime_block"
-          }
-        ]
-      }
+        {
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "minecraft:item",
+                    "name": "bunchofthings:yellow_slime_block"
+                }
+            ]
+        }
     ]
-  }
+}

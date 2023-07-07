@@ -9,6 +9,11 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
 public class ModBlockTags {
-	public static final TagKey<Block> COLORED_SLIME_BLOCK = BlockTags.create(new ResourceLocation(BunchOfThings.MODID, "colored_slime_block"));
-	public static final TagKey<Item> MUSHROOMS = ItemTags.create(new ResourceLocation(BunchOfThings.MODID, "mushrooms"));
+
+    public static final TagKey<Block> COLORED_SLIME_BLOCK = BlockTags.create(
+        new ResourceLocation(BunchOfThings.MODID, "colored_slime_block")
+    );
+    public static final TagKey<Item> MUSHROOMS = ItemTags.create(
+        new ResourceLocation(BunchOfThings.MODID, "mushrooms")
+    );
 }
