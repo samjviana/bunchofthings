@@ -1,6 +1,7 @@
 package net.ddns.samjviana.bunchofthings;
 
 import net.ddns.samjviana.bunchofthings.core.particles.ModParticleTypes;
+import net.ddns.samjviana.bunchofthings.world.entity.ModEntityType;
 import net.ddns.samjviana.bunchofthings.world.item.ModItems;
 import net.ddns.samjviana.bunchofthings.world.level.block.ModBlocks;
 import net.ddns.samjviana.bunchofthings.world.level.block.entity.ModBlockEntityType;
@@ -24,6 +25,7 @@ public class BunchOfThings {
         ModItems.ITEMS.register(modEventBus);
         ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
         ModBlockEntityType.BLOCK_ENTITY_TYPES.register(modEventBus);
+        ModEntityType.ENTITY_TYPES.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(modEventBus);
     }

@@ -5,8 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 import net.ddns.samjviana.bunchofthings.client.particle.YellowMushroomGlowParticle;
 import net.ddns.samjviana.bunchofthings.client.renderer.blockentity.ColoredPistonHeadRenderer;
+import net.ddns.samjviana.bunchofthings.client.renderer.entity.ColoredSlimeRenderer;
 import net.ddns.samjviana.bunchofthings.core.particles.ModParticleTypes;
 import net.ddns.samjviana.bunchofthings.state.properties.Colors;
+import net.ddns.samjviana.bunchofthings.world.entity.ModEntityType;
+import net.ddns.samjviana.bunchofthings.world.entity.monster.ColoredSlime;
 import net.ddns.samjviana.bunchofthings.world.item.ModItems;
 import net.ddns.samjviana.bunchofthings.world.level.block.ColoredSlimeBlock;
 import net.ddns.samjviana.bunchofthings.world.level.block.ColoredStickyPistonBlock;
@@ -18,8 +21,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientRegistryLayer;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.SlimeRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -30,6 +38,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.event.CreativeModeTabEvent;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
@@ -52,6 +61,30 @@ public class ModEventSubscriber {
             );
         });*/
     }
+
+    @SubscribeEvent
+    public static void onEntityRendereresEvent(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(
+            ModEntityType.COLORED_SLIME.get(),
+            ColoredSlimeRenderer::new
+        );
+    }
+
+    @SubscribeEvent
+    public static void newEntityAttributes(EntityAttributeCreationEvent event) {
+        event.put(ModEntityType.COLORED_SLIME.get(), ColoredSlime.createMobAttributes()
+            .add(Attributes.ATTACK_DAMAGE).build());
+    }
+
+    // On the mod event bus
+    // public void newEntityAttributes(EntityAttributeCreationEvent event) {
+    //     event.put(EXAMPLE_ENTITY_TYPE.get(),
+    //         AttributeSupplier.builder()
+    //             .add(Attributes.MAX_HEALTH) // Sets max health to default value 20
+    //             .add(Attributes.KNOCKBACK_RESISTANCE, 4.0D) // Sets knockback resistance to 4
+    //             // ...
+    //     );
+    // }
 
     @SubscribeEvent
     public static void onRegisterCreativeModeTab(CreativeModeTabEvent.Register event) {
