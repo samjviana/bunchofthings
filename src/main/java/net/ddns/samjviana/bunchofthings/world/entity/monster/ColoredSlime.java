@@ -135,7 +135,9 @@ public class ColoredSlime extends Slime {
 
     public static boolean _checkSlimeSpawnRules(EntityType<ColoredSlime> p_219113_, LevelAccessor p_219114_, MobSpawnType p_219115_, BlockPos p_219116_, RandomSource p_219117_) {
         if (p_219114_.getDifficulty() != Difficulty.PEACEFUL) {
-            if (p_219114_.getBiome(p_219116_).is(BiomeTags.ALLOWS_SURFACE_SLIME_SPAWNS) && p_219116_.getY() > 50 && p_219116_.getY() < 70 && p_219117_.nextFloat() < 0.5F && p_219117_.nextFloat() < p_219114_.getMoonBrightness() && p_219114_.getMaxLocalRawBrightness(p_219116_) <= p_219117_.nextInt(8)) {
+            boolean allowSurfaceSpawn = p_219114_.getBiome(p_219116_).is(BiomeTags.ALLOWS_SURFACE_SLIME_SPAWNS);
+            boolean allowedHeight = p_219116_.getY() > 50 && p_219116_.getY() < 70;
+            if (allowSurfaceSpawn && allowedHeight && p_219117_.nextFloat() < 0.5F && p_219117_.nextFloat() < p_219114_.getMoonBrightness() && p_219114_.getMaxLocalRawBrightness(p_219116_) <= p_219117_.nextInt(8)) {
                 return checkMobSpawnRules(p_219113_, p_219114_, p_219115_, p_219116_, p_219117_);
             }
 

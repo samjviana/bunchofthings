@@ -6,6 +6,7 @@ import net.ddns.samjviana.bunchofthings.world.item.ModItems;
 import net.ddns.samjviana.bunchofthings.world.level.block.ModBlocks;
 import net.ddns.samjviana.bunchofthings.world.level.block.entity.ModBlockEntityType;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;

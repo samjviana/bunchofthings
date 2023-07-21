@@ -1,6 +1,11 @@
 package net.ddns.samjviana.bunchofthings;
 
+import net.ddns.samjviana.bunchofthings.world.entity.ModEntityType;
+import net.ddns.samjviana.bunchofthings.world.entity.monster.ColoredSlime;
+import net.minecraft.world.entity.monster.Slime;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = BunchOfThings.MODID, value = Dist.CLIENT)
