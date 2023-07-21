@@ -262,7 +262,7 @@ public class ColoredMovingPistonBlockEntity extends BlockEntity {
             this.progressO = this.progress;
             this.level.removeBlockEntity(this.worldPosition);
             this.setRemoved();
-            if (this.level.getBlockState(this.worldPosition).is(Blocks.MOVING_PISTON)) {
+            if (this.level.getBlockState(this.worldPosition).is(ModBlocks.COLORED_MOVING_PISTON.get())) {
                 BlockState blockstate;
                 if (this.isSourcePiston) {
                 blockstate = Blocks.AIR.defaultBlockState();
@@ -286,7 +286,7 @@ public class ColoredMovingPistonBlockEntity extends BlockEntity {
             } else {
                 p_155916_.removeBlockEntity(p_155917_);
                 p_155919_.setRemoved();
-                if (p_155916_.getBlockState(p_155917_).is(Blocks.MOVING_PISTON)) {
+                if (p_155916_.getBlockState(p_155917_).is(ModBlocks.COLORED_MOVING_PISTON.get())) {
                 BlockState blockstate = Block.updateFromNeighbourShapes(p_155919_.movedState, p_155916_, p_155917_);
                 if (blockstate.isAir()) {
                     p_155916_.setBlock(p_155917_, p_155919_.movedState, 84);

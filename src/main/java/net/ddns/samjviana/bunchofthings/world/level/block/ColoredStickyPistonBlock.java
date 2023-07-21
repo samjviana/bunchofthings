@@ -134,7 +134,7 @@ public class ColoredStickyPistonBlock extends DirectionalBlock {
          BlockPos blockpos = p_60169_.relative(direction, 2);
          BlockState blockstate = p_60168_.getBlockState(blockpos);
          int i = 1;
-         if (blockstate.is(Blocks.MOVING_PISTON) && blockstate.getValue(FACING) == direction) {
+         if (blockstate.is(ModBlocks.COLORED_MOVING_PISTON.get()) && blockstate.getValue(FACING) == direction) {
             BlockEntity blockentity = p_60168_.getBlockEntity(blockpos);
             if (blockentity instanceof ColoredMovingPistonBlockEntity) {
                ColoredMovingPistonBlockEntity ColoredMovingPistonBlockEntity = (ColoredMovingPistonBlockEntity)blockentity;
@@ -201,7 +201,7 @@ public class ColoredStickyPistonBlock extends DirectionalBlock {
             ((ColoredMovingPistonBlockEntity)blockentity1).finalTick();
          }
 
-         BlockState blockstate = Blocks.MOVING_PISTON.defaultBlockState().setValue(ColoredMovingPistonBlock.FACING, direction).setValue(ColoredMovingPistonBlock.TYPE, this.isSticky ? PistonType.STICKY : PistonType.DEFAULT);
+         BlockState blockstate = ModBlocks.COLORED_MOVING_PISTON.get().defaultBlockState().setValue(ColoredMovingPistonBlock.FACING, direction).setValue(ColoredMovingPistonBlock.TYPE, this.isSticky ? PistonType.STICKY : PistonType.DEFAULT);
          p_60193_.setBlock(p_60194_, blockstate, 20);
          p_60193_.setBlockEntity(ColoredMovingPistonBlock.newMovingBlockEntity(p_60194_, blockstate, this.defaultBlockState().setValue(FACING, Direction.from3DDataValue(p_60196_ & 7)), direction, false, true));
          p_60193_.blockUpdated(p_60194_, blockstate.getBlock());
@@ -210,7 +210,7 @@ public class ColoredStickyPistonBlock extends DirectionalBlock {
             BlockPos blockpos = p_60194_.offset(direction.getStepX() * 2, direction.getStepY() * 2, direction.getStepZ() * 2);
             BlockState blockstate1 = p_60193_.getBlockState(blockpos);
             boolean flag1 = false;
-            if (blockstate1.is(Blocks.MOVING_PISTON)) {
+            if (blockstate1.is(ModBlocks.COLORED_MOVING_PISTON.get())) {
                BlockEntity blockentity = p_60193_.getBlockEntity(blockpos);
                if (blockentity instanceof ColoredMovingPistonBlockEntity) {
                   ColoredMovingPistonBlockEntity ColoredMovingPistonBlockEntity = (ColoredMovingPistonBlockEntity)blockentity;
@@ -322,7 +322,7 @@ public class ColoredStickyPistonBlock extends DirectionalBlock {
             BlockState blockstate5 = p_60182_.getBlockState(blockpos3);
             blockpos3 = blockpos3.relative(direction);
             map.remove(blockpos3);
-            BlockState blockstate8 = Blocks.MOVING_PISTON.defaultBlockState().setValue(FACING, p_60184_);
+            BlockState blockstate8 = ModBlocks.COLORED_MOVING_PISTON.get().defaultBlockState().setValue(FACING, p_60184_);
             p_60182_.setBlock(blockpos3, blockstate8, 68);
             p_60182_.setBlockEntity(ColoredMovingPistonBlock.newMovingBlockEntity(blockpos3, blockstate8, list1.get(l), p_60184_, p_60185_, false));
             ablockstate[j++] = blockstate5;
@@ -331,7 +331,7 @@ public class ColoredStickyPistonBlock extends DirectionalBlock {
          if (p_60185_) {
             PistonType pistontype = this.isSticky ? PistonType.STICKY : PistonType.DEFAULT;
             BlockState blockstate4 = ModBlocks.COLORED_STICKY_PISTON_HEAD.get().defaultBlockState().setValue(ColoredStickyPistonHeadBlock.FACING, p_60184_).setValue(ColoredStickyPistonHeadBlock.TYPE, pistontype).setValue(ColoredStickyPistonHeadBlock.COLOR, this.getColor());
-            BlockState blockstate6 = Blocks.MOVING_PISTON.defaultBlockState().setValue(ColoredMovingPistonBlock.FACING, p_60184_).setValue(ColoredMovingPistonBlock.TYPE, this.isSticky ? PistonType.STICKY : PistonType.DEFAULT);
+            BlockState blockstate6 = ModBlocks.COLORED_MOVING_PISTON.get().defaultBlockState().setValue(ColoredMovingPistonBlock.FACING, p_60184_).setValue(ColoredMovingPistonBlock.TYPE, this.isSticky ? PistonType.STICKY : PistonType.DEFAULT);
             map.remove(blockpos);
             p_60182_.setBlock(blockpos, blockstate6, 68);
             p_60182_.setBlockEntity(ColoredMovingPistonBlock.newMovingBlockEntity(blockpos, blockstate6, blockstate4, p_60184_, true, true));

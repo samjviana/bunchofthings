@@ -14,6 +14,6 @@ public class ModBlockEntityType {
 
     public static final RegistryObject<BlockEntityType<ColoredMovingPistonBlockEntity>> COLORED_MOVING_PISTON = BLOCK_ENTITY_TYPES.register(
         "colored_moving_piston",
-        () -> BlockEntityType.Builder.of(ColoredMovingPistonBlockEntity::new, Blocks.MOVING_PISTON).build(null)
+        () -> BlockEntityType.Builder.of(ColoredMovingPistonBlockEntity::new, ModBlocks.COLORED_MOVING_PISTON.get()).build(null)
     );
 }

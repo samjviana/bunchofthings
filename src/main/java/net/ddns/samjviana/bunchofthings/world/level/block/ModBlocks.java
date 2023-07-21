@@ -316,16 +316,16 @@ public class ModBlocks {
         }
     );
 
-    // public static final RegistryObject<Block> COLORED_MOVING_PISTON = BLOCKS.register(
-    //     "colored_moving_piston",
-    //     () -> {
-    //         return new ColoredMovingPistonBlock(BlockBehaviour.Properties.of(Material.PISTON).strength(-1.0F).dynamicShape().noLootTable().noOcclusion()
-    //             .isRedstoneConductor(ModBlocks::never)
-    //             .isSuffocating(ModBlocks::never)
-    //             .isViewBlocking(ModBlocks::never)
-    //         );
-    //     }
-    // );
+    public static final RegistryObject<Block> COLORED_MOVING_PISTON = BLOCKS.register(
+        "colored_moving_piston",
+        () -> {
+            return new ColoredMovingPistonBlock(BlockBehaviour.Properties.of(Material.PISTON).strength(-1.0F).dynamicShape().noLootTable().noOcclusion()
+                .isRedstoneConductor(ModBlocks::never)
+                .isSuffocating(ModBlocks::never)
+                .isViewBlocking(ModBlocks::never)
+            );
+        }
+    );
 
     private static boolean never(BlockState p_50806_, BlockGetter p_50807_, BlockPos p_50808_) {
         return false;

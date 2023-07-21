@@ -135,7 +135,7 @@ public class ColoredStickyPistonHeadBlock extends DirectionalBlock {
   
      public boolean canSurvive(BlockState p_60288_, LevelReader p_60289_, BlockPos p_60290_) {
         BlockState blockstate = p_60289_.getBlockState(p_60290_.relative(p_60288_.getValue(FACING).getOpposite()));
-        return this.isFittingBase(p_60288_, blockstate) || blockstate.is(Blocks.MOVING_PISTON) && blockstate.getValue(FACING) == p_60288_.getValue(FACING);
+        return this.isFittingBase(p_60288_, blockstate) || blockstate.is(ModBlocks.COLORED_MOVING_PISTON.get()) && blockstate.getValue(FACING) == p_60288_.getValue(FACING);
      }
   
      public void neighborChanged(BlockState p_60275_, Level p_60276_, BlockPos p_60277_, Block p_60278_, BlockPos p_60279_, boolean p_60280_) {
