@@ -69,7 +69,6 @@ public class ColoredMovingPistonBlock extends BaseEntityBlock {
             if (blockentity instanceof ColoredMovingPistonBlockEntity) {
                 ((ColoredMovingPistonBlockEntity)blockentity).finalTick();
             }
-
         }
     }
 

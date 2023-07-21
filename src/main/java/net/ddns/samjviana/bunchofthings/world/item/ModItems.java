@@ -9,6 +9,7 @@ import net.ddns.samjviana.bunchofthings.world.level.block.ColoredStickyPistonBlo
 import net.ddns.samjviana.bunchofthings.world.level.block.ModBlocks;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -193,148 +194,21 @@ public class ModItems {
         }
     }
 
-    // public static final RegistryObject<BlockItem> WHITE_STICKY_PISTON_ITEM =
-    //     ITEMS.register(
-    //         "white_sticky_piston",
-    //         () ->
-    //             new BlockItem(
-    //                 ModBlocks.WHITE_STICKY_PISTON.get(),
-    //                 new Item.Properties()
-    //             )
-    //     );
-    // public static final RegistryObject<BlockItem> ORANGE_STICKY_PISTON_ITEM =
-    //     ITEMS.register(
-    //         "orange_sticky_piston",
-    //         () ->
-    //             new BlockItem(
-    //                 ModBlocks.ORANGE_STICKY_PISTON.get(),
-    //                 new Item.Properties()
-    //             )
-    //     );
-    // public static final RegistryObject<BlockItem> MAGENTA_STICKY_PISTON_ITEM =
-    //     ITEMS.register(
-    //         "magenta_sticky_piston",
-    //         () ->
-    //             new BlockItem(
-    //                 ModBlocks.MAGENTA_STICKY_PISTON.get(),
-    //                 new Item.Properties()
-    //             )
-    //     );
-    // public static final RegistryObject<BlockItem> LIGHT_BLUE_STICKY_PISTON_ITEM =
-    //     ITEMS.register(
-    //         "light_blue_sticky_piston",
-    //         () ->
-    //             new BlockItem(
-    //                 ModBlocks.LIGHT_BLUE_STICKY_PISTON.get(),
-    //                 new Item.Properties()
-    //             )
-    //     );
-    // public static final RegistryObject<BlockItem> YELLOW_STICKY_PISTON_ITEM =
-    //     ITEMS.register(
-    //         "yellow_sticky_piston",
-    //         () ->
-    //             new BlockItem(
-    //                 ModBlocks.YELLOW_STICKY_PISTON.get(),
-    //                 new Item.Properties()
-    //             )
-    //     );
-    // public static final RegistryObject<BlockItem> LIME_STICKY_PISTON_ITEM =
-    //     ITEMS.register(
-    //         "lime_sticky_piston",
-    //         () ->
-    //             new BlockItem(
-    //                 ModBlocks.LIME_STICKY_PISTON.get(),
-    //                 new Item.Properties()
-    //             )
-    //     );
-    // public static final RegistryObject<BlockItem> PINK_STICKY_PISTON_ITEM =
-    //     ITEMS.register(
-    //         "pink_sticky_piston",
-    //         () ->
-    //             new BlockItem(
-    //                 ModBlocks.PINK_STICKY_PISTON.get(),
-    //                 new Item.Properties()
-    //             )
-    //     );
-    // public static final RegistryObject<BlockItem> GRAY_STICKY_PISTON_ITEM =
-    //     ITEMS.register(
-    //         "gray_sticky_piston",
-    //         () ->
-    //             new BlockItem(
-    //                 ModBlocks.GRAY_STICKY_PISTON.get(),
-    //                 new Item.Properties()
-    //             )
-    //     );
-    // public static final RegistryObject<BlockItem> LIGHT_GRAY_STICKY_PISTON_ITEM =
-    //     ITEMS.register(
-    //         "light_gray_sticky_piston",
-    //         () ->
-    //             new BlockItem(
-    //                 ModBlocks.LIGHT_GRAY_STICKY_PISTON.get(),
-    //                 new Item.Properties()
-    //             )
-    //     );
-    // public static final RegistryObject<BlockItem> CYAN_STICKY_PISTON_ITEM =
-    //     ITEMS.register(
-    //         "cyan_sticky_piston",
-    //         () ->
-    //             new BlockItem(
-    //                 ModBlocks.CYAN_STICKY_PISTON.get(),
-    //                 new Item.Properties()
-    //             )
-    //     );
-    // public static final RegistryObject<BlockItem> PURPLE_STICKY_PISTON_ITEM =
-    //     ITEMS.register(
-    //         "purple_sticky_piston",
-    //         () ->
-    //             new BlockItem(
-    //                 ModBlocks.PURPLE_STICKY_PISTON.get(),
-    //                 new Item.Properties()
-    //             )
-    //     );
-    // public static final RegistryObject<BlockItem> BLUE_STICKY_PISTON_ITEM =
-    //     ITEMS.register(
-    //         "blue_sticky_piston",
-    //         () ->
-    //             new BlockItem(
-    //                 ModBlocks.BLUE_STICKY_PISTON.get(),
-    //                 new Item.Properties()
-    //             )
-    //     );
-    // public static final RegistryObject<BlockItem> BROWN_STICKY_PISTON_ITEM =
-    //     ITEMS.register(
-    //         "brown_sticky_piston",
-    //         () ->
-    //             new BlockItem(
-    //                 ModBlocks.BROWN_STICKY_PISTON.get(),
-    //                 new Item.Properties()
-    //             )
-    //     );
-    // public static final RegistryObject<BlockItem> GREEN_STICKY_PISTON_ITEM =
-    //     ITEMS.register(
-    //         "green_sticky_piston",
-    //         () ->
-    //             new BlockItem(
-    //                 ModBlocks.GREEN_STICKY_PISTON.get(),
-    //                 new Item.Properties()
-    //             )
-    //     );
-    // public static final RegistryObject<BlockItem> RED_STICKY_PISTON_ITEM =
-    //     ITEMS.register(
-    //         "red_sticky_piston",
-    //         () ->
-    //             new BlockItem(
-    //                 ModBlocks.RED_STICKY_PISTON.get(),
-    //                 new Item.Properties()
-    //             )
-    //     );
-    // public static final RegistryObject<BlockItem> BLACK_STICKY_PISTON_ITEM =
-    //     ITEMS.register(
-    //         "black_sticky_piston",
-    //         () ->
-    //             new BlockItem(
-    //                 ModBlocks.BLACK_STICKY_PISTON.get(),
-    //                 new Item.Properties()
-    //             )
-    //     );
+    public static final RegistryObject<Item> WHITE_SLIME_BALL = ITEMS.register("white_slime_ball", () -> new Item((new Item.Properties())));
+    public static final RegistryObject<Item> ORANGE_SLIME_BALL = ITEMS.register("orange_slime_ball", () -> new Item((new Item.Properties())));
+    public static final RegistryObject<Item> MAGENTA_SLIME_BALL = ITEMS.register("magenta_slime_ball", () -> new Item((new Item.Properties())));
+    public static final RegistryObject<Item> LIGHT_BLUE_SLIME_BALL = ITEMS.register("light_blue_slime_ball", () -> new Item((new Item.Properties())));
+    public static final RegistryObject<Item> YELLOW_SLIME_BALL = ITEMS.register("yellow_slime_ball", () -> new Item((new Item.Properties())));
+    public static final RegistryObject<Item> LIME_SLIME_BALL = ITEMS.register("lime_slime_ball", () -> new Item((new Item.Properties())));
+    public static final RegistryObject<Item> PINK_SLIME_BALL = ITEMS.register("pink_slime_ball", () -> new Item((new Item.Properties())));
+    public static final RegistryObject<Item> GRAY_SLIME_BALL = ITEMS.register("gray_slime_ball", () -> new Item((new Item.Properties())));
+    public static final RegistryObject<Item> LIGHT_GRAY_SLIME_BALL = ITEMS.register("light_gray_slime_ball", () -> new Item((new Item.Properties())));
+    public static final RegistryObject<Item> CYAN_SLIME_BALL = ITEMS.register("cyan_slime_ball", () -> new Item((new Item.Properties())));
+    public static final RegistryObject<Item> PURPLE_SLIME_BALL = ITEMS.register("purple_slime_ball", () -> new Item((new Item.Properties())));
+    public static final RegistryObject<Item> BLUE_SLIME_BALL = ITEMS.register("blue_slime_ball", () -> new Item((new Item.Properties())));
+    public static final RegistryObject<Item> BROWN_SLIME_BALL = ITEMS.register("brown_slime_ball", () -> new Item((new Item.Properties())));
+    public static final RegistryObject<Item> GREEN_SLIME_BALL = ITEMS.register("green_slime_ball", () -> new Item((new Item.Properties())));
+    public static final RegistryObject<Item> RED_SLIME_BALL = ITEMS.register("red_slime_ball", () -> new Item((new Item.Properties())));
+    public static final RegistryObject<Item> BLACK_SLIME_BALL = ITEMS.register("black_slime_ball", () -> new Item((new Item.Properties())));
+    // public static final RegistryObject<Item> COLORED_SLIME_SPAWN_EGG = ITEMS.register("colored_slime_spawn_egg", () -> new SpawnEggItem(ModEntityType.COLORED_SLIME_ENTITY_TYPE, 0x00ff00, 0x0000ff, new Item.Properties().group(ModItemGroup.ENTITIES)));
 }

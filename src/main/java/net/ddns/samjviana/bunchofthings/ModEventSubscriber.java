@@ -63,13 +63,50 @@ public class ModEventSubscriber {
                     new ItemStack(ModBlocks.PURPLE_SLIME_BLOCK.get())
                 )
                 .displayItems((params, output) -> {
-                    ModItems.ITEMS
-                        .getEntries()
-                        .stream()
-                        .map(RegistryObject::get)
-                        .forEach(item -> {
-                            output.accept(item.getDefaultInstance());
-                        });
+                    ModItems.ITEMS.getEntries().stream().forEach((registryItem) -> {
+                        String registryName = registryItem.getId().toString();
+                        if (registryName.contains("_slime_ball")) {
+                            return;
+                        }
+
+                        Item item = registryItem.get();
+                        BlockItem blockItem = (BlockItem)item;
+                        Block block = blockItem.getBlock();
+                        if (block instanceof YellowMushroomBlock) {
+                            return;
+                        }
+
+                        output.accept(item.getDefaultInstance());
+                    });
+                })
+        );
+
+        event.registerCreativeModeTab(
+            new ResourceLocation(BunchOfThings.MODID, "items"),
+            builder -> builder
+                .title(Component.translatable("itemGroup.items"))
+                .icon(() ->
+                    new ItemStack(ModItems.PURPLE_SLIME_BALL.get())
+                )
+                .displayItems((params, output) -> {
+                    ModItems.ITEMS.getEntries().stream().forEach((registryItem) -> {
+                        String registryName = registryItem.getId().toString();
+                        if (registryName.contains("_slime_ball")) {
+                            output.accept(registryItem.get().getDefaultInstance());
+                        }
+
+                        Item item = registryItem.get();
+                        try {
+                            BlockItem blockItem = (BlockItem)item;
+                            Block block = blockItem.getBlock();
+                            if (block instanceof YellowMushroomBlock) {
+                                output.accept(registryItem.get().getDefaultInstance());
+                            }
+                        }
+                        catch (ClassCastException e) {
+                            return;
+                        }
+                    });
                 })
         );
 

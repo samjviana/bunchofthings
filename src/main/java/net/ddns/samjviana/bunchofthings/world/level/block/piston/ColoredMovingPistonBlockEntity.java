@@ -310,7 +310,6 @@ public class ColoredMovingPistonBlockEntity extends BlockEntity {
             if (p_155919_.progress >= 1.0F) {
                 p_155919_.progress = 1.0F;
             }
-
         }
     }
 
