@@ -2,6 +2,7 @@ package net.ddns.samjviana.bunchofthings.world.level.block;
 
 import java.util.Arrays;
 
+import net.ddns.samjviana.bunchofthings.BunchOfThings;
 import net.ddns.samjviana.bunchofthings.state.properties.Colors;
 import net.ddns.samjviana.bunchofthings.state.properties.ModBlockStateProperties;
 import net.minecraft.core.BlockPos;
@@ -14,10 +15,9 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.piston.PistonBaseBlock;
-import net.minecraft.world.level.block.piston.PistonHeadBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -31,7 +31,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class ColoredStickyPistonHeadBlock extends PistonHeadBlock {
+public class ColoredStickyPistonHeadBlock extends DirectionalBlock {
     public static final EnumProperty<PistonType> TYPE = BlockStateProperties.PISTON_TYPE;
     public static final BooleanProperty SHORT = BlockStateProperties.SHORT;
     public static final float PLATFORM = 4.0F;
@@ -58,6 +58,7 @@ public class ColoredStickyPistonHeadBlock extends PistonHeadBlock {
     protected static final VoxelShape SHORT_WEST_ARM_AABB = Block.box(4.0D, 6.0D, 6.0D, 16.0D, 10.0D, 10.0D);
     private static final VoxelShape[] SHAPES_SHORT = makeShapes(true);
     private static final VoxelShape[] SHAPES_LONG = makeShapes(false);
+ 
     public static final EnumProperty<Colors> COLOR = ModBlockStateProperties.COLOR;
 
     private static VoxelShape[] makeShapes(boolean p_60313_) {
@@ -67,7 +68,7 @@ public class ColoredStickyPistonHeadBlock extends PistonHeadBlock {
             return new VoxelShape[p_60318_];
         });
     }
-
+  
     private static VoxelShape calculateShape(Direction p_60310_, boolean p_60311_) {
         switch (p_60310_) {
             case DOWN:
@@ -85,85 +86,82 @@ public class ColoredStickyPistonHeadBlock extends PistonHeadBlock {
                 return Shapes.or(EAST_AABB, p_60311_ ? SHORT_EAST_ARM_AABB : EAST_ARM_AABB);
         }
     }
-
+  
     public ColoredStickyPistonHeadBlock(Colors color, BlockBehaviour.Properties p_60259_) {
         super(p_60259_);
-        this.registerDefaultState(this.stateDefinition.any()
-            .setValue(FACING, Direction.NORTH)
-            .setValue(TYPE, PistonType.DEFAULT)
-            .setValue(SHORT, Boolean.valueOf(false))
-            .setValue(COLOR, color)
-        );
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(TYPE, PistonType.DEFAULT).setValue(SHORT, Boolean.valueOf(false)).setValue(COLOR, color));
     }
 
     public boolean useShapeForLightOcclusion(BlockState p_60325_) {
         return true;
-    }
-
-    public VoxelShape getShape(BlockState p_60320_, BlockGetter p_60321_, BlockPos p_60322_, CollisionContext p_60323_) {
+     }
+  
+     public VoxelShape getShape(BlockState p_60320_, BlockGetter p_60321_, BlockPos p_60322_, CollisionContext p_60323_) {
         return (p_60320_.getValue(SHORT) ? SHAPES_SHORT : SHAPES_LONG)[p_60320_.getValue(FACING).ordinal()];
-    }
-
-    private boolean isFittingBase(BlockState p_60298_, BlockState p_60299_) {
-        Block block = p_60298_.getValue(TYPE) == PistonType.DEFAULT ? Blocks.PISTON : Blocks.STICKY_PISTON;
+     }
+  
+     private boolean isFittingBase(BlockState p_60298_, BlockState p_60299_) {
+        Block block = ModBlocks.COLORED_STICKY_PISTONS.get(p_60298_.getValue(COLOR)).get();
         return p_60299_.is(block) && p_60299_.getValue(ColoredStickyPistonBlock.EXTENDED) && p_60299_.getValue(FACING) == p_60298_.getValue(FACING);
-    }
-
-    public void playerWillDestroy(Level p_60265_, BlockPos p_60266_, BlockState p_60267_, Player p_60268_) {
+     }
+  
+     public void playerWillDestroy(Level p_60265_, BlockPos p_60266_, BlockState p_60267_, Player p_60268_) {
         if (!p_60265_.isClientSide && p_60268_.getAbilities().instabuild) {
-            BlockPos blockpos = p_60266_.relative(p_60267_.getValue(FACING).getOpposite());
-            if (this.isFittingBase(p_60267_, p_60265_.getBlockState(blockpos))) {
-                p_60265_.destroyBlock(blockpos, false);
-            }
+           BlockPos blockpos = p_60266_.relative(p_60267_.getValue(FACING).getOpposite());
+           if (this.isFittingBase(p_60267_, p_60265_.getBlockState(blockpos))) {
+              p_60265_.destroyBlock(blockpos, false);
+           }
         }
-
+  
         super.playerWillDestroy(p_60265_, p_60266_, p_60267_, p_60268_);
-    }
-
-    public void onRemove(BlockState p_60282_, Level p_60283_, BlockPos p_60284_, BlockState p_60285_, boolean p_60286_) {
+     }
+  
+     public void onRemove(BlockState p_60282_, Level p_60283_, BlockPos p_60284_, BlockState p_60285_, boolean p_60286_) {
         if (!p_60282_.is(p_60285_.getBlock())) {
-            super.onRemove(p_60282_, p_60283_, p_60284_, p_60285_, p_60286_);
-            BlockPos blockpos = p_60284_.relative(p_60282_.getValue(FACING).getOpposite());
-            if (this.isFittingBase(p_60282_, p_60283_.getBlockState(blockpos))) {
-                p_60283_.destroyBlock(blockpos, true);
-            }
-
+           super.onRemove(p_60282_, p_60283_, p_60284_, p_60285_, p_60286_);
+           BlockPos blockpos = p_60284_.relative(p_60282_.getValue(FACING).getOpposite());
+           if (this.isFittingBase(p_60282_, p_60283_.getBlockState(blockpos))) {
+              p_60283_.destroyBlock(blockpos, true);
+           }
+  
         }
-    }
-
-    public BlockState updateShape(BlockState p_60301_, Direction p_60302_, BlockState p_60303_, LevelAccessor p_60304_, BlockPos p_60305_, BlockPos p_60306_) {
-        return p_60302_.getOpposite() == p_60301_.getValue(FACING) && !p_60301_.canSurvive(p_60304_, p_60305_) ? Blocks.AIR.defaultBlockState() : super.updateShape(p_60301_, p_60302_, p_60303_, p_60304_, p_60305_, p_60306_);
-    }
-
-    public boolean canSurvive(BlockState p_60288_, LevelReader p_60289_, BlockPos p_60290_) {
+     }
+  
+     public BlockState updateShape(BlockState p_60301_, Direction p_60302_, BlockState p_60303_, LevelAccessor p_60304_, BlockPos p_60305_, BlockPos p_60306_) {
+        boolean facingOpposite = p_60302_.getOpposite() == p_60301_.getValue(FACING);
+        boolean canSurvive = !p_60301_.canSurvive(p_60304_, p_60305_);
+        return facingOpposite && canSurvive ? Blocks.AIR.defaultBlockState() : super.updateShape(p_60301_, p_60302_, p_60303_, p_60304_, p_60305_, p_60306_);
+     }
+  
+     public boolean canSurvive(BlockState p_60288_, LevelReader p_60289_, BlockPos p_60290_) {
         BlockState blockstate = p_60289_.getBlockState(p_60290_.relative(p_60288_.getValue(FACING).getOpposite()));
         return this.isFittingBase(p_60288_, blockstate) || blockstate.is(Blocks.MOVING_PISTON) && blockstate.getValue(FACING) == p_60288_.getValue(FACING);
-    }
-
-    public void neighborChanged(BlockState p_60275_, Level p_60276_, BlockPos p_60277_, Block p_60278_, BlockPos p_60279_, boolean p_60280_) {
+     }
+  
+     public void neighborChanged(BlockState p_60275_, Level p_60276_, BlockPos p_60277_, Block p_60278_, BlockPos p_60279_, boolean p_60280_) {
         if (p_60275_.canSurvive(p_60276_, p_60277_)) {
-            p_60276_.neighborChanged(p_60277_.relative(p_60275_.getValue(FACING).getOpposite()), p_60278_, p_60279_);
+           p_60276_.neighborChanged(p_60277_.relative(p_60275_.getValue(FACING).getOpposite()), p_60278_, p_60279_);
         }
-
-    }
-
-    public ItemStack getCloneItemStack(BlockGetter p_60261_, BlockPos p_60262_, BlockState p_60263_) {
+  
+     }
+  
+     public ItemStack getCloneItemStack(BlockGetter p_60261_, BlockPos p_60262_, BlockState p_60263_) {
         return new ItemStack(p_60263_.getValue(TYPE) == PistonType.STICKY ? Blocks.STICKY_PISTON : Blocks.PISTON);
-    }
-
-    public BlockState rotate(BlockState p_60295_, Rotation p_60296_) {
+     }
+  
+     public BlockState rotate(BlockState p_60295_, Rotation p_60296_) {
         return p_60295_.setValue(FACING, p_60296_.rotate(p_60295_.getValue(FACING)));
-    }
-
-    public BlockState mirror(BlockState p_60292_, Mirror p_60293_) {
+     }
+  
+     public BlockState mirror(BlockState p_60292_, Mirror p_60293_) {
         return p_60292_.rotate(p_60293_.getRotation(p_60292_.getValue(FACING)));
-    }
-
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_60308_) {
+     }
+  
+     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_60308_) {
         p_60308_.add(FACING, TYPE, SHORT, COLOR);
-    }
-
-    public boolean isPathfindable(BlockState p_60270_, BlockGetter p_60271_, BlockPos p_60272_, PathComputationType p_60273_) {
+     }
+  
+     public boolean isPathfindable(BlockState p_60270_, BlockGetter p_60271_, BlockPos p_60272_, PathComputationType p_60273_) {
         return false;
-    }
-}
+     }
+  }

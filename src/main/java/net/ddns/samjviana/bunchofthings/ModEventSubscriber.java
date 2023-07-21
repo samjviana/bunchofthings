@@ -34,12 +34,24 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegisterEvent;
 import net.minecraftforge.registries.RegistryObject;
 
 @EventBusSubscriber(modid = BunchOfThings.MODID, bus = Bus.MOD)
 public class ModEventSubscriber {
 
     private static final Minecraft INSTANCE = Minecraft.getInstance();
+
+    @SubscribeEvent
+    public static void onRegister(final RegisterEvent event) {
+        /*ModBlocks.COLORED_STICKY_PISTONS.forEach((color, block) -> {
+            event.register(
+                ForgeRegistries.Keys.BLOCKS,
+                helper -> helper.register(block.getId(), block.get())
+            );
+        });*/
+    }
 
     @SubscribeEvent
     public static void onRegisterCreativeModeTab(CreativeModeTabEvent.Register event) {
@@ -61,7 +73,7 @@ public class ModEventSubscriber {
                 })
         );
 
-        event.registerCreativeModeTab(
+        /*event.registerCreativeModeTab(
             new ResourceLocation(BunchOfThings.MODID, "items"),
             builder -> builder
                 .title(Component.translatable("itemGroup.items"))
@@ -74,7 +86,7 @@ public class ModEventSubscriber {
                         final BlockItem blockItem = new BlockItem(block, properties);
                     });
                 })
-        );
+        );*/
     }
 
     @SubscribeEvent

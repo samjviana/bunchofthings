@@ -18,8 +18,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.piston.PistonBaseBlock;
-import net.minecraft.world.level.block.piston.PistonHeadBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.PistonType;
 import net.minecraftforge.api.distmarker.Dist;
@@ -47,10 +45,10 @@ public class ColoredPistonHeadRenderer implements BlockEntityRenderer<ColoredMov
                     blockstate = blockstate.setValue(ColoredStickyPistonHeadBlock.SHORT, Boolean.valueOf(p_112452_.getProgress(p_112453_) <= 0.5F));
                     this.renderBlock(blockpos, blockstate, p_112454_, p_112455_, level, false, p_112457_);
                 } else if (p_112452_.isSourcePiston() && !p_112452_.isExtending()) {
-                    PistonType pistontype = blockstate.is(Blocks.STICKY_PISTON) ? PistonType.STICKY : PistonType.DEFAULT;
+                    PistonType pistontype = PistonType.STICKY;
                     BlockState blockstate1 = ModBlocks.COLORED_STICKY_PISTON_HEAD.get().defaultBlockState()
                         .setValue(ColoredStickyPistonHeadBlock.TYPE, pistontype)
-                        .setValue(ColoredStickyPistonHeadBlock.FACING, blockstate.getValue(PistonBaseBlock.FACING))
+                        .setValue(ColoredStickyPistonHeadBlock.FACING, blockstate.getValue(ColoredStickyPistonHeadBlock.FACING))
                         .setValue(ColoredStickyPistonHeadBlock.COLOR, blockstate.getValue(ColoredStickyPistonHeadBlock.COLOR));
                     blockstate1 = blockstate1.setValue(ColoredStickyPistonHeadBlock.SHORT, Boolean.valueOf(p_112452_.getProgress(p_112453_) >= 0.5F));
                     this.renderBlock(blockpos, blockstate1, p_112454_, p_112455_, level, false, p_112457_);

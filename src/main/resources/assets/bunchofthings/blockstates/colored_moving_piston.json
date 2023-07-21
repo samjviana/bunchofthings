@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "": {
+            "model": "bunchofthings:block/colored_moving_piston"
+        }
+    }
+}

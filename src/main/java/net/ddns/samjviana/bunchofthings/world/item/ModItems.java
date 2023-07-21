@@ -181,10 +181,14 @@ public class ModItems {
         for (Colors color : Colors.values()) {
             COLORED_STICKY_PISTONS.put(color, ITEMS.register(
                 color.toString() + "_sticky_piston",
-                () -> new BlockItem(
-                    ModBlocks.COLORED_STICKY_PISTON.get().defaultBlockState().setValue(ColoredStickyPistonBlock.COLOR, color).getBlock(),
-                    properties
-                )
+                () -> {
+                    BlockItem blockItem = new BlockItem(
+                        ModBlocks.COLORED_STICKY_PISTONS.get(color).get(),
+                        properties
+                    );
+
+                    return blockItem;
+                }
             ));
         }
     }

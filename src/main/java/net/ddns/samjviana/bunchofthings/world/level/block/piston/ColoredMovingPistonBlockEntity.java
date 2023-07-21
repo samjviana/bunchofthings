@@ -24,9 +24,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.piston.MovingPistonBlock;
-import net.minecraft.world.level.block.piston.PistonBaseBlock;
-import net.minecraft.world.level.block.piston.PistonHeadBlock;
 import net.minecraft.world.level.block.piston.PistonMath;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -46,13 +43,13 @@ public class ColoredMovingPistonBlockEntity extends BlockEntity {
     private boolean extending;
     private boolean isSourcePiston;
     private static final ThreadLocal<Direction> NOCLIP = ThreadLocal.withInitial(() -> {
-        return null;
+       return null;
     });
     private float progress;
     private float progressO;
     private long lastTicked;
     private int deathTicks;
-
+ 
     public ColoredMovingPistonBlockEntity(BlockPos blockPos, BlockState state) {
         super(ModBlockEntityType.COLORED_MOVING_PISTON.get(), blockPos, state);
     }
@@ -106,7 +103,7 @@ public class ColoredMovingPistonBlockEntity extends BlockEntity {
     }
 
     private BlockState getCollisionRelatedBlockState() {
-        return !this.isExtending() && this.isSourcePiston() && this.movedState.getBlock() instanceof ColoredStickyPistonBlock ? ModBlocks.COLORED_STICKY_PISTON_HEAD.get().defaultBlockState().setValue(ColoredStickyPistonHeadBlock.SHORT, Boolean.valueOf(this.progress > 0.25F)).setValue(ColoredStickyPistonHeadBlock.TYPE, this.movedState.is(Blocks.STICKY_PISTON) ? PistonType.STICKY : PistonType.DEFAULT).setValue(ColoredStickyPistonHeadBlock.FACING, this.movedState.getValue(PistonBaseBlock.FACING)) : this.movedState;
+        return !this.isExtending() && this.isSourcePiston() && this.movedState.getBlock() instanceof ColoredStickyPistonBlock ? ModBlocks.COLORED_STICKY_PISTON_HEAD.get().defaultBlockState().setValue(ColoredStickyPistonHeadBlock.COLOR, this.movedState.getValue(ColoredStickyPistonBlock.COLOR)).setValue(ColoredStickyPistonHeadBlock.SHORT, Boolean.valueOf(this.progress > 0.25F)).setValue(ColoredStickyPistonHeadBlock.TYPE, this.movedState.is(Blocks.STICKY_PISTON) ? PistonType.STICKY : PistonType.DEFAULT).setValue(ColoredStickyPistonHeadBlock.FACING, this.movedState.getValue(ColoredStickyPistonBlock.FACING)) : this.movedState;
     }
 
     private static void moveCollidedEntities(Level p_155911_, BlockPos p_155912_, float p_155913_, ColoredMovingPistonBlockEntity p_155914_) {
@@ -339,8 +336,8 @@ public class ColoredMovingPistonBlockEntity extends BlockEntity {
 
     public VoxelShape getCollisionShape(BlockGetter p_60357_, BlockPos p_60358_) {
         VoxelShape voxelshape;
-        if (!this.extending && this.isSourcePiston && this.movedState.getBlock() instanceof PistonBaseBlock) {
-            voxelshape = this.movedState.setValue(PistonBaseBlock.EXTENDED, Boolean.valueOf(true)).getCollisionShape(p_60357_, p_60358_);
+        if (!this.extending && this.isSourcePiston && this.movedState.getBlock() instanceof ColoredStickyPistonBlock) {
+            voxelshape = this.movedState.setValue(ColoredStickyPistonBlock.EXTENDED, Boolean.valueOf(true)).getCollisionShape(p_60357_, p_60358_);
         } else {
             voxelshape = Shapes.empty();
         }
@@ -348,14 +345,10 @@ public class ColoredMovingPistonBlockEntity extends BlockEntity {
         Direction direction = NOCLIP.get();
         if ((double)this.progress < 1.0D && direction == this.getMovementDirection()) {
             return voxelshape;
-        }
-        else {
+        } else {
             BlockState blockstate;
             if (this.isSourcePiston()) {
-                blockstate = Blocks.PISTON_HEAD.defaultBlockState()
-                    .setValue(ColoredStickyPistonHeadBlock.FACING, this.direction)
-                    .setValue(ColoredStickyPistonHeadBlock.SHORT, Boolean.valueOf(this.extending != 1.0F - this.progress < 0.25F))
-                    .setValue(ColoredStickyPistonHeadBlock.COLOR, this.movedState.getValue(ColoredStickyPistonHeadBlock.COLOR));
+                blockstate = ModBlocks.COLORED_STICKY_PISTON_HEAD.get().defaultBlockState().setValue(ColoredStickyPistonHeadBlock.FACING, this.direction).setValue(ColoredStickyPistonHeadBlock.SHORT, Boolean.valueOf(this.extending != 1.0F - this.progress < 0.25F)).setValue(ColoredStickyPistonHeadBlock.COLOR, this.movedState.getValue(ColoredStickyPistonBlock.COLOR));
             } else {
                 blockstate = this.movedState;
             }

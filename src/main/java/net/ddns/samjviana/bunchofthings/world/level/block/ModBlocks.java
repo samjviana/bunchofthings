@@ -1,13 +1,20 @@
 package net.ddns.samjviana.bunchofthings.world.level.block;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.ddns.samjviana.bunchofthings.BunchOfThings;
 import net.ddns.samjviana.bunchofthings.state.properties.Colors;
 import net.ddns.samjviana.bunchofthings.world.level.block.piston.ColoredMovingPistonBlock;
+import net.minecraft.client.renderer.blockentity.PistonHeadRenderer;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.piston.PistonBaseBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.registries.DeferredRegister;
@@ -28,7 +35,8 @@ public class ModBlocks {
                         .of(Material.CLAY)
                         .friction(0.8f)
                         .sound(SoundType.SLIME_BLOCK)
-                        .noOcclusion()
+                        .noOcclusion(),
+                    Colors.WHITE
                 );
             }
         );
@@ -41,7 +49,8 @@ public class ModBlocks {
                         .of(Material.CLAY)
                         .friction(0.8f)
                         .sound(SoundType.SLIME_BLOCK)
-                        .noOcclusion()
+                        .noOcclusion(),
+                    Colors.ORANGE
                 );
             }
         );
@@ -54,7 +63,8 @@ public class ModBlocks {
                         .of(Material.CLAY)
                         .friction(0.8f)
                         .sound(SoundType.SLIME_BLOCK)
-                        .noOcclusion()
+                        .noOcclusion(),
+                    Colors.MAGENTA
                 );
             }
         );
@@ -67,7 +77,8 @@ public class ModBlocks {
                         .of(Material.CLAY)
                         .friction(0.8f)
                         .sound(SoundType.SLIME_BLOCK)
-                        .noOcclusion()
+                        .noOcclusion(),
+                    Colors.LIGHT_BLUE
                 );
             }
         );
@@ -80,7 +91,8 @@ public class ModBlocks {
                         .of(Material.CLAY)
                         .friction(0.8f)
                         .sound(SoundType.SLIME_BLOCK)
-                        .noOcclusion()
+                        .noOcclusion(),
+                    Colors.YELLOW
                 );
             }
         );
@@ -93,7 +105,8 @@ public class ModBlocks {
                         .of(Material.CLAY)
                         .friction(0.8f)
                         .sound(SoundType.SLIME_BLOCK)
-                        .noOcclusion()
+                        .noOcclusion(),
+                    Colors.LIME
                 );
             }
         );
@@ -106,7 +119,8 @@ public class ModBlocks {
                         .of(Material.CLAY)
                         .friction(0.8f)
                         .sound(SoundType.SLIME_BLOCK)
-                        .noOcclusion()
+                        .noOcclusion(),
+                    Colors.PINK
                 );
             }
         );
@@ -119,7 +133,8 @@ public class ModBlocks {
                         .of(Material.CLAY)
                         .friction(0.8f)
                         .sound(SoundType.SLIME_BLOCK)
-                        .noOcclusion()
+                        .noOcclusion(),
+                    Colors.GRAY
                 );
             }
         );
@@ -132,7 +147,8 @@ public class ModBlocks {
                         .of(Material.CLAY)
                         .friction(0.8f)
                         .sound(SoundType.SLIME_BLOCK)
-                        .noOcclusion()
+                        .noOcclusion(),
+                    Colors.LIGHT_GRAY
                 );
             }
         );
@@ -145,7 +161,8 @@ public class ModBlocks {
                         .of(Material.CLAY)
                         .friction(0.8f)
                         .sound(SoundType.SLIME_BLOCK)
-                        .noOcclusion()
+                        .noOcclusion(),
+                    Colors.CYAN
                 );
             }
         );
@@ -158,7 +175,8 @@ public class ModBlocks {
                         .of(Material.CLAY)
                         .friction(0.8f)
                         .sound(SoundType.SLIME_BLOCK)
-                        .noOcclusion()
+                        .noOcclusion(),
+                    Colors.PURPLE
                 );
             }
         );
@@ -171,7 +189,8 @@ public class ModBlocks {
                         .of(Material.CLAY)
                         .friction(0.8f)
                         .sound(SoundType.SLIME_BLOCK)
-                        .noOcclusion()
+                        .noOcclusion(),
+                    Colors.BLUE
                 );
             }
         );
@@ -184,7 +203,8 @@ public class ModBlocks {
                         .of(Material.CLAY)
                         .friction(0.8f)
                         .sound(SoundType.SLIME_BLOCK)
-                        .noOcclusion()
+                        .noOcclusion(),
+                    Colors.BROWN
                 );
             }
         );
@@ -197,7 +217,8 @@ public class ModBlocks {
                         .of(Material.CLAY)
                         .friction(0.8f)
                         .sound(SoundType.SLIME_BLOCK)
-                        .noOcclusion()
+                        .noOcclusion(),
+                    Colors.GREEN
                 );
             }
         );
@@ -209,7 +230,8 @@ public class ModBlocks {
                     .of(Material.CLAY)
                     .friction(0.8f)
                     .sound(SoundType.SLIME_BLOCK)
-                    .noOcclusion()
+                    .noOcclusion(),
+                Colors.RED
             );
         }
     );
@@ -222,7 +244,8 @@ public class ModBlocks {
                         .of(Material.CLAY)
                         .friction(0.8f)
                         .sound(SoundType.SLIME_BLOCK)
-                        .noOcclusion()
+                        .noOcclusion(),
+                    Colors.BLACK
                 );
             }
         );
@@ -241,21 +264,44 @@ public class ModBlocks {
         }
     );
 
-    public static final RegistryObject<Block> COLORED_STICKY_PISTON = BLOCKS.register("colored_sticky_piston", () -> {
-        return new ColoredStickyPistonBlock(
-            true,
-            BlockBehaviour.Properties.of(Material.PISTON).strength(1.5f).isRedstoneConductor(
-                (blockState, level, blockPos) -> false
-            ).isSuffocating(
-                (blockState, level, blockPos) -> !blockState.getValue(PistonBaseBlock.EXTENDED)
-            ).isViewBlocking(
-                (blockState, level, blockPos) -> false
-            ),
-            Colors.WHITE
-        );
-    });
-
+    // public static final RegistryObject<Block> COLORED_STICKY_PISTON = BLOCKS.register("colored_sticky_piston", () -> {
+    //     return new ColoredStickyPistonBlock(
+    //         true,
+    //         BlockBehaviour.Properties.of(Material.PISTON).strength(1.5f).isRedstoneConductor(
+    //             (blockState, level, blockPos) -> false
+    //         ).isSuffocating(
+    //             (blockState, level, blockPos) -> !blockState.getValue(PistonBaseBlock.EXTENDED)
+    //         ).isViewBlocking(
+    //             (blockState, level, blockPos) -> false
+    //         ),
+    //         Colors.WHITE
+    //     );
+    // });
     
+    public static final Map<Colors, RegistryObject<Block>> COLORED_STICKY_PISTONS = new HashMap<>();
+    static {
+        for (Colors color : Colors.values()) {
+            COLORED_STICKY_PISTONS.put(
+                color,
+                BLOCKS.register(
+                    color.toString() + "_sticky_piston",
+                    () -> {
+                        BlockBehaviour.StatePredicate blockbehaviour$statepredicate = (p_152641_, p_152642_, p_152643_) -> {
+                        return !p_152641_.getValue(PistonBaseBlock.EXTENDED);
+                        };
+                        return new ColoredStickyPistonBlock(
+                            true,
+                            BlockBehaviour.Properties.of(Material.PISTON).strength(1.5f)
+                                .isRedstoneConductor(ModBlocks::never)
+                                .isSuffocating(blockbehaviour$statepredicate)
+                                .isViewBlocking(blockbehaviour$statepredicate),
+                            color
+                        );
+                    }
+                )
+            );
+        }
+    }
 
     public static final RegistryObject<Block> COLORED_STICKY_PISTON_HEAD = BLOCKS.register(
         "colored_sticky_piston_head",
@@ -270,18 +316,19 @@ public class ModBlocks {
         }
     );
 
-    public static final RegistryObject<Block> COLORED_MOVING_PISTON = BLOCKS.register(
-        "colored_moving_piston",
-        () -> {
-            return new ColoredMovingPistonBlock(BlockBehaviour.Properties.of(Material.PISTON).strength(-1.0F).dynamicShape().noLootTable().noOcclusion()
-                .isRedstoneConductor(
-                    (blockState, level, blockPos) -> false
-                ).isSuffocating(
-                    (blockState, level, blockPos) -> !blockState.getValue(PistonBaseBlock.EXTENDED)
-                ).isViewBlocking(
-                    (blockState, level, blockPos) -> false
-                )
-            );
-        }
-    );
+    // public static final RegistryObject<Block> COLORED_MOVING_PISTON = BLOCKS.register(
+    //     "colored_moving_piston",
+    //     () -> {
+    //         return new ColoredMovingPistonBlock(BlockBehaviour.Properties.of(Material.PISTON).strength(-1.0F).dynamicShape().noLootTable().noOcclusion()
+    //             .isRedstoneConductor(ModBlocks::never)
+    //             .isSuffocating(ModBlocks::never)
+    //             .isViewBlocking(ModBlocks::never)
+    //         );
+    //     }
+    // );
+
+    private static boolean never(BlockState p_50806_, BlockGetter p_50807_, BlockPos p_50808_) {
+        return false;
+    }
+
 }
